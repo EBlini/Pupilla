@@ -1,0 +1,15 @@
+Package: Pupilla
+Title: Process and Analyze Eye-tracking and Pupillometry Data
+Version: 0.0.0.9000
+Year: 2023 
+Date: 2023
+Authors@R: 
+    person("Elvio", "Blini", , "elvio.blini@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7181-5763"))
+Description: This R package is a collection of utility functions for the preprocessing and analysis of eye-tracking and (event-related) pupillometry data. Mostly optimized for TOBII eye-trackers, though functions aim to be as general as possible.
+Depends: R (>= 3.6)
+Imports: ggplot2, dplyr, data.table, here, tidyr
+License: use_gpl3_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
