@@ -10,6 +10,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/check_series.html</loc>
+  </url>
+  <url>
     <loc>/reference/consolidate_signal.html</loc>
   </url>
   <url>
@@ -34,13 +37,7 @@
     <loc>/reference/pre_process.html</loc>
   </url>
   <url>
-    <loc>/reference/read_one.html</loc>
-  </url>
-  <url>
     <loc>/reference/read_TOBII.html</loc>
-  </url>
-  <url>
-    <loc>/reference/smooth.html</loc>
   </url>
   <url>
     <loc>/reference/smooth_vector.html</loc>
