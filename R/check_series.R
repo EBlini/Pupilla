@@ -55,10 +55,10 @@ check_series= function(data,
   #plot
   p= ggplot2::ggplot(ggDF,
             aes(y= series1, x= time)) +
-    ggplot2::geom_line(linewidth= 1.1) +
+    ggplot2::geom_line(linewidth= 1.25) +
     ggplot2::geom_line(aes(y= series2),
               color= "red",
-              linewidth= 1.2) +
+              linewidth= 1.05) +
     commonTheme +
     ggplot2::ylab("Series") +
     ggplot2::xlab("Time")
