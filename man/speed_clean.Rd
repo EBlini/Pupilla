@@ -8,6 +8,7 @@ speed_clean(
   vector,
   time,
   thresh = pp_options("thresh"),
+  speed_method = pp_options("speed_method"),
   extend_by = pp_options("extend_by"),
   island_size = pp_options("island_size")
 )
@@ -18,7 +19,11 @@ speed_clean(
 \item{time}{A vector variable indicating the elapsed time, needed to compute
 velocity.}
 
-\item{thresh}{Threshold (z point) above which values are marked as NA.}
+\item{thresh}{Threshold (z point or absolute value) above which values are marked as NA.}
+
+\item{speed_method}{Whether the 'thresh' is a z-score ('z'), with deviant values
+omitted once, or until there are no more values above the threshold ('z-dynamic').
+'abs' is used instead when a precise absolute value for speed is supplied.}
 
 \item{extend_by}{Number of samples starting from the deviant speed values that
 are stripped (e.g., the signal in proximity of blinks may be biased as well).}

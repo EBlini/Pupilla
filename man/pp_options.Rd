@@ -7,7 +7,11 @@
 pp_options(...)
 }
 \arguments{
-\item{thresh}{\strong{speed_clean} Threshold (z point) above which values are marked as NA.}
+\item{thresh}{\strong{speed_clean} Threshold (z point or absolute value) above which values are marked as NA.}
+
+\item{speed_method}{\strong{speed_clean} Whether the 'thresh' is a z-score ('z'), with deviant values
+omitted once, or until there are no more values above the threshold ('z-dynamic').
+'abs' is used instead when a precise absolute value for speed is supplied.}
 
 \item{extend_by}{\strong{speed_clean} Number of samples starting from the deviant speed values that
 are stripped (e.g., the signal in proximity of blinks may be biased as well).}
