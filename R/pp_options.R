@@ -3,7 +3,7 @@
 opt= settings::options_manager(
 
   thresh= 3,
-  speed_method= "z-dynamic",
+  speed_method= "z",
   extend_by= 3,
   island_size= 4,
 
