@@ -1,6 +1,6 @@
-#' Highlights and test the time-course of effects through crossvalidation
+#' *Deprecated* Highlights and test the time-course of effects through crossvalidation
 #'
-#' Variant of 'decode_signal()', in which different IDs (i.e., participants)
+#' *Deprecated* - it's best to set-up yourn own. Variant of 'decode_signal()', in which different IDs (i.e., participants)
 #' end up in different folds. In other words, data is not splitted by trials, but by
 #' individuals. All the other inferential approaches remains the same. The main difference
 #' implies that stress here is on *generalization across individuals* rather than
