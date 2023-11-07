@@ -28,6 +28,16 @@ plot_loadings= function(name,
   if(limit[2]<0)(limit[2]= 0)
   if(limit[1]>0)(limit[1]= 0)
 
+  if("ICA" %in% names(data)){
+    cp= gsub("[[:digit:]]","",name)
+    cp= as.numeric(gsub(cp,"",name))
+    ev= round(data$summaryPCA["Proportion of Variance", cp], 2)
+  } else {
+    ev= round(data$summaryPCA["Proportion of Variance", name], 2)
+
+    }
+
+
 
   #theme
   commonTheme= list(#theme_bw(),
@@ -38,7 +48,7 @@ plot_loadings= function(name,
     ggplot2::ylim(limit),
     ggplot2::ggtitle(name,
             subtitle= paste0("Explained variance: ",
-                             round(data$summaryPCA["Proportion of Variance", name], 2)))
+                             ev))
   )
 
 

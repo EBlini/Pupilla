@@ -8,7 +8,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-7181-5763"))
 Description: This R package is a collection of utility functions for the preprocessing and analysis of eye-tracking and (event-related) pupillometry data. Mostly optimized for TOBII eye-trackers, though functions aim to be as general as possible.
 Depends: R (>= 3.6)
-Imports: ggplot2, dplyr, data.table, here, tidyr, lmerTest
+Imports: ggplot2, dplyr, data.table, here, tidyr, lmerTest, ica
 License: use_gpl3_license()
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
