@@ -43,7 +43,7 @@ retained, cross-validated peaks; test of the consensus time-points, if any; list
 of time-points retained in the consensus for each effect.
 }
 \description{
-This function is meant to implement - roughly and with no assurance of full compatibility whatsoever -
+This function is meant to implement, roughly and with no assurance of full compatibility whatsoever,
 the procedure proposed by Mathôt and Vilotijević (2022, \emph{Behavior Research Methods}).
 First, each trial (i.e., one complete time series) is assigned to one fold in a
 deterministic fashion (the first trial to the first fold, then the second trial to

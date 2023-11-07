@@ -52,6 +52,7 @@ increase or decrease.</p>
 <span>  <span class="va">vector</span>,</span>
 <span>  <span class="va">time</span>,</span>
 <span>  thresh <span class="op">=</span> <span class="fu"><a href="pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"thresh"</span><span class="op">)</span>,</span>
+<span>  speed_method <span class="op">=</span> <span class="fu"><a href="pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"speed_method"</span><span class="op">)</span>,</span>
 <span>  extend_by <span class="op">=</span> <span class="fu"><a href="pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"extend_by"</span><span class="op">)</span>,</span>
 <span>  island_size <span class="op">=</span> <span class="fu"><a href="pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"island_size"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -69,7 +70,13 @@ velocity.</p></dd>
 
 
 <dt>thresh</dt>
-<dd><p>Threshold (z point) above which values are marked as NA.</p></dd>
+<dd><p>Threshold (z point or absolute value) above which values are marked as NA.</p></dd>
+
+
+<dt>speed_method</dt>
+<dd><p>Whether the 'thresh' is a z-score ('z'), with deviant values
+omitted once, or until there are no more values above the threshold ('z-dynamic').
+'abs' is used instead when a precise absolute value for speed is supplied.</p></dd>
 
 
 <dt>extend_by</dt>
@@ -101,7 +108,7 @@ or equal to this threshold (amount of samples).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

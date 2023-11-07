@@ -25,7 +25,7 @@
     <loc>/reference/decode_signal.html</loc>
   </url>
   <url>
-    <loc>/reference/decode_signal2.html</loc>
+    <loc>/reference/decode_signal_g.html</loc>
   </url>
   <url>
     <loc>/reference/detect_change.html</loc>
@@ -40,6 +40,9 @@
     <loc>/reference/interpolate.html</loc>
   </url>
   <url>
+    <loc>/reference/plot_loadings.html</loc>
+  </url>
+  <url>
     <loc>/reference/pp_options.html</loc>
   </url>
   <url>
@@ -47,6 +50,12 @@
   </url>
   <url>
     <loc>/reference/read_TOBII.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reduce_ICA.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reduce_PCA.html</loc>
   </url>
   <url>
     <loc>/reference/smooth_vector.html</loc>
