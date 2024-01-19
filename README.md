@@ -3,8 +3,6 @@
 
 # Pupilla
 
-# Pupilla
-
 <!-- badges: start -->
 <!-- badges: end -->
 
