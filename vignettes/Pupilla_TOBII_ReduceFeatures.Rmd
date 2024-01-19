@@ -1,0 +1,545 @@
+---
+title: "Pupilla_TOBII_ReduceFeatures"
+author: "Elvio Blini"
+date: "January 2024"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width = 999)
+Sys.setenv(LANG = "en")
+
+```
+
+## Introduction
+
+`Pupilla` gathers several functions that are designed to facilitate the analysis of pupillometry experiments as commonly performed in cognitive neuroscience, e.g. event-related designs, although its use could be much more general.
+
+The typical analysis pipeline would, coarsely, include the following steps:
+  1. **Read the data.** This part can vary a lot depending on the eyetracker used, the individual OS, local paths, how the experiment was coded, etc. `Pupilla` does provide utility functions to read from common eyetrackers (e.g., TOBII, EyeLink) but clearly this passage will need to be tailored to your files.
+  2. **Prepare the data.** As above, this part may need to be tailored to your specific needs; however, several steps are very common across pipelines, and will be presented in this vignette.
+  3. **Preprocessing.** Pupillometry needs robust preprocessing of the raw data, in order to reduce noise and artifacts (such as those due to blinks). Once the data is properly prepared, this aspect can be translated across several different scenarios. Of course, flexibility and adapting to your own data is warmly advised.
+  4. **Statistical modelling**. `Pupilla` offers two approaches: 1) crossvalidated LMEMs as in [Mathôt & Vilotijević, 2022](https://link.springer.com/article/10.3758/s13428-022-01957-7)); and 2) an original approach through feature reduction. This vignette covers and illustrates the second option.
+
+
+For this example we use data from [Blini and Zorzi, 2023](https://link.springer.com/article/10.3758/s13423-022-02192-z). Data can be retrieved from the associated [OSF repository](https://osf.io/6r5ch/). The eyetracker used was the TOBII spectrum. Unfortunately, the eyetracking data acquired this way are quite large, meaning that reading them will take some time.
+In this study (termed **Passive Viewing (PV) task**) 40 participants (following exclusions), of which 20 smokers and 20 non smokers, were given, as the name suggests, several images to look at: some were related to nicotine, and some were neutral controls. Contrary to what the name suggest, instead, they also had to report (hence somehow actively) the occurrence of a rare probe, which was presented on screen very sparingly; this was to ensure central fixation was maintained together with a minimum task engagement. Details are provided in the accompanying paper, what matters here is that smokers were found to have pupillary **constriction** when nicotine-related images (as opposed to neutral ones) were presented.
+Please note that the pipeline and the default parameters in `Pupilla` have changed since that paper came out in PBR, so that results will be slightly different. 
+
+## Read the data
+
+The library `Pupilla` must be installed first, and only once, through `devtools`:
+
+```{r, eval= F}
+#install.packages("devtools")
+devtools::install_github("EBlini/Pupilla")
+
+```
+
+Dependencies will be installed automatically.
+We will then need to load the following packages:
+
+```{r}
+library("Pupilla")
+library("dplyr") 
+library("ggplot2") 
+
+```
+
+```{r echo= F}
+wd= "I:\\Il mio Drive\\00 backup drive padova\\pupil NRS\\DotProbeTask\\02 PV\\02 data"
+
+```
+
+The following steps in this section vary a lot as a function of the software used for the presentation of the stimuli and your machine. `Pupilla` is tested on windows machines, you may thus have troubles using the utility functions to read all participants altogether. But this is how you would do in Windows:
+
+```{r}
+#set your own working directory first!
+#wd= choose.dir()
+
+subject= 1:51 #vector of ids
+#groups- whether ids are smokers or not; 
+#this I didn't know beforehand so I have to add manually this var
+group= c("NS", "S", "NS", "NS", "S","S", "NS", "S",
+         "S", "S", "S", "S", "S", "S", "NS", "S",
+         "NS", "S", "NS", "S", "NS", "NS", "S", "NS",
+         "S", "NS", "NS", "NS", "NS", "NS", "NS", "S",
+         "S", "S", "S", "NS", "NS", "NS", "NS", "S",
+         "NS", "NS", "NS", "S", "S", "S", "S", "S",
+         "S", "S", "S")
+
+#read all the files
+data= read_TOBII(subject, wd)
+
+#split for eyetracker and behavioral data
+ET= data$ET
+BD= data$BD
+
+```
+
+As you can see: 
+
+1) a working directory has been set - change yours!; 
+2) there are 51 subjects corresponding to 102 files because by default OpenSesame splits the eyetracker and behavioral files.
+
+So, reading the files should be straightforward. If this utility function does not work for you, however, just assume that it works by iterating `data.table::fread()` across (eyetracking) files. 
+Also, please note that by default the first 7 lines are skipped, but your eyetracker files may need different values!
+
+## Prepare the data
+
+I have the bad (?) habit to only record essential info in the eyetracker file, :)
+As a result, very often variables that are only present in the behavioral file (e.g., response time, condition) must be copied to the eyetracker file, which has very different dimensions (several lines per trial, depending on sampling rate). `Pupilla` has utility functions to do precisely that. 
+Let's move in order though.
+
+We start by filling the "Event" column, which is blank except for when the Event changes:
+
+```{r}
+ET$Event= ifelse(ET$Event== "", NA, ET$Event)
+ET= tidyr::fill(ET, Event, .direction = "down")
+
+```
+
+Based on the Event column changing value, we can establish the trial number (yes, this info is also missing from the eyetracker file!).
+
+```{r}
+ET$Subject= ET$p_ID
+ET= ET %>%
+  group_by(Subject) %>%
+  mutate(Trial= detect_change(Event, 
+                              key= "scrambled"))
+
+```
+
+Few initial samples are not assigned to a trial, and shall be removed:
+
+```{r}
+ET= ET[ET$Trial>=0,]
+
+```
+
+We can start now with copying the relevant variables to the ET dataframe. We start by adding the variable Phase (whether a trial was labelled as practice, and therefore removed afterwards, or experimental).
+
+```{r}
+#whether it's practice or experiment
+ET$Phase= copy_variable("Phase")
+#discard practice
+ET= ET[ET$Phase== "experiment",]
+BD= BD[BD$Phase== "experiment",]
+
+```
+
+We move on with the variable Trial:
+
+```{r}
+ET$Trial= copy_variable("Trial")
+
+range(ET$Trial)
+range(BD$Trial)
+
+```
+
+And finally all the variables that make up our experimental design:
+
+```{r}
+ET$Condition= copy_variable("Condition")
+ET$Cue= copy_variable("Cue")
+# ET$Accuracy= copy_variable("Accuracy")
+# ET$Image= copy_variable("Image")
+# ET$RT = as.numeric(copy_variable("RT"))
+
+```
+
+(Of these, only Condition is relevant here, the rest we can skip for this vignette).
+
+We can finally start handling and preparing the signal about pupil size!
+
+The TOBII acquired both the left and right eye. So we consolidate the two in one single variable that represents the average of the two eyes - but only when both were judged valid by TOBII's algorithms.
+
+Because the TOBII stores pupil size in mms, we can fetch plausible values (between 2 and 7 mms) and discard the outlier ones straight away.
+
+```{r}
+ET$Pupil= consolidate_signal(ET$PupilSizeLeft, ET$PupilSizeRight,
+                             ET$PupilValidityLeft, ET$PupilValidityRight,
+                             strategy = "conservative",
+                             plausible= c(2, 7))
+
+```
+
+We then isolate the two experimental stages: scrambled images (our baseline) vs target images.
+
+```{r}
+ET= ET[ET$Event %in% c("scrambled", "target"),]
+
+```
+
+We can now realign the timestamps to the first sample of the scrambled phase. As you can see timestamps are in absolute values, and their difference is not really constant.  
+
+```{r}
+head(ET$TimeStamp)
+
+ET= ET %>%
+  group_by(Subject, Trial) %>%
+  mutate(Time= c(0,
+                 cumsum(diff(TimeStamp))))
+
+head(ET$Time)
+
+```
+
+In theory each trial had to last 4500 ms, but one or two for some reasons missed something and last longer, we shall discard them.
+
+```{r}
+range(ET$Time)
+
+ET= ET %>%
+  group_by(Subject, Trial) %>%
+  mutate(Anomaly= ifelse(max(Time)>4500, 1, 0))
+
+(table(ET$p_ID[ET$Anomaly== 1], 
+      ET$Trial[ET$Anomaly== 1])) #for 1 participant, the trial around the break...
+
+ET= ET[ET$Anomaly== 0,]
+
+```
+
+Now that everything is clean, we realign Time not to the beginning of the trial, but to the moment in which the target was presented:
+
+```{r}
+ET= ET %>%
+  group_by(Subject, Trial) %>%
+  mutate(Time= Time - Time[Event== "target"][1])
+
+ET= ET[ET$Time >-1000 & ET$Time<3000,]
+
+```
+
+
+Finally, this is the moment in which the Group variable is added. Furthermore, we discard the participants who did not present sufficient valid trials; this would actually be seen afterwards, but in this experiment we add another task for which eye movements quality was important, so that exclusions have been decided based on the results of both tasks.
+
+```{r}
+ET= ET %>% filter(!Subject %in% c(2, 9, 10, 13, 25, 29, 30, 34, 38, 48, 49))
+
+#assign group
+ET$Group= group[ET$Subject]
+
+```
+
+## Preprocessing
+
+We can finally move to the real thing!
+The signal must be **processed** so that the impact of artifacts, blinks, etc. is reduced. The easiest way to do that in `Pupilla` would be to use the `pre_process()` function. You may want, however, to consider whether the specific default parameters are applicable to your data. For a description of the parameters, see `?pp_options()`. You can always change the default parameters by calling the options globally, other than within the function itself. E.g.:
+
+```{r}
+#the default parameters:
+pp_options()
+
+#this changes the width of the window for smoothing
+pp_options("spar"= 1) 
+
+#entire preprocessing
+ET= ET %>%
+  group_by(Subject, Trial) %>%
+  mutate(Pupil_pp= pre_process(Pupil, Time))
+
+```
+
+And that's it! You can **check** the result of the pipeline visually as follows:
+
+```{r}
+ET %>% filter(Subject==12 & Trial== 104) %>%
+  check_series("Pupil", "Pupil_pp", "Time")
+
+```
+
+Or you can use the function `Pupilla::check_all_series()` to have all the plots (that is, for all ids and trials) saved as images in your path.
+
+In the image, the black dots represent the raw, initial data. The red line depicts instead the reconstructed, preprocessed signal. `pre_process()` simply runs, in order, functions for deblinking (through a velocity-based criterion), interpolation, and smoothing through cubic splines. Trials in which data points do not reach a given quality threshold are set to NA; trials that can be recovered are, instead, recovered.
+
+So, for those trials in which we couldn't restore a reliable signal, we simply discard them!
+
+```{r}
+#drop
+ET= ET %>% filter(!is.na(Pupil_pp))
+
+```
+
+Another common step is **downsampling**, we choose bins of 25 ms:
+
+```{r}
+ET$Time= downsample_time(ET$Time, 25)
+
+#summarise the data for the new binned variable
+ET= ET %>%
+  group_by(Subject, Group, Condition, Trial, Time) %>%
+  summarise(Pupil= median(Pupil_pp, na.rm = T))
+
+```
+
+Next, I personally prefer to work with **z-scores** instead of arbitrary units or mms, as to have a standardized measure. So:
+
+```{r}
+ET= ET %>%
+  group_by(Subject) %>%
+  mutate(Pupil= (Pupil-mean(na.omit(Pupil)))/sd(na.omit(Pupil)))
+
+```
+
+The last, crucial step is the **baseline subtraction**. In analogy to what done in the paper I simply realign the traces to the beginning of the target presentation phase, just like what done for Time. A more extended period would be advisable.
+
+```{r}
+ET= ET %>%
+  group_by(Subject, Trial) %>%
+  mutate(Pupil= Pupil - Pupil[Time== 0][1])
+
+```
+
+We are done!
+
+## Analysis
+
+Briefly, the data looks like this:
+
+```{r fig.width=9, echo= F, fig.height=6}
+ET$Subject= as.factor(ET$Subject)
+ET$Condition= ifelse(ET$Condition== "A",
+                     "Nicotine-related",
+                     "Control")
+ET$Group= ifelse(ET$Group== "S",
+                 "Smokers",
+                 "Non smokers")
+
+pupil= ET %>%
+  group_by(Subject, Group, Time, Condition) %>%
+  summarise(Pupil= mean(Pupil, na.rm=T))
+
+pupil_group= pupil %>%
+  group_by(Group, Time, Condition) %>%
+  summarise(Pupil= mean(Pupil, na.rm=T))
+
+
+commonTheme= list(theme_bw(),
+                  theme(text= element_text(size= 16,
+                                           face="bold")),
+                  geom_hline(yintercept = 0, color= "black"),
+                  geom_vline(xintercept = 0, color= "black"),
+                  xlab("Time (ms)"),
+                  ylab("Pupil dilation (z scores)"))
+
+p1=
+  pupil_group %>%
+  #filter(Time>=0) %>%
+  ggplot(aes(x= Time, y= Pupil,
+             color= Group, linetype= Condition)) +
+  commonTheme +
+  geom_line(linewidth= 1)
+
+pupil_diff= ET %>%
+  group_by(Subject, Group, Time, Condition) %>%
+  summarise(Pupil= mean(Pupil, na.rm= T)) %>%
+  group_by(Subject, Group, Time) %>%
+  summarise(Pupil= Pupil[Condition== "Nicotine-related"] - Pupil[Condition== "Control"])
+
+
+pupil_diff_group= pupil_diff %>%
+  group_by(Group, Time) %>%
+  summarise(SEM= sd(Pupil)/sqrt(length(Pupil)),
+            N= length(Pupil),
+            Pupil= mean(Pupil)) %>%
+  mutate(ci.min= Pupil - 1.96 * SEM,
+         ci.max= Pupil + 1.96 * SEM)
+
+p2= pupil_diff_group %>%
+  ggplot(aes(x= Time, y= Pupil, color= Group)) +
+  commonTheme +
+  geom_ribbon(aes(ymin= ci.min,
+                  ymax= ci.max,
+                  fill= Group),
+              alpha= 0.3, color= NA) +
+  geom_line(linewidth= 1.2, show.legend = F) +
+  ylab("Pupil dilation by NRS") + guides(NULL)
+
+
+patchwork::plot_layout(p1 + p2)
+
+```
+
+We have now different paths for statistical modelling. In the original paper we choose a cluster-based permutation test. This approach is often computationally-intensive, though it works very well. Other approaches involve crossvalidated LMEMs (implemented in the package `Pupilla` but shown in another vignette) or **feature reduction**.
+Feature reduction is not the norm in pupillometry, but it is common in other branches of neuroimaging - e.g., fMRI. It works very well, when data is large, in reducing its dimensions as to have more manageable variables to work with. In the case of pupillometry, because the signal is strongly autocorrelated, this is particularly appealing. 
+`Pupilla` can summarise the traces through both PCA and ICA as follows.
+
+### PCA
+
+```{r}
+data= ET[ET$Time>0,] #remove the baseline
+dv= "Pupil"
+time= "Time"
+id= "Subject"
+trial= "Trial"
+add= c("Group", "Condition")
+Ncomp= NULL
+
+rf= reduce_PCA(data,
+                     dv,
+                     time,
+                     id,
+                     trial,
+                     Ncomp= NULL,
+                     scaling= F,
+                     add)
+
+
+```
+
+The traces of 40 participants x (about) 200 trials each can be summarised by very few PCs (you only need 3 variables to account for >95% of the data!):
+
+```{r}
+rf$summaryPCA[, 1:4]
+
+```
+
+Each PC accounts for a specific share of the variance, and has distinctive loadings - you can think at them as the weighted contribution to the PC of each time point, in a way that is very similar to a cluster, though graded. You can assess the loadings directly or through a plot conveniently returned by `plot_loadings()`.
+
+```{r}
+plot_loadings("PC1", rf)
+
+```
+
+The loadings for the first PC, as expected, resemble very much the shape of the data. During the trial there was a steady pupil dilation, which is well captured here in that later timepoints have larger weights. The sign of the loadings is, instead, arbitrary, and you could very well multiply them all for -1. 
+
+Each component is summarised with only one score per trial! This is far more manageable for most uses, e.g. to obtain intuitive and easy to interpret summary scores. Scores can be used directly - e.g., to correlate with other experimental variables such as questionnaires or neuroimaging data - or used for a second level analysis (e.g., simple t tests).
+In the case of our Group x Condition interaction, we start by summarising each trial into summary scores, and then scoring the difference between conditions:
+
+```{r}
+Scores= rf$Scores
+
+Scores= Scores %>% 
+  group_by(id, Group, Condition) %>% 
+  summarise(PC1= mean(PC1), PC2= mean(PC2)) %>% 
+  group_by(id, Group) %>% 
+  reframe(PC1= PC1[Condition== "Control"]-PC1[Condition== "Nicotine-related"], 
+          PC2= PC2[Condition== "Control"]-PC2[Condition== "Nicotine-related"])
+
+
+```
+
+For PC1:
+
+```{r}
+#plots of the difference
+ggplot(Scores, aes(x= Group,
+                   fill= Group,
+                   y= PC1)) +
+  geom_violin()
+
+
+t.test(Scores$PC1[Scores$Group== "Smokers"],
+       Scores$PC1[Scores$Group== "Non smokers"])
+
+```
+
+There is a significant interaction between group and condition that is captured by the first PC!
+
+The second PC is not, instead, significant:
+
+```{r}
+ggplot(Scores, aes(x= Group,
+                   fill= Group,
+                   y= PC2)) +
+  geom_boxplot()
+
+t.test(Scores$PC2[Scores$Group== "Smokers"],
+       Scores$PC2[Scores$Group== "Non smokers"])
+
+```
+
+Features after the first ones progressively account for the remaining variance, and may thus accomodate for subtle differences between conditions that do not alter necessarily the overall shape of pupillary dilation. In other words, the next pcs describe some sort of contrast functions like this one: 
+
+```{r}
+plot_loadings("PC2", rf)
+
+```
+
+
+### ICA
+
+Choosing ICA is as simple as that!
+
+```{r}
+rf2= reduce_ICA(data,
+                     dv,
+                     time,
+                     id,
+                     trial,
+                     Ncomp= NULL,
+                     scaling= F,
+                     add)
+
+
+```
+
+`Pupilla` uses `ica::icafast` for independent components analysis. The overall explained variance remains that of PCA. However, the single contribution of components should be weighted by:
+
+```{r}
+rf2$ICA$vafs
+
+```
+
+In other words, do not trust much the title of the loadings plot:
+
+```{r}
+plot_loadings("IC1", rf2)
+
+```
+
+So in this case the first IC and the first PC are very similar, as both reflect the overall dilation trend - doesn't really matter that loadings are negative for the ICA.
+
+```{r}
+Scores2= rf2$Scores
+
+Scores2= Scores2 %>% 
+  group_by(id, Group, Condition) %>% 
+  summarise(IC1= mean(IC1), IC2= mean(IC2)) %>% 
+  group_by(id, Group) %>% 
+  reframe(IC1= IC1[Condition== "Control"]-IC1[Condition== "Nicotine-related"], 
+          IC2= IC2[Condition== "Control"]-IC2[Condition== "Nicotine-related"])
+
+```
+
+Results are (somehow) similar to PCA:
+
+```{r}
+#plots of the difference
+ggplot(Scores2, aes(x= Group,
+                   fill= Group,
+                   y= IC1)) +
+  geom_violin()
+
+
+t.test(Scores2$IC1[Scores$Group== "Smokers"],
+       Scores2$IC1[Scores$Group== "Non smokers"])
+
+```
+
+
+
+## Conclusion
+
+In this vignette we went through an example of how you could use the functions in `Pupilla` for your own data, in areas encompassing loading, preparing, and preprocessing the data. Furthermore, a novel approach - and, as such, object of active research - to analyze the data has been presented. 
+In this approach the signal is decomposed in few, very manageable scores, the explain efficiently the (severely autocorrelated) data with only a handful of scores. These scores can be attributed to differences in pupil size at different time points, as can be explored visually as the loadings of specific components. Another advantage is that, in the case of multiple components presenting significant effects, the weights can be backprojected as a linear combination of the coefficients and the loadings (see, for more details, backprojection in my other package, [FCnet](https://github.com/EBlini/FCnet)). This approach has therefore the potential to be very flexible.
+
+This approach will be discussed in more details in the accompanying paper.
+
+## Appendix
+
+Packages' versions:
+
+```{r}
+sessionInfo()
+
+```
+

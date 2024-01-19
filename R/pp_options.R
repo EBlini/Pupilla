@@ -11,7 +11,7 @@ opt= settings::options_manager(
   overall_thresh= 0.4,
   consecutive_thresh= NULL,
 
-  spar= 0.1
+  spar= 0.7
 
 )
 

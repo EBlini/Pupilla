@@ -91,7 +91,7 @@ reduce_ICA= function(data,
   col_sd= apply(rs_mat, 2, sd)
 
   #run PCA
-  PCA= prcomp(rs_mat, scale= scaling)
+  PCA= prcomp(rs_mat, scale= scaling, center= scaling)
 
   #summary
   summaryPCA= summary(PCA)$importance
