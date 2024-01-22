@@ -3,5 +3,9 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Pupilla_TOBII_ReduceFeatures: Pupilla_TOBII_ReduceFeatures.html
+<<<<<<< HEAD
 last_built: 2024-01-22T11:20Z
+=======
+last_built: 2024-01-22T10:57Z
+>>>>>>> 99ac6f131d877595bceea81e47efafbb7ebe53f0
 
