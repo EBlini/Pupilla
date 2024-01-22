@@ -88,24 +88,28 @@ facilitate the analysis of pupillometry experiments as commonly
 performed in cognitive neuroscience, e.g. event-related designs,
 although its use could be much more general.</p>
 <p>The typical analysis pipeline would, coarsely, include the following
-steps: 1. <strong>Read the data.</strong> This part can vary a lot
+steps:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Read the data.</strong> This part can vary a lot
 depending on the eyetracker used, the individual OS, local paths, how
 the experiment was coded, etc. <code>Pupilla</code> does provide utility
 functions to read from common eyetrackers (e.g., TOBII, EyeLink) but
-clearly this passage will need to be tailored to your files. 2.
-<strong>Prepare the data.</strong> As above, this part may need to be
-tailored to your specific needs; however, several steps are very common
-across pipelines, and will be presented in this vignette. 3.
-<strong>Preprocessing.</strong> Pupillometry needs robust preprocessing
-of the raw data, in order to reduce noise and artifacts (such as those
-due to blinks). Once the data is properly prepared, this aspect can be
-translated across several different scenarios. Of course, flexibility
-and adapting to your own data is warmly advised. 4. <strong>Statistical
-modelling</strong>. <code>Pupilla</code> offers two approaches: 1)
-crossvalidated LMEMs as in <a href="https://link.springer.com/article/10.3758/s13428-022-01957-7" class="external-link">Mathôt
+clearly this passage will need to be tailored to your files.</p></li>
+<li><p><strong>Prepare the data.</strong> As above, this part may need
+to be tailored to your specific needs; however, several steps are very
+common across pipelines, and will be presented in this
+vignette.</p></li>
+<li><p><strong>Preprocessing.</strong> Pupillometry needs robust
+preprocessing of the raw data, in order to reduce noise and artifacts
+(such as those due to blinks). Once the data is properly prepared, this
+aspect can be translated across several different scenarios. Of course,
+flexibility and adapting to your own data is warmly advised.</p></li>
+<li><p><strong>Statistical modelling</strong>. <code>Pupilla</code>
+offers two approaches: 1) crossvalidated LMEMs as in <a href="https://link.springer.com/article/10.3758/s13428-022-01957-7" class="external-link">Mathôt
 &amp; Vilotijević, 2022</a>); and 2) an original approach through
 feature reduction. This vignette covers and illustrates the second
-option.</p>
+option.</p></li>
+</ol>
 <p>For this example we use data from <a href="https://link.springer.com/article/10.3758/s13423-022-02192-z" class="external-link">Blini
 and Zorzi, 2023</a>. Data can be retrieved from the associated <a href="https://osf.io/6r5ch/" class="external-link">OSF repository</a>. The eyetracker used was
 the TOBII spectrum. Unfortunately, the eyetracking data acquired this
@@ -117,13 +121,13 @@ some were related to nicotine, and some were neutral controls. Contrary
 to what the name suggest, instead, they also had to report (hence
 somehow actively) the occurrence of a rare probe, which was presented on
 screen very sparingly; this was to ensure central fixation was
-maintained together with a minimum task engagement. Details are provided
-in the accompanying paper, what matters here is that smokers were found
-to have pupillary <strong>constriction</strong> when nicotine-related
-images (as opposed to neutral ones) were presented. Please note that the
-pipeline and the default parameters in <code>Pupilla</code> have changed
-since that paper came out in PBR, so that results will be slightly
-different.</p>
+maintained together with a minimum of task engagement. Details are
+provided in the accompanying paper, what matters here is that smokers
+were found to have pupillary <strong>constriction</strong> when
+nicotine-related images (as opposed to neutral ones) were presented.
+Please note that the pipeline and the default parameters in
+<code>Pupilla</code> have changed since that paper came out in PBR, so
+that results will be slightly different.</p>
 </div>
 <div class="section level2">
 <h2 id="read-the-data">Read the data<a class="anchor" aria-label="anchor" href="#read-the-data"></a>
@@ -147,7 +151,10 @@ load the following packages:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span> </span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org" class="external-link">"tidyr"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>dplyr.summarise.inform <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>The following steps in this section vary a lot as a function of the
 software used for the presentation of the stimuli and your machine.
 <code>Pupilla</code> is tested on windows machines, you may thus have
@@ -190,19 +197,22 @@ your eyetracker files may need different values!</p>
 <h2 id="prepare-the-data">Prepare the data<a class="anchor" aria-label="anchor" href="#prepare-the-data"></a>
 </h2>
 <p>I have the bad (?) habit to only record essential info in the
-eyetracker file, :) As a result, very often variables that are only
-present in the behavioral file (e.g., response time, condition) must be
-copied to the eyetracker file, which has very different dimensions
-(several lines per trial, depending on sampling rate).
-<code>Pupilla</code> has utility functions to do precisely that. Let’s
-move in order though.</p>
+eyetracker file, :)</p>
+<p>As a result, very often variables that are only present in the
+behavioral file (e.g., response time, condition) must be copied to the
+eyetracker file, which has very different dimensions (several lines per
+trial, depending on sampling rate). <code>Pupilla</code> has utility
+functions to do precisely that. Let’s move in order though.</p>
 <p>We start by filling the “Event” column, which is blank except for
 when the Event changes:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">$</span><span class="va">Event</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">ET</span><span class="op">$</span><span class="va">Event</span><span class="op">==</span> <span class="st">""</span>, <span class="cn">NA</span>, <span class="va">ET</span><span class="op">$</span><span class="va">Event</span><span class="op">)</span></span>
 <span><span class="va">ET</span><span class="op">=</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">fill</a></span><span class="op">(</span><span class="va">ET</span>, <span class="va">Event</span>, .direction <span class="op">=</span> <span class="st">"down"</span><span class="op">)</span></span></code></pre></div>
 <p>Based on the Event column changing value, we can establish the trial
-number (yes, this info is also missing from the eyetracker file!).</p>
+number (yes, this info is also missing from the eyetracker file!).
+<code><a href="../reference/detect_change.html">detect_change()</a></code> simply updates a counter for every instance
+in which the parameter “key” appears again in a vector (and only the
+first time).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">$</span><span class="va">Subject</span><span class="op">=</span> <span class="va">ET</span><span class="op">$</span><span class="va">p_ID</span></span>
 <span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -236,7 +246,7 @@ experimental).</p>
 design:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">$</span><span class="va">Condition</span><span class="op">=</span> <span class="fu"><a href="../reference/copy_variable.html">copy_variable</a></span><span class="op">(</span><span class="st">"Condition"</span><span class="op">)</span></span>
-<span><span class="va">ET</span><span class="op">$</span><span class="va">Cue</span><span class="op">=</span> <span class="fu"><a href="../reference/copy_variable.html">copy_variable</a></span><span class="op">(</span><span class="st">"Cue"</span><span class="op">)</span></span>
+<span><span class="co"># ET$Cue= copy_variable("Cue")</span></span>
 <span><span class="co"># ET$Accuracy= copy_variable("Accuracy")</span></span>
 <span><span class="co"># ET$Image= copy_variable("Image")</span></span>
 <span><span class="co"># ET$RT = as.numeric(copy_variable("RT"))</span></span></code></pre></div>
@@ -350,7 +360,7 @@ E.g.:</p>
 <span><span class="co">## [1] 0.7</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#this changes the width of the window for smoothing</span></span>
-<span><span class="fu"><a href="../reference/pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"spar"</span><span class="op">=</span> <span class="fl">1</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="../reference/pp_options.html">pp_options</a></span><span class="op">(</span><span class="st">"spar"</span><span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co">#entire preprocessing</span></span>
 <span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -386,11 +396,10 @@ of 25 ms:</p>
 <span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">Group</span>, <span class="va">Condition</span>, <span class="va">Trial</span>, <span class="va">Time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">Pupil_pp</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'Subject', 'Group', 'Condition', 'Trial'. You can override using the `.groups` argument.</span></span></code></pre>
 <p>Next, I personally prefer to work with <strong>z-scores</strong>
 instead of arbitrary units or mms, as to have a standardized measure.
 So:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="op">(</span><span class="va">Pupil</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -398,7 +407,7 @@ So:</p>
 In analogy to what done in the paper I simply realign the traces to the
 beginning of the target presentation phase, just like what done for
 Time. A more extended period would be advisable.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">Trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="va">Pupil</span> <span class="op">-</span> <span class="va">Pupil</span><span class="op">[</span><span class="va">Time</span><span class="op">==</span> <span class="fl">0</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
@@ -408,11 +417,6 @@ Time. A more extended period would be advisable.</p>
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h2>
 <p>Briefly, the data looks like this:</p>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'Subject', 'Group', 'Time'. You can override using the `.groups` argument.</span></span>
-<span><span class="co">## `summarise()` has grouped output by 'Group', 'Time'. You can override using the `.groups` argument.</span></span>
-<span><span class="co">## `summarise()` has grouped output by 'Subject', 'Group', 'Time'. You can override using the `.groups` argument.</span></span>
-<span><span class="co">## `summarise()` has grouped output by 'Subject', 'Group'. You can override using the `.groups` argument.</span></span>
-<span><span class="co">## `summarise()` has grouped output by 'Group'. You can override using the `.groups` argument.</span></span></code></pre>
 <pre><code><span><span class="co">## $ncol</span></span></code></pre>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-23-1.png" width="864"></p>
 <pre><code><span><span class="co">## </span></span>
@@ -454,41 +458,39 @@ through both PCA and ICA as follows.</p>
 <div class="section level3">
 <h3 id="pca">PCA<a class="anchor" aria-label="anchor" href="#pca"></a>
 </h3>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">=</span> <span class="va">ET</span><span class="op">[</span><span class="va">ET</span><span class="op">$</span><span class="va">Time</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="op">]</span> <span class="co">#remove the baseline</span></span>
 <span><span class="va">dv</span><span class="op">=</span> <span class="st">"Pupil"</span></span>
 <span><span class="va">time</span><span class="op">=</span> <span class="st">"Time"</span></span>
 <span><span class="va">id</span><span class="op">=</span> <span class="st">"Subject"</span></span>
 <span><span class="va">trial</span><span class="op">=</span> <span class="st">"Trial"</span></span>
-<span><span class="va">add</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Group"</span>, <span class="st">"Condition"</span><span class="op">)</span></span>
-<span><span class="va">Ncomp</span><span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="va">add</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Group"</span>, <span class="st">"Condition"</span><span class="op">)</span> <span class="co">#save to final dataframe</span></span>
+<span><span class="va">Ncomp</span><span class="op">=</span> <span class="cn">NULL</span> <span class="co">#defaults to 95% of variance retained</span></span>
 <span></span>
-<span><span class="va">rf</span><span class="op">=</span> <span class="fu"><a href="../reference/reduce_PCA.html">reduce_PCA</a></span><span class="op">(</span><span class="va">data</span>,</span>
-<span>                     <span class="va">dv</span>,</span>
-<span>                     <span class="va">time</span>,</span>
-<span>                     <span class="va">id</span>,</span>
-<span>                     <span class="va">trial</span>,</span>
-<span>                     Ncomp<span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>                     scaling<span class="op">=</span> <span class="cn">F</span>,</span>
-<span>                     <span class="va">add</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in reduce_PCA(data, dv, time, id, trial, Ncomp = NULL, scaling = F, : NAs is the data will be discarded:</span></span>
-<span><span class="co">##             check the data (unequal timepoints maybe?)!</span></span></code></pre>
+<span><span class="va">rf</span> <span class="op">=</span> <span class="fu"><a href="../reference/reduce_PCA.html">reduce_PCA</a></span><span class="op">(</span><span class="va">data</span>,</span>
+<span>                <span class="va">dv</span>,</span>
+<span>                <span class="va">time</span>,</span>
+<span>                <span class="va">id</span>,</span>
+<span>                <span class="va">trial</span>,</span>
+<span>                Ncomp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                scaling <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                <span class="va">add</span><span class="op">)</span></span></code></pre></div>
 <p>The traces of 40 participants x (about) 200 trials each can be
 summarised by very few PCs (you only need 3 variables to account for
-&gt;95% of the data!):</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+&gt;98% of the data!):</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rf</span><span class="op">$</span><span class="va">summaryPCA</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">##                             PC1      PC2       PC3       PC4</span></span>
-<span><span class="co">## Standard deviation     5.675128 1.842544 0.9993216 0.5538732</span></span>
-<span><span class="co">## Proportion of Variance 0.869030 0.091610 0.0269500 0.0082800</span></span>
-<span><span class="co">## Cumulative Proportion  0.869030 0.960640 0.9875900 0.9958600</span></span></code></pre>
+<pre><code><span><span class="co">##                             PC1      PC2      PC3       PC4</span></span>
+<span><span class="co">## Standard deviation     5.747356 1.889998 1.108391 0.7121974</span></span>
+<span><span class="co">## Proportion of Variance 0.849950 0.091910 0.031610 0.0130500</span></span>
+<span><span class="co">## Cumulative Proportion  0.849950 0.941860 0.973480 0.9865300</span></span></code></pre>
 <p>Each PC accounts for a specific share of the variance, and has
 distinctive loadings - you can think at them as the weighted
 contribution to the PC of each time point, in a way that is very similar
 to a cluster, though graded. You can assess the loadings directly or
 through a plot conveniently returned by
 <code><a href="../reference/plot_loadings.html">plot_loadings()</a></code>.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 <p>The loadings for the first PC, as expected, resemble very much the
@@ -504,7 +506,7 @@ neuroimaging data - or used for a second level analysis (e.g., simple t
 tests). In the case of our Group x Condition interaction, we start by
 summarising each trial into summary scores, and then scoring the
 difference between conditions:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Scores</span><span class="op">=</span> <span class="va">rf</span><span class="op">$</span><span class="va">Scores</span></span>
 <span></span>
 <span><span class="va">Scores</span><span class="op">=</span> <span class="va">Scores</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -513,58 +515,51 @@ difference between conditions:</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span>PC1<span class="op">=</span> <span class="va">PC1</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Control"</span><span class="op">]</span><span class="op">-</span><span class="va">PC1</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Nicotine-related"</span><span class="op">]</span>, </span>
 <span>          PC2<span class="op">=</span> <span class="va">PC2</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Control"</span><span class="op">]</span><span class="op">-</span><span class="va">PC2</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Nicotine-related"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'id', 'Group'. You can override using the `.groups` argument.</span></span></code></pre>
 <p>For PC1:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plots of the difference</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Group</span>,</span>
-<span>                   fill<span class="op">=</span> <span class="va">Group</span>,</span>
+<span>                   color<span class="op">=</span> <span class="va">Group</span>,</span>
 <span>                   y<span class="op">=</span> <span class="va">PC1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">position_dodge2</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">Scores</span><span class="op">$</span><span class="va">PC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Smokers"</span><span class="op">]</span>,</span>
 <span>       <span class="va">Scores</span><span class="op">$</span><span class="va">PC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Non smokers"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Welch Two Sample t-test</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## data:  Scores$PC1[Scores$Group == "Smokers"] and Scores$PC1[Scores$Group == "Non smokers"]</span></span>
-<span><span class="co">## t = 2.4325, df = 36.666, p-value = 0.02</span></span>
+<span><span class="co">## t = 2.303, df = 36.918, p-value = 0.02701</span></span>
 <span><span class="co">## alternative hypothesis: true difference in means is not equal to 0</span></span>
 <span><span class="co">## 95 percent confidence interval:</span></span>
-<span><span class="co">##  0.111286 1.223193</span></span>
+<span><span class="co">##  0.07770775 1.21602944</span></span>
 <span><span class="co">## sample estimates:</span></span>
 <span><span class="co">##  mean of x  mean of y </span></span>
-<span><span class="co">##  0.3851254 -0.2821139</span></span></code></pre>
+<span><span class="co">##  0.3538250 -0.2930436</span></span></code></pre>
 <p>There is a significant interaction between group and condition that
 is captured by the first PC!</p>
 <p>The second PC is not, instead, significant:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Group</span>,</span>
-<span>                   fill<span class="op">=</span> <span class="va">Group</span>,</span>
-<span>                   y<span class="op">=</span> <span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">Scores</span><span class="op">$</span><span class="va">PC2</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Smokers"</span><span class="op">]</span>,</span>
 <span>       <span class="va">Scores</span><span class="op">$</span><span class="va">PC2</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Non smokers"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Welch Two Sample t-test</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## data:  Scores$PC2[Scores$Group == "Smokers"] and Scores$PC2[Scores$Group == "Non smokers"]</span></span>
-<span><span class="co">## t = -0.73752, df = 34.374, p-value = 0.4658</span></span>
+<span><span class="co">## t = -0.57373, df = 34.168, p-value = 0.5699</span></span>
 <span><span class="co">## alternative hypothesis: true difference in means is not equal to 0</span></span>
 <span><span class="co">## 95 percent confidence interval:</span></span>
-<span><span class="co">##  -0.3324722  0.1553623</span></span>
+<span><span class="co">##  -0.3254013  0.1821000</span></span>
 <span><span class="co">## sample estimates:</span></span>
 <span><span class="co">##   mean of x   mean of y </span></span>
-<span><span class="co">## -0.06812827  0.02042667</span></span></code></pre>
+<span><span class="co">## -0.05093052  0.02072016</span></span></code></pre>
 <p>Features after the first ones progressively account for the remaining
 variance, and may thus accomodate for subtle differences between
 conditions that do not alter necessarily the overall shape of pupillary
 dilation. In other words, the next pcs describe some sort of contrast
 functions like this one:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC2"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-30-1.png" width="700"></p>
 </div>
@@ -572,32 +567,32 @@ functions like this one:</p>
 <h3 id="ica">ICA<a class="anchor" aria-label="anchor" href="#ica"></a>
 </h3>
 <p>Choosing ICA is as simple as that!</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rf2</span><span class="op">=</span> <span class="fu"><a href="../reference/reduce_ICA.html">reduce_ICA</a></span><span class="op">(</span><span class="va">data</span>,</span>
-<span>                     <span class="va">dv</span>,</span>
-<span>                     <span class="va">time</span>,</span>
-<span>                     <span class="va">id</span>,</span>
-<span>                     <span class="va">trial</span>,</span>
-<span>                     Ncomp<span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>                     scaling<span class="op">=</span> <span class="cn">F</span>,</span>
-<span>                     <span class="va">add</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in reduce_ICA(data, dv, time, id, trial, Ncomp = NULL, scaling = F, : NAs is the data will be discarded:</span></span>
-<span><span class="co">##             check the data (unequal timepoints maybe?)!</span></span></code></pre>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rf2</span> <span class="op">=</span> <span class="fu"><a href="../reference/reduce_ICA.html">reduce_ICA</a></span><span class="op">(</span><span class="va">data</span>,</span>
+<span>                 <span class="va">dv</span>,</span>
+<span>                 <span class="va">time</span>,</span>
+<span>                 <span class="va">id</span>,</span>
+<span>                 <span class="va">trial</span>,</span>
+<span>                 Ncomp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                 scaling <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                 <span class="va">add</span><span class="op">)</span></span></code></pre></div>
 <p><code>Pupilla</code> uses <code><a href="https://rdrr.io/pkg/ica/man/icafast.html" class="external-link">ica::icafast</a></code> for independent
 components analysis. The overall explained variance remains that of PCA.
 However, the single contribution of components should be weighted
 by:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rf2</span><span class="op">$</span><span class="va">ICA</span><span class="op">$</span><span class="va">vafs</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.8540742 0.1065659</span></span></code></pre>
-<p>In other words, do not trust much the title of the loadings plot:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.72918272 0.17781761 0.06647561</span></span></code></pre>
+<p>In other words, do not trust much the title of the loadings plot -
+that refers to the PCA model:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"IC1"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-33-1.png" width="700"></p>
-<p>So in this case the first IC and the first PC are very similar, as
-both reflect the overall dilation trend - doesn’t really matter that
-loadings are negative for the ICA.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<p>So in this case the first IC and the first PC are very similar, only
+the scale changes a bit, as both reflect the overall dilation trend -
+again, the sign of the loadings does not really matter (just check the
+direction for the interpretation of your data).</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Scores2</span><span class="op">=</span> <span class="va">rf2</span><span class="op">$</span><span class="va">Scores</span></span>
 <span></span>
 <span><span class="va">Scores2</span><span class="op">=</span> <span class="va">Scores2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -606,29 +601,28 @@ loadings are negative for the ICA.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span>IC1<span class="op">=</span> <span class="va">IC1</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Control"</span><span class="op">]</span><span class="op">-</span><span class="va">IC1</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Nicotine-related"</span><span class="op">]</span>, </span>
 <span>          IC2<span class="op">=</span> <span class="va">IC2</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Control"</span><span class="op">]</span><span class="op">-</span><span class="va">IC2</span><span class="op">[</span><span class="va">Condition</span><span class="op">==</span> <span class="st">"Nicotine-related"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'id', 'Group'. You can override using the `.groups` argument.</span></span></code></pre>
 <p>Results are (somehow) similar to PCA:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plots of the difference</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Scores2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Group</span>,</span>
-<span>                   fill<span class="op">=</span> <span class="va">Group</span>,</span>
+<span>                   color<span class="op">=</span> <span class="va">Group</span>,</span>
 <span>                   y<span class="op">=</span> <span class="va">IC1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">position_dodge2</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Pupilla_TOBII_ReduceFeatures_files/figure-html/unnamed-chunk-35-1.png" width="700"></p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">Scores2</span><span class="op">$</span><span class="va">IC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Smokers"</span><span class="op">]</span>,</span>
 <span>       <span class="va">Scores2</span><span class="op">$</span><span class="va">IC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Non smokers"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Welch Two Sample t-test</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## data:  Scores2$IC1[Scores$Group == "Smokers"] and Scores2$IC1[Scores$Group == "Non smokers"]</span></span>
-<span><span class="co">## t = 2.5861, df = 36.047, p-value = 0.01389</span></span>
+<span><span class="co">## t = -1.9344, df = 37.973, p-value = 0.06054</span></span>
 <span><span class="co">## alternative hypothesis: true difference in means is not equal to 0</span></span>
 <span><span class="co">## 95 percent confidence interval:</span></span>
-<span><span class="co">##  0.02657081 0.21965828</span></span>
+<span><span class="co">##  -0.215057273  0.004892434</span></span>
 <span><span class="co">## sample estimates:</span></span>
 <span><span class="co">##   mean of x   mean of y </span></span>
-<span><span class="co">##  0.07234191 -0.05077263</span></span></code></pre>
+<span><span class="co">## -0.05883640  0.04624602</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -655,7 +649,7 @@ paper.</p>
 <h2 id="appendix">Appendix<a class="anchor" aria-label="anchor" href="#appendix"></a>
 </h2>
 <p>Packages’ versions:</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.2.3 (2023-03-15 ucrt)</span></span>
 <span><span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -670,11 +664,11 @@ paper.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] ggplot2_3.4.1      dplyr_1.1.0        Pupilla_0.0.0.9000</span></span>
+<span><span class="co">## [1] tidyr_1.3.0        ggplot2_3.4.1      dplyr_1.1.0        Pupilla_0.0.0.9000</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] zoo_1.8-11        settings_0.2.7    tidyselect_1.2.0  xfun_0.39         bslib_0.4.2       purrr_1.0.1       ica_1.0-3         lattice_0.20-45   colorspace_2.1-0  vctrs_0.6.0       generics_0.1.3    htmltools_0.5.4   yaml_2.3.7        utf8_1.2.3        rlang_1.1.0       pkgdown_2.0.7     jquerylib_0.1.4   pillar_1.8.1      glue_1.6.2        withr_2.5.0       lifecycle_1.0.3   stringr_1.5.0     munsell_0.5.0     gtable_0.3.1      ragg_1.2.5        memoise_2.0.1     evaluate_0.20     labeling_0.4.2    knitr_1.42        fastmap_1.1.1     fansi_1.0.4       highr_0.10        scales_1.2.1      cachem_1.0.7      desc_1.4.2        jsonlite_1.8.4    farver_2.1.1      systemfonts_1.0.4 fs_1.6.1          textshaping_0.3.6 digest_0.6.31     stringi_1.7.12    rprojroot_2.0.3   grid_4.2.3        here_1.0.1        cli_3.6.0         tools_4.2.3       magrittr_2.0.3    sass_0.4.5        patchwork_1.1.2   tibble_3.2.0      tidyr_1.3.0       pkgconfig_2.0.3   data.table_1.14.8 rmarkdown_2.20   </span></span>
-<span><span class="co">## [56] rstudioapi_0.14   R6_2.5.1          compiler_4.2.3</span></span></code></pre>
+<span><span class="co">##  [1] zoo_1.8-11        settings_0.2.7    tidyselect_1.2.0  xfun_0.39         bslib_0.4.2       purrr_1.0.1       ica_1.0-3         lattice_0.20-45   colorspace_2.1-0  vctrs_0.6.0       generics_0.1.3    htmltools_0.5.4   yaml_2.3.7        utf8_1.2.3        rlang_1.1.0       pkgdown_2.0.7     jquerylib_0.1.4   pillar_1.8.1      glue_1.6.2        withr_2.5.0       lifecycle_1.0.3   stringr_1.5.0     munsell_0.5.0     gtable_0.3.1      ragg_1.2.5        memoise_2.0.1     evaluate_0.20     labeling_0.4.2    knitr_1.42        fastmap_1.1.1     fansi_1.0.4       highr_0.10        scales_1.2.1      cachem_1.0.7      desc_1.4.2        jsonlite_1.8.4    farver_2.1.1      systemfonts_1.0.4 fs_1.6.1          textshaping_0.3.6 digest_0.6.31     stringi_1.7.12    rprojroot_2.0.3   grid_4.2.3        here_1.0.1        cli_3.6.0         tools_4.2.3       magrittr_2.0.3    sass_0.4.5        patchwork_1.1.2   tibble_3.2.0      pkgconfig_2.0.3   data.table_1.14.8 rmarkdown_2.20    rstudioapi_0.14  </span></span>
+<span><span class="co">## [56] R6_2.5.1          compiler_4.2.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -2,30 +2,7 @@
 % Please edit documentation in R/decode_signal.R
 \name{decode_signal}
 \alias{decode_signal}
-\title{Highlights and test the time-course of effects through crossvalidation
-This function is meant to implement, roughly and with no assurance of full compatibility whatsoever,
-the procedure proposed by Mathôt and Vilotijević (2022, \emph{Behavior Research Methods}).
-First, each trial (i.e., one complete time series) is assigned to one fold in a
-deterministic fashion (the first trial to the first fold, then the second trial to
-the second fold, etc.). In doing that, there is no regard of how conditions are
-distributed across folds, i.e. data may be slightly unbalanced; thus, you should think
-carefully as to whether this strategy applies to your design (e.g., blocked conditions).
-Then, data are separated for each time-point, and a LMEM as specified by the 'formula'
-parameter, which is passed to 'lmerTest::lmer', is performed by iteratively leaving
-one fold out. This results in a table, with as many rows as effects implied
-by the formula by 'nfolds', summarising which time point had a peak t-value (in absolute value)
-in the trained folds. In a separate table these peak values are tested: the dependent
-variable becomes, for each fold, the variable provided by 'dv' at that specific peak.
-Another LMEM is then computed by using this newly created variable. One problem with
-this approach is that peak values can be all over the places, depending on your data.
-Also, choosing the time-points based on the maximum value in the training dataset can
-occasionally decrease the precision of the estimate or give overfitting. You may use
-this approach if you are confident that a specific effect only has an effect at a specific
-window; effects with multiple windows - e.g., an early and late impact on pupil size - may
-not be properly captured with this approach. Therefore,
-in addition to this procedure, a very coarse consensus is seek by assessing,
-across all folds and effects, which time points resulted in t-values above a certain
-threshold; if the same time points pop out consistently across folds (e.g.,= 'consensus_thresh' \% of the times), then the time point is retained; all time-pointsretained in the consensus are collapsed (averaged), and a final LMEM is performed withthese time points. This can be interpreted more similarly to a cluster-basedpermutation test (although it is not the same).}
+\title{Highlights and test the time-course of effects through crossvalidation}
 \usage{
 decode_signal(
   data,
@@ -66,7 +43,6 @@ retained, cross-validated peaks; test of the consensus time-points, if any; list
 of time-points retained in the consensus for each effect.
 }
 \description{
-Highlights and test the time-course of effects through crossvalidation
 This function is meant to implement, roughly and with no assurance of full compatibility whatsoever,
 the procedure proposed by Mathôt and Vilotijević (2022, \emph{Behavior Research Methods}).
 First, each trial (i.e., one complete time series) is assigned to one fold in a

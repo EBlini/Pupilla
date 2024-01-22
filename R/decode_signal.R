@@ -1,5 +1,5 @@
 #' Highlights and test the time-course of effects through crossvalidation
-
+#'
 #' This function is meant to implement, roughly and with no assurance of full compatibility whatsoever,
 #' the procedure proposed by Mathôt and Vilotijević (2022, *Behavior Research Methods*).
 #' First, each trial (i.e., one complete time series) is assigned to one fold in a
