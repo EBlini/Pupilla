@@ -6,7 +6,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 
 ---
 
@@ -16,8 +16,12 @@ options(width = 999)
 Sys.setenv(LANG = "en")
 knitr::opts_chunk$set(
   #fig.path = "images/",
-  eval= F
+  eval= F,
+  collapse = TRUE,
+  comment = "#"
 )
+library(Pupilla)
+
 
 ```
 
