@@ -269,7 +269,7 @@ ET %>% filter(Subject==12 & Trial== 104) %>%
 
 ```
 
-[](images/preprocessed_trial-1.png)
+![  ](images/preprocessed_trial-1.png)
 
 Or you can use the function `Pupilla::check_all_series()` to have all the plots (that is, for all ids and trials) saved as images in your path.
 
@@ -384,7 +384,7 @@ pw= patchwork::plot_layout(p1 + p2)
 pw
 ```
 
-[](images/results_pbr-1.png)
+![  ](images/results_pbr-1.png)
 
 We have now different paths for statistical modelling. In the original paper we choose a cluster-based permutation test. This approach is often computationally-intensive, though it works very well. Other approaches involve crossvalidated LMEMs (implemented in the package `Pupilla` but shown in another vignette) or **feature reduction**.
 Feature reduction is not the norm in pupillometry, but it is common in other branches of neuroimaging - e.g., fMRI. It works very well, when data is large, in reducing its dimensions as to have more manageable variables to work with. In the case of pupillometry, because the signal is strongly autocorrelated, this is particularly appealing. 
@@ -427,7 +427,7 @@ plot_loadings("PC1", rf)
 
 ```
 
-[](images/load_pc1-1.png)
+![   ](images/load_pc1-1.png)
 
 The loadings for the first PC, as expected, resemble very much the shape of the data. During the trial there was a steady pupil dilation, which is well captured here in that later timepoints have larger weights. The sign of the loadings is, instead, arbitrary, and you could very well multiply them all for -1. 
 
@@ -462,7 +462,7 @@ t.test(Scores$PC1[Scores$Group== "Smokers"],
 
 ```
 
-[](images/res_pc1-1.png)
+![   ](images/res_pc1-1.png)
 
 There is a significant interaction between group and condition that is captured by the first PC!
 
@@ -481,7 +481,7 @@ plot_loadings("PC2", rf)
 
 ```
 
-[](images/load_pc2-1.png)
+![   ](images/load_pc2-1.png)
 
 
 ### ICA
@@ -514,7 +514,7 @@ plot_loadings("IC1", rf2)
 
 ```
 
-[](images/load_ic1-1.png)
+![   ](images/load_ic1-1.png)
 
 So in this case the first IC and the first PC are very similar, only the scale changes a bit, as both reflect the overall dilation trend - again, the sign of the loadings does not really matter (just check the direction for the interpretation of your data).
 
@@ -544,7 +544,7 @@ t.test(Scores2$IC1[Scores$Group== "Smokers"],
 
 ```
 
-[](images/res_ic1-1.png)
+![   ](images/res_ic1-1.png)
 
 
 ## Conclusion
