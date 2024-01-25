@@ -7,7 +7,14 @@ vignette: >
   %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-
+resource_files:
+    - images/load_ic1-1.png
+    - images/load_pc1-1.png
+    - images/load_pc2-1.png
+    - images/preprocessed_trial-1.png
+    - images/res_ic1-1.png
+    - images/res_pc1-1.png
+    - images/results_pbr-1.png
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +22,6 @@ knitr::opts_chunk$set(echo = TRUE)
 options(width = 999)
 Sys.setenv(LANG = "en")
 knitr::opts_chunk$set(
-  #fig.path = "images/",
   eval= F,
   collapse = TRUE,
   comment = "#"
