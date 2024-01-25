@@ -2,3 +2,13 @@ url: ~
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [reference, articles, tutorials, news]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Reduce Features with TOBII
+        href: articles/Pupilla_TOBII_ReduceFeatures.html
