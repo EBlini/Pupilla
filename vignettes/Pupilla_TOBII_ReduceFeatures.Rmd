@@ -3,6 +3,11 @@ title: "Pupilla_TOBII_ReduceFeatures"
 author: "Elvio Blini"
 date: "January 2024"
 output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+
 ---
 
 ```{r setup, include=FALSE}
