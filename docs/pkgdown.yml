@@ -1,7 +1,7 @@
 pandoc: 3.1.1
-pkgdown: 1.6.1
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Pupilla_TOBII_ReduceFeatures: Pupilla_TOBII_ReduceFeatures.html
-last_built: 2024-01-22T14:13Z
+last_built: 2024-01-25T12:34Z
 

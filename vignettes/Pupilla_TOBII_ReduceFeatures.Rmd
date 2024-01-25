@@ -3,17 +3,16 @@ title: "Pupilla_TOBII_ReduceFeatures"
 author: "Elvio Blini"
 date: "January 2024"
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(width = 999)
 Sys.setenv(LANG = "en")
-
+knitr::opts_chunk$set(
+  fig.path = "images/",
+  eval= F
+)
 ```
 
 ## Introduction
@@ -48,7 +47,7 @@ devtools::install_github("EBlini/Pupilla")
 Dependencies will be installed automatically.
 We will then need to load the following packages:
 
-```{r}
+```{r eval= T}
 library("Pupilla")
 library("dplyr") 
 library("ggplot2") 
@@ -145,9 +144,6 @@ We move on with the variable Trial:
 ```{r}
 ET$Trial= copy_variable("Trial")
 
-range(ET$Trial)
-range(BD$Trial)
-
 ```
 
 And finally all the variables that make up our experimental design:
@@ -187,28 +183,28 @@ ET= ET[ET$Event %in% c("scrambled", "target"),]
 We can now realign the timestamps to the first sample of the scrambled phase. As you can see timestamps are in absolute values, and their difference is not really constant.  
 
 ```{r}
-head(ET$TimeStamp)
+#head(ET$TimeStamp)
 
 ET= ET %>%
   group_by(Subject, Trial) %>%
   mutate(Time= c(0,
                  cumsum(diff(TimeStamp))))
 
-head(ET$Time)
+#head(ET$Time)
 
 ```
 
 In theory each trial had to last 4500 ms, but one or two for some reasons missed something and last longer, we shall discard them.
 
 ```{r}
-range(ET$Time)
+#range(ET$Time)
 
 ET= ET %>%
   group_by(Subject, Trial) %>%
   mutate(Anomaly= ifelse(max(Time)>4500, 1, 0))
 
-(table(ET$p_ID[ET$Anomaly== 1], 
-      ET$Trial[ET$Anomaly== 1])) #for 1 participant, the trial around the break...
+# (table(ET$p_ID[ET$Anomaly== 1], 
+#       ET$Trial[ET$Anomaly== 1])) #for 1 participant, the trial around the break...
 
 ET= ET[ET$Anomaly== 0,]
 
@@ -241,13 +237,18 @@ ET$Group= group[ET$Subject]
 We can finally move to the real thing!
 The signal must be **processed** so that the impact of artifacts, blinks, etc. is reduced. The easiest way to do that in `Pupilla` would be to use the `pre_process()` function. You may want, however, to consider whether the specific default parameters are applicable to your data. For a description of the parameters, see `?pp_options()`. You can always change the default parameters by calling the options globally, other than within the function itself. E.g.:
 
-```{r}
+```{r eval= T}
 #the default parameters:
 pp_options()
 
 #this changes the width of the window for smoothing
 pp_options("spar"= 0.8) 
 
+```
+
+Once checked the defaults, preprocessing only requires:
+
+```{r}
 #entire preprocessing
 ET= ET %>%
   group_by(Subject, Trial) %>%
@@ -257,11 +258,13 @@ ET= ET %>%
 
 And that's it! You can **check** the result of the pipeline visually as follows:
 
-```{r}
+```{r preprocessed_trial}
 ET %>% filter(Subject==12 & Trial== 104) %>%
   check_series("Pupil", "Pupil_pp", "Time")
 
 ```
+
+[](images/preprocessed_trial-1.png)
 
 Or you can use the function `Pupilla::check_all_series()` to have all the plots (that is, for all ids and trials) saved as images in your path.
 
@@ -311,7 +314,7 @@ We are done!
 
 Briefly, the data looks like this:
 
-```{r fig.width=9, echo= F, fig.height=6}
+```{r results_pbr, fig.width=10, echo= F, fig.height=6}
 ET$Subject= as.factor(ET$Subject)
 ET$Condition= ifelse(ET$Condition== "A",
                      "Nicotine-related",
@@ -376,6 +379,8 @@ pw= patchwork::plot_layout(p1 + p2)
 pw
 ```
 
+[](images/results_pbr-1.png)
+
 We have now different paths for statistical modelling. In the original paper we choose a cluster-based permutation test. This approach is often computationally-intensive, though it works very well. Other approaches involve crossvalidated LMEMs (implemented in the package `Pupilla` but shown in another vignette) or **feature reduction**.
 Feature reduction is not the norm in pupillometry, but it is common in other branches of neuroimaging - e.g., fMRI. It works very well, when data is large, in reducing its dimensions as to have more manageable variables to work with. In the case of pupillometry, because the signal is strongly autocorrelated, this is particularly appealing. 
 `Pupilla` can summarise the traces through both PCA and ICA as follows.
@@ -412,10 +417,12 @@ rf$summaryPCA[, 1:4]
 
 Each PC accounts for a specific share of the variance, and has distinctive loadings - you can think at them as the weighted contribution to the PC of each time point, in a way that is very similar to a cluster, though graded. You can assess the loadings directly or through a plot conveniently returned by `plot_loadings()`.
 
-```{r}
+```{r load_pc1}
 plot_loadings("PC1", rf)
 
 ```
+
+[](images/load_pc1-1.png)
 
 The loadings for the first PC, as expected, resemble very much the shape of the data. During the trial there was a steady pupil dilation, which is well captured here in that later timepoints have larger weights. The sign of the loadings is, instead, arbitrary, and you could very well multiply them all for -1. 
 
@@ -437,7 +444,7 @@ Scores= Scores %>%
 
 For PC1:
 
-```{r}
+```{r res_pc1}
 #plots of the difference
 ggplot(Scores, aes(x= Group,
                    color= Group,
@@ -449,6 +456,8 @@ t.test(Scores$PC1[Scores$Group== "Smokers"],
        Scores$PC1[Scores$Group== "Non smokers"])
 
 ```
+
+[](images/res_pc1-1.png)
 
 There is a significant interaction between group and condition that is captured by the first PC!
 
@@ -462,10 +471,12 @@ t.test(Scores$PC2[Scores$Group== "Smokers"],
 
 Features after the first ones progressively account for the remaining variance, and may thus accomodate for subtle differences between conditions that do not alter necessarily the overall shape of pupillary dilation. In other words, the next pcs describe some sort of contrast functions like this one: 
 
-```{r}
+```{r load_pc2}
 plot_loadings("PC2", rf)
 
 ```
+
+[](images/load_pc2-1.png)
 
 
 ### ICA
@@ -493,10 +504,12 @@ rf2$ICA$vafs
 
 In other words, do not trust much the title of the loadings plot - that refers to the PCA model:
 
-```{r}
+```{r load_ic1}
 plot_loadings("IC1", rf2)
 
 ```
+
+[](images/load_ic1-1.png)
 
 So in this case the first IC and the first PC are very similar, only the scale changes a bit, as both reflect the overall dilation trend - again, the sign of the loadings does not really matter (just check the direction for the interpretation of your data).
 
@@ -514,7 +527,7 @@ Scores2= Scores2 %>%
 
 Results are (somehow) similar to PCA:
 
-```{r}
+```{r res_ic1}
 #plots of the difference
 ggplot(Scores2, aes(x= Group,
                    color= Group,
@@ -526,6 +539,7 @@ t.test(Scores2$IC1[Scores$Group== "Smokers"],
 
 ```
 
+[](images/res_ic1-1.png)
 
 
 ## Conclusion
