@@ -5,7 +5,7 @@ to create one single file with both eyetracking and experimental details
 This function is written with OpenSesame-like csv files in mind, though compatibility
 with other programs (e.g., e-prime) may be achieved provided that files are converted to
 the csv format. This is optimized for Windows machines - you may encounter
-address errors in Macs."><title>Reads and imports TOBII eye-tracking and behavioral data — read_TOBII • Pupilla</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Reads and imports TOBII eye-tracking and behavioral data — read_TOBII"><meta property="og:description" content="These two type of data are usually separate and sometimes must be merged
+address errors in Macs."><title>Reads and imports eyelink eye-tracking and behavioral data — read_eyelink • Pupilla</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Reads and imports eyelink eye-tracking and behavioral data — read_eyelink"><meta property="og:description" content="These two type of data are usually separate and sometimes must be merged
 to create one single file with both eyetracking and experimental details
 (e.g., conditions), unless you have specified this via code in the experiment builder.
 This function is written with OpenSesame-like csv files in mind, though compatibility
@@ -58,9 +58,9 @@ address errors in Macs."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Reads and imports TOBII eye-tracking and behavioral data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/EBlini/Pupilla/blob/HEAD/R/read_TOBII.R" class="external-link"><code>R/read_TOBII.R</code></a></small>
-      <div class="d-none name"><code>read_TOBII.Rd</code></div>
+      <img src="" class="logo" alt=""><h1>Reads and imports eyelink eye-tracking and behavioral data</h1>
+      <small class="dont-index">Source: <a href="https://github.com/EBlini/Pupilla/blob/HEAD/R/read_eyelink.R" class="external-link"><code>R/read_eyelink.R</code></a></small>
+      <div class="d-none name"><code>read_eyelink.Rd</code></div>
     </div>
 
     <div class="ref-description section level2">
@@ -75,12 +75,12 @@ address errors in Macs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_TOBII</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_eyelink</span><span class="op">(</span></span>
 <span>  <span class="va">ID</span>,</span>
+<span>  keep_events <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  start_filename <span class="op">=</span> <span class="st">"subject-"</span>,</span>
-<span>  append_TOBII <span class="op">=</span> <span class="st">"_TOBII_output.tsv"</span>,</span>
-<span>  skip <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  start_behavior <span class="op">=</span> <span class="st">"subject-"</span>,</span>
+<span>  start_eyelink <span class="op">=</span> <span class="st">"sub_"</span>,</span>
 <span>  separate_behavioral <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -94,29 +94,30 @@ Also, One variable named p_ID is attached to both ET and BD files.
 If a vector is supplied, files are read with <code>lapply</code> and then merged.</p></dd>
 
 
+<dt>keep_events</dt>
+<dd><p>A character vector specifying the events
+that should be kept. This is an hard assumption that
+experimental phases are recorded as messages in the events$messages
+slot returned by 'eyelinkReader::read_edf()'.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Defaults to <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd()</a></code> but can be specified to be otherwise.
 Files will be searched for starting from this location.</p></dd>
 
 
-<dt>start_filename</dt>
+<dt>start_behavior</dt>
 <dd><p>A string, it defaults to <code>"subject-"</code>. Usually
 all files start with this string, regardless of their nature. Usually
 names are built by concatenating <code>path</code>, <code>start_filename</code>,
-<code>ID</code>, and <code>append_TOBII</code> (for eye-tracking data, else ".csv").</p></dd>
+<code>ID</code>, <code>.csv</code>.</p></dd>
 
 
-<dt>append_TOBII</dt>
-<dd><p>A string, it defaults to <code>"_TOBII_output.tsv"</code> and
-indicates the text that tells eye-tracking from behavioral files apart. Usually
-names are built by concatenating <code>path</code>, <code>start_filename</code>,
-<code>ID</code>, and <code>append_TOBII</code> (for eye-tracking data, else ".csv").</p></dd>
-
-
-<dt>skip</dt>
-<dd><p>Integer. The amount of lines to skip from the eye-tracking file,
-i.e. after how many lines the header is encountered.
-This is passed to <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code>.</p></dd>
+<dt>start_eyelink</dt>
+<dd><p>A string, it defaults to <code>"subject-"</code>. Usually
+all files start with this string, regardless of their nature. Usually
+names are built by concatenating <code>path</code>, <code>start_eyelink</code>,
+<code>ID</code>, <code>.edf</code>.</p></dd>
 
 
 <dt>separate_behavioral</dt>
@@ -129,6 +130,13 @@ eye-tracking data</p></dd>
     
 
 <p>A list of one or two DFs, one for eye-tracking data, one for behavioral data (if requested).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function is a wrapper around 'eyelinkReader::read_edf()'
+which must be installed. In order to use this package,
+eyelink proprietary code must be installed as well
+(the relevant scripts are available in the eyelink forum)</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

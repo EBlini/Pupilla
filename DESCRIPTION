@@ -17,5 +17,6 @@ URL: https://github.com/EBlini/Pupilla
 BugReports: https://github.com/EBlini/Pupilla/issues
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    eyelinkReader
 VignetteBuilder: knitr

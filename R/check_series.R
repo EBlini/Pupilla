@@ -56,7 +56,7 @@ check_series= function(data,
   p= ggplot2::ggplot(ggDF,
                      ggplot2::aes(y= series1, x= time)) +
     ggplot2::geom_line(linewidth= 1.3) +
-    ggplot2::geom_line(aes(y= series2),
+    ggplot2::geom_line(ggplot2::aes(y= series2),
               color= "red", alpha= 0.7,
               linewidth= 1) +
     commonTheme +

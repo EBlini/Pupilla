@@ -45,7 +45,7 @@ read_one= function(ID,
 #' This function is written with OpenSesame-like csv files in mind, though compatibility
 #' with other programs (e.g., e-prime) may be achieved provided that files are converted to
 #' the csv format. This is optimized for Windows machines - you may encounter
-#' adress errors in Macs.
+#' address errors in Macs.
 #'
 #' @param ID An integer corresponding to one participant's ID. This is attached
 #' to the current path in order to locate the two files to read.
