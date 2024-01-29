@@ -39,7 +39,8 @@ address errors in Macs."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Pupilla_TOBII_ReduceFeatures.html">Pupilla_TOBII_ReduceFeatures</a>
+    <a class="dropdown-item" href="../articles/Pupilla_Eyelink_SingleSubjectPreprocessing.html">Pupilla::EyeLink::Read and preprocessing</a>
+    <a class="dropdown-item" href="../articles/Pupilla_TOBII_ReduceFeatures.html">Pupilla::TOBII::Complete pipeline</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -81,7 +82,8 @@ address errors in Macs.</p>
 <span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  start_behavior <span class="op">=</span> <span class="st">"subject-"</span>,</span>
 <span>  start_eyelink <span class="op">=</span> <span class="st">"sub_"</span>,</span>
-<span>  separate_behavioral <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  separate_behavioral <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  import_all <span class="op">=</span> <span class="cn">T</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -123,6 +125,11 @@ names are built by concatenating <code>path</code>, <code>start_eyelink</code>,
 <dt>separate_behavioral</dt>
 <dd><p>defaults to <code>TRUE</code>. If <code>FALSE</code>, it only reads
 eye-tracking data</p></dd>
+
+
+<dt>import_all</dt>
+<dd><p>If TRUE (the default) import the
+blink and fixation data as computed by the eyelink.</p></dd>
 
 </dl></div>
     <div class="section level2">

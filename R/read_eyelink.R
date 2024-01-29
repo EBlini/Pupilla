@@ -3,7 +3,8 @@ read_el= function(ID,
                    path= getwd(),
                    start_behavior= "subject-",
                    start_eyelink= "sub_",
-                   separate_behavioral= TRUE){
+                   separate_behavioral= TRUE,
+                  import_all= T){
 
   if(is.null(keep_events))(warning("You need to specify the event messages to keep"))
 
@@ -39,6 +40,36 @@ read_el= function(ID,
     eDFs$Event[eDFs$trial== trial & eDFs$time>= from]= msg
 
   }
+
+  #import all
+  if(import_all){
+
+    #import blinks (not necessary but...)
+    eDFs$is_Blink= 0
+    for (i in 1:nrow(eDF$blinks)){
+
+      trial= eDF$blinks[i, "trial"]
+      from= eDF$blinks[i, "sttime_rel"]
+      to= eDF$blinks[i, "entime_rel"]
+
+      eDFs$is_Blink[eDFs$trial== trial & eDFs$time_rel>= from & eDFs$time_rel<= to] = 1
+
+    }
+
+    #import fixations
+    eDFs$is_Fixation= 0
+    for (i in 1:nrow(eDF$fixations)){
+
+      trial= eDF$fixations[i, "trial"]
+      from= eDF$fixations[i, "sttime_rel"]
+      to= eDF$fixations[i, "entime_rel"]
+
+      eDFs$is_Fixation[eDFs$trial== trial & eDFs$time_rel> from & eDFs$time_rel< to] = 1
+
+    }
+
+  } #end import_all
+
 
   #omit calibration etc
   eDFs= eDFs[!is.na(eDFs$Event),]
@@ -105,6 +136,8 @@ read_el= function(ID,
 #' `ID`, `.edf`.
 #' @param separate_behavioral defaults to `TRUE`. If `FALSE`, it only reads
 #' eye-tracking data
+#' @param import_all If TRUE (the default) import the
+#' blink and fixation data as computed by the eyelink.
 #'
 #' @return A list of one or two DFs, one for eye-tracking data, one for behavioral data (if requested).
 #'
@@ -115,7 +148,8 @@ read_eyelink= function(ID,
                        path= getwd(),
                        start_behavior= "subject-",
                        start_eyelink= "sub_",
-                       separate_behavioral= TRUE){
+                       separate_behavioral= TRUE,
+                       import_all= T){
 
 
   #call main function
@@ -124,7 +158,8 @@ read_eyelink= function(ID,
                                       path = path,
                                       start_behavior = start_behavior,
                                       start_eyelink = start_eyelink,
-                                      separate_behavioral = separate_behavioral))
+                                      separate_behavioral = separate_behavioral,
+                                      import_all= import_all))
 
   #pick
   ET= lapply(data, function(x)x$ET)

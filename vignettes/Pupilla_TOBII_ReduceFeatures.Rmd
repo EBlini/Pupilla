@@ -1,10 +1,10 @@
 ---
-title: "Pupilla_TOBII_ReduceFeatures"
+title: "Pupilla::TOBII::Complete pipeline"
 author: "Elvio Blini"
 date: "January 2024"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
+  %\VignetteIndexEntry{Pupilla::TOBII::Complete pipeline}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:

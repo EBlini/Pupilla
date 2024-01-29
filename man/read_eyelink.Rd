@@ -10,7 +10,8 @@ read_eyelink(
   path = getwd(),
   start_behavior = "subject-",
   start_eyelink = "sub_",
-  separate_behavioral = TRUE
+  separate_behavioral = TRUE,
+  import_all = T
 )
 }
 \arguments{
@@ -39,6 +40,9 @@ names are built by concatenating \code{path}, \code{start_eyelink},
 
 \item{separate_behavioral}{defaults to \code{TRUE}. If \code{FALSE}, it only reads
 eye-tracking data}
+
+\item{import_all}{If TRUE (the default) import the
+blink and fixation data as computed by the eyelink.}
 }
 \value{
 A list of one or two DFs, one for eye-tracking data, one for behavioral data (if requested).
