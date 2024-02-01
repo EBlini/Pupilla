@@ -72,7 +72,7 @@ reduce_ICA= function(data,
   #check NAs here and warn
   if(sum(is.na(rsmat2))>0){
 
-    warning("NAs is the data will be discarded:
+    warning("NAs in the data will be discarded:
             check the data (unequal timepoints maybe?)!")
 
   }

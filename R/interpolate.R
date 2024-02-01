@@ -159,7 +159,7 @@ interpolate= function(vector,
     }
 
     #interpolate linearly
-    vector= zoo::na.approx(vector)
+    vector= zoo::na.approx(vector) #consider , na.rm = F
 
     return(vector)
 
