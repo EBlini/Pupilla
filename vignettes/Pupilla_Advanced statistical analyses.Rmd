@@ -13,7 +13,7 @@ resource_files:
 ---
 
 ```{r setup, include=FALSE}
-knitr::knit_engines$set(python= reticulate::eng_python)
+#knitr::knit_engines$set(python= reticulate::eng_python)
 options(width = 999)
 Sys.setenv(LANG = "en")
 knitr::opts_chunk$set(
@@ -54,7 +54,7 @@ library("lmerTest")
 
 # #create python environment
 #conda_create("my_env")
-use_miniconda("my_env")
+#use_miniconda("my_env")
 
 # #install packages in the environment
 # py_install("pandas")
