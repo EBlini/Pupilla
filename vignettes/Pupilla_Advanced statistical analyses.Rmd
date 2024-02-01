@@ -44,13 +44,20 @@ I am grateful to the authors for sharing their data and allowing us to do reprod
 We will need the following R packages:
 
 ```{r}
-library("reticulate")
 library("dplyr")
 library("Pupilla")
 library("ggplot2")
 library("emmeans")
 library("lmerTest")
 
+options(dplyr.summarise.inform = FALSE)
+
+```
+
+For the python interface:
+
+```{r eval= F}
+library("reticulate")
 
 # #create python environment
 #conda_create("my_env")
@@ -59,8 +66,6 @@ library("lmerTest")
 # #install packages in the environment
 # py_install("pandas")
 # py_install("datamatrix")
-
-options(dplyr.summarise.inform = FALSE)
 
 ```
 
