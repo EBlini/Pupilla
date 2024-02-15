@@ -1,7 +1,7 @@
 ---
 title: "Pupilla::Advanced statistical analyses"
 author: "Elvio Blini"
-date: "January 2024"
+date: "February 2024"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Pupilla::Advanced statistical analyses}
@@ -125,7 +125,7 @@ There are a few `NA` in the data. It is generally not problematic for LMEMs, whi
 For this vignette we simply interpolate the missing values linearly through `zoo::na.approx()`. Note that this function will not work when NAs are located at the beginning or the end of a vector, so that we won't get rid of all NAs.
 
 ```{r echo= F}
-DF2= readRDS("data//zhou et al 2022.RData")
+DF2= readRDS("data/zhou et al 2022.RData")
 
 ```
 
