@@ -7,7 +7,9 @@ vignette: >
   %\VignetteIndexEntry{Pupilla::EyeLink::Read and preprocessing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-
+resource_files:
+    - images/trial 13-1.png
+    - images/math anxiety subj 10-1.png
 ---
 
 
