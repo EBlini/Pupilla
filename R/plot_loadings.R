@@ -29,9 +29,15 @@ plot_loadings= function(name,
   if(limit[1]>0)(limit[1]= 0)
 
   if("ICA" %in% names(data)){
+
     cp= gsub("[[:digit:]]","",name)
     cp= as.numeric(gsub(cp,"",name))
     ev= round(data$ICA$vafs[cp], 2)
+
+  } else if("rPCA" %in% names(data)){
+
+    ev= round(data$summaryRPCA["Proportion Var", name], 2)
+
   } else {
     ev= round(data$summaryPCA["Proportion of Variance", name], 2)
 

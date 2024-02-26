@@ -274,6 +274,7 @@ dv= "Pupil"
 time= "Time"
 id= "Subject"
 trial= "Trial"
+scaling= F
 #append to the reduced dataframe
 add= c("Set_size", "Color_type")
 
@@ -283,6 +284,7 @@ rf = reduce_PCA(
   time = time,
   id = id,
   trial = trial,
+  scaling = scaling,
   add = add
 )
 
@@ -369,6 +371,46 @@ summary(mod_pc2)
 ```
 
 We find no such effect, reiterating that the interaction probably appears later on in the course of the trial.
+
+## Rotated Principal Components Analysis
+
+The loadings can be "rotated" so that: 1) their interpretation is easier (e.g., few timepoints are set closer to 0, some are increased); 2) components are not orthogonal but can correlate. As a result, the model performs slightly worse in terms of explained variance, but may allow one a better, clearer interpretation of the loadings, and may relax some unrealistic assumption such as that different components do not interact (correlate) significantly.
+The implementation is outlined below. Please note that while `reduce_PCA()` follows `prcomp()`, this function follows `psych::principal()` including the standardization of the loadings (that is, even `rotate` is `"none"` results differ slightly). 
+
+```{r}
+#the data
+data= DF2
+#variables names should be supplied explicitly 
+dv= "Pupil"
+time= "Time"
+id= "Subject"
+trial= "Trial"
+rotate= "promax" #oblique rotation
+#append to the reduced dataframe
+add= c("Set_size", "Color_type")
+
+rf2 = reduce_rPCA(
+  data = DF2,
+  dv = dv,
+  time = time,
+  id = id,
+  trial = trial,
+  rotate= rotate,
+  add = add
+)
+
+```
+
+Here's how the loadings now look:
+
+```{r}
+plot_loadings("RC1", rf2)
+
+plot_loadings("RC2", rf2)
+
+```
+
+So, notwistanding the differences in the implementation of the PCA - based on the covariance matrix for `psych::principal()`, in this case the second component is more clearly referring to the early part of the trial, presumably PLR.
 
 ## Discussion
 
