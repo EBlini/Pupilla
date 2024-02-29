@@ -7,8 +7,6 @@ vignette: >
   %\VignetteIndexEntry{Pupilla::Advanced statistical analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-resource_files:
-    - data/zhou et al 2022.RData
 ---
 
 ```{r setup, include=FALSE}
@@ -373,7 +371,7 @@ We find no such effect, reiterating that the interaction probably appears later 
 The loadings can be "rotated" so that: 1) their interpretation is easier (e.g., few timepoints are set closer to 0, some are increased); 2) components are not orthogonal but can correlate. As a result, the model performs slightly worse in terms of explained variance, but may allow one a better, clearer interpretation of the loadings, and may relax some unrealistic assumption such as that different components do not interact (correlate) significantly.
 The implementation is outlined below. Please note that while `reduce_PCA()` follows `prcomp()`, this function follows `psych::principal()` including the standardization of the loadings (that is, even `rotate` is `"none"` results differ slightly). 
 
-```{r}
+```{r rPCA}
 #the data
 data= DF2
 #variables names should be supplied explicitly 
