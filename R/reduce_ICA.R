@@ -18,9 +18,12 @@
 #' retains 95% of the explained variance. If Ncomp== "all" returns all
 #' the components. If Ncomp <1 this is interpreted as if the user wishes to retain
 #' a given proportion of variance (e.g. 0.6).
-#' @param scaling Whether variables, i.e. pupil size for each timepoint,
-#' should be scaled beforehand. Defaults to FALSE assuming that measures
-#' are already normalized (with z-scores) and baseline-corrected.
+#' @param center Whether variables, i.e. pupil size for each timepoint,
+#' should be centered beforehand. Defaults to FALSE assuming that measures
+#' are already baseline-corrected.
+#' @param scale Whether variables, i.e. pupil size for each timepoint,
+#' should be centered beforehand. Defaults to FALSE assuming that measures
+#' are already baseline-corrected.
 #' @param add String(s) indicating which variables names, if any, should
 #' be appendend to the scores dataframe.
 #' @return A list including the processed data, the scores and loadings dataframes,
@@ -34,7 +37,8 @@ reduce_ICA= function(data,
                      id,
                      trial,
                      Ncomp= NULL,
-                     scaling= FALSE,
+                     center= FALSE,
+                     scale= FALSE,
                      add){
 
   #first change names for your convenience; it's easier this way
@@ -73,7 +77,7 @@ reduce_ICA= function(data,
   if(sum(is.na(rsmat2))>0){
 
     warning("NAs in the data will be discarded:
-            check the data (unequal timepoints maybe?)!")
+            check the data!")
 
   }
 
@@ -90,8 +94,11 @@ reduce_ICA= function(data,
   col_means= apply(rs_mat, 2, mean)
   col_sd= apply(rs_mat, 2, sd)
 
+  #now scale
+  rs_mat= scale(rs_mat, center = center, scale= scale)
+
   #run PCA
-  PCA= prcomp(rs_mat, scale= scaling, center= scaling)
+  PCA= prcomp(rs_mat, scale= F, center= F)
 
   #summary
   summaryPCA= summary(PCA)$importance
@@ -126,7 +133,7 @@ reduce_ICA= function(data,
 
   #now ICA
   ICA= ica::icafast(rs_mat, nc=Ncomp,
-                    center= scaling)
+                    center= F)
 
   Loadings= ICA$M[,1:Ncomp]
 
@@ -177,7 +184,10 @@ reduce_ICA= function(data,
             Loadings= Loadings,
             Scores= Scores,
             ICA= ICA,
-            scaling= list(M= col_means, SD= col_sd))
+            scaling= list(is_centered= center,
+                          is_scaled= scale,
+                          M= col_means,
+                          SD= col_sd))
 
 
   return(res)

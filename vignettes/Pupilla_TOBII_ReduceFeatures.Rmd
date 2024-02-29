@@ -1,10 +1,10 @@
 ---
-title: "Pupilla::TOBII::Complete pipeline"
+title: "Pupilla_TOBII_ReduceFeatures"
 author: "Elvio Blini"
 date: "January 2024"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pupilla::TOBII::Complete pipeline}
+  %\VignetteIndexEntry{Pupilla_TOBII_ReduceFeatures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -393,7 +393,6 @@ rf = reduce_PCA(data,
                 id,
                 trial,
                 Ncomp = NULL,
-                scaling = F,
                 add)
 
 ```
@@ -486,7 +485,7 @@ rf2 = reduce_ICA(data,
                  id,
                  trial,
                  Ncomp = NULL,
-                 scaling = F,
+                 center = F,
                  add)
 
 ```

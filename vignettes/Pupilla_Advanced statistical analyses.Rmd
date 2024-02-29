@@ -273,7 +273,6 @@ dv= "Pupil"
 time= "Time"
 id= "Subject"
 trial= "Trial"
-scaling= F
 #append to the reduced dataframe
 add= c("Set_size", "Color_type")
 
@@ -283,7 +282,6 @@ rf = reduce_PCA(
   time = time,
   id = id,
   trial = trial,
-  scaling = scaling,
   add = add
 )
 

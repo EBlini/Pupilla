@@ -23,7 +23,12 @@
 #' the components. If Ncomp <1 this is interpreted as if the user wishes to retain
 #' a given proportion of variance (e.g. 0.6), but again the unrotated
 #' PCA is used to find the number of components.
-#' @param scaling Whether variables, i.e. pupil size for each timepoint,
+#' @param center Whether variables, i.e. pupil size for each timepoint,
+#' should be scaled beforehand. Defaults to FALSE assuming that measures
+#' are already normalized (with z-scores) and baseline-corrected.
+#' Note that this only impacts summaryPCA and the number of components
+#' retained because psych uses the covariance matrix.
+#' @param scale Whether variables, i.e. pupil size for each timepoint,
 #' should be scaled beforehand. Defaults to FALSE assuming that measures
 #' are already normalized (with z-scores) and baseline-corrected.
 #' Note that this only impacts summaryPCA and the number of components
@@ -44,7 +49,8 @@ reduce_rPCA= function(data,
                      id,
                      trial,
                      Ncomp= NULL,
-                     scaling= FALSE,
+                     center= FALSE,
+                     scale= FALSE,
                      rotate= "promax",
                      add){
 
@@ -84,7 +90,7 @@ reduce_rPCA= function(data,
   if(sum(is.na(rsmat2))>0){
 
     warning("NAs in the data will be discarded:
-            check the data (unequal timepoints maybe?)!")
+            check the data!")
 
   }
 
@@ -101,8 +107,12 @@ reduce_rPCA= function(data,
   col_means= apply(rs_mat, 2, mean)
   col_sd= apply(rs_mat, 2, sd)
 
+  #now scale
+  rs_mat= scale(rs_mat, center = center, scale= scale)
+
+
   #run PCA - preliminary
-  PCA= prcomp(rs_mat, scale= scaling, center= scaling)
+  PCA= prcomp(rs_mat, scale= F, center= F)
 
   #summary
   summaryPCA= summary(PCA)$importance
@@ -190,7 +200,10 @@ reduce_rPCA= function(data,
             Loadings= Loadings,
             Scores= Scores,
             rPCA= rPCA,
-            scaling= list(M= col_means, SD= col_sd))
+            scaling= list(is_centered= center,
+                          is_scaled= scale,
+                          M= col_means,
+                          SD= col_sd))
 
 
   return(res)

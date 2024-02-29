@@ -11,7 +11,8 @@ reduce_rPCA(
   id,
   trial,
   Ncomp = NULL,
-  scaling = FALSE,
+  center = FALSE,
+  scale = FALSE,
   rotate = "promax",
   add
 )
@@ -35,7 +36,13 @@ the components. If Ncomp <1 this is interpreted as if the user wishes to retain
 a given proportion of variance (e.g. 0.6), but again the unrotated
 PCA is used to find the number of components.}
 
-\item{scaling}{Whether variables, i.e. pupil size for each timepoint,
+\item{center}{Whether variables, i.e. pupil size for each timepoint,
+should be scaled beforehand. Defaults to FALSE assuming that measures
+are already normalized (with z-scores) and baseline-corrected.
+Note that this only impacts summaryPCA and the number of components
+retained because psych uses the covariance matrix.}
+
+\item{scale}{Whether variables, i.e. pupil size for each timepoint,
 should be scaled beforehand. Defaults to FALSE assuming that measures
 are already normalized (with z-scores) and baseline-corrected.
 Note that this only impacts summaryPCA and the number of components

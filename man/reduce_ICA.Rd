@@ -4,7 +4,17 @@
 \alias{reduce_ICA}
 \title{Reduce time-series to few Independent Components}
 \usage{
-reduce_ICA(data, dv, time, id, trial, Ncomp = NULL, scaling = FALSE, add)
+reduce_ICA(
+  data,
+  dv,
+  time,
+  id,
+  trial,
+  Ncomp = NULL,
+  center = FALSE,
+  scale = FALSE,
+  add
+)
 }
 \arguments{
 \item{data}{A data.frame containing all the necessary variables.}
@@ -22,9 +32,13 @@ retains 95\% of the explained variance. If Ncomp== "all" returns all
 the components. If Ncomp <1 this is interpreted as if the user wishes to retain
 a given proportion of variance (e.g. 0.6).}
 
-\item{scaling}{Whether variables, i.e. pupil size for each timepoint,
-should be scaled beforehand. Defaults to FALSE assuming that measures
-are already normalized (with z-scores) and baseline-corrected.}
+\item{center}{Whether variables, i.e. pupil size for each timepoint,
+should be centered beforehand. Defaults to FALSE assuming that measures
+are already baseline-corrected.}
+
+\item{scale}{Whether variables, i.e. pupil size for each timepoint,
+should be centered beforehand. Defaults to FALSE assuming that measures
+are already baseline-corrected.}
 
 \item{add}{String(s) indicating which variables names, if any, should
 be appendend to the scores dataframe.}

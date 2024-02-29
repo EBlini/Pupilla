@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Pupilla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Pupilla_Advanced%20statistical%20analyses.html">Pupilla::Advanced statistical analyses</a>
     <a class="dropdown-item" href="../articles/Pupilla_Eyelink_SingleSubjectPreprocessing.html">Pupilla::EyeLink::Read and preprocessing</a>
-    <a class="dropdown-item" href="../articles/Pupilla_TOBII_ReduceFeatures.html">Pupilla::TOBII::Complete pipeline</a>
+    <a class="dropdown-item" href="../articles/Pupilla_TOBII_ReduceFeatures.html">Pupilla_TOBII_ReduceFeatures</a>
   </div>
 </li>
       </ul>
@@ -492,7 +492,6 @@ what used above:</p>
 <span><span class="va">time</span><span class="op">=</span> <span class="st">"Time"</span></span>
 <span><span class="va">id</span><span class="op">=</span> <span class="st">"Subject"</span></span>
 <span><span class="va">trial</span><span class="op">=</span> <span class="st">"Trial"</span></span>
-<span><span class="va">scaling</span><span class="op">=</span> <span class="cn">F</span></span>
 <span><span class="co">#append to the reduced dataframe</span></span>
 <span><span class="va">add</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Set_size"</span>, <span class="st">"Color_type"</span><span class="op">)</span></span>
 <span></span>
@@ -502,11 +501,10 @@ what used above:</p>
 <span>  time <span class="op">=</span> <span class="va">time</span>,</span>
 <span>  id <span class="op">=</span> <span class="va">id</span>,</span>
 <span>  trial <span class="op">=</span> <span class="va">trial</span>,</span>
-<span>  scaling <span class="op">=</span> <span class="va">scaling</span>,</span>
 <span>  add <span class="op">=</span> <span class="va">add</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in reduce_PCA(data = DF2, dv = dv, time = time, id = id, trial = trial, : NAs in the data will be discarded:</span></span>
-<span><span class="co">##             check the data (unequal timepoints maybe?)!</span></span></code></pre>
+<span><span class="co">##             check the data!</span></span></code></pre>
 <p>We have used PCA (though ICA would be very similar in this specific
 case). As we can see the approach is tremendously effective in reducing
 the data, because only 2 components can explain more than 90% of the
@@ -731,7 +729,7 @@ results differ slightly).</p>
 <span>  add <span class="op">=</span> <span class="va">add</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in reduce_rPCA(data = DF2, dv = dv, time = time, id = id, trial = trial, : NAs in the data will be discarded:</span></span>
-<span><span class="co">##             check the data (unequal timepoints maybe?)!</span></span></code></pre>
+<span><span class="co">##             check the data!</span></span></code></pre>
 <pre><code><span><span class="co">## The determinant of the smoothed correlation was zero.</span></span>
 <span><span class="co">## This means the objective function is not defined.</span></span>
 <span><span class="co">## Chi square is based upon observed residuals.</span></span></code></pre>
@@ -792,7 +790,7 @@ understand with more research.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] zoo_1.8-12         lmerTest_3.1-3     lme4_1.1-35.1      Matrix_1.6-5       emmeans_1.10.0     ggplot2_3.4.4      Pupilla_0.0.0.9000 dplyr_1.1.4       </span></span>
+<span><span class="co">## [1] zoo_1.8-12         lmerTest_3.1-3     lme4_1.1-35.1      Matrix_1.6-5       emmeans_1.10.0     ggplot2_3.4.4      Pupilla_0.0.0.9001 dplyr_1.1.4       </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] Rcpp_1.0.12         mvtnorm_1.2-4       lattice_0.22-5      png_0.1-8           psych_2.4.1         digest_0.6.34       utf8_1.2.4          R6_2.5.1            evaluate_0.23       coda_0.19-4.1       highr_0.10          pillar_1.9.0        rlang_1.1.3         multcomp_1.4-25     rstudioapi_0.15.0   minqa_1.2.6         jquerylib_0.1.4     nloptr_2.0.3        reticulate_1.35.0   rmarkdown_2.25      pkgdown_2.0.7       labeling_0.4.3      textshaping_0.3.7   desc_1.4.3          splines_4.2.3       stringr_1.5.1       munsell_0.5.0       numDeriv_2016.8-1.1 compiler_4.2.3      xfun_0.41           pkgconfig_2.0.3     systemfonts_1.0.5   mnormt_2.1.1        htmltools_0.5.7     tidyselect_1.2.0    tibble_3.2.1        codetools_0.2-19    fansi_1.0.6         withr_3.0.0         MASS_7.3-58.2       grid_4.2.3          nlme_3.1-162        jsonlite_1.8.8      xtable_1.8-4        gtable_0.3.4        lifecycle_1.0.4     magrittr_2.0.3      scales_1.3.0        estimability_1.4.1 </span></span>
