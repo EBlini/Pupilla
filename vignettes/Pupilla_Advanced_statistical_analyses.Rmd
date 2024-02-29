@@ -7,6 +7,9 @@ vignette: >
   %\VignetteIndexEntry{Pupilla::Advanced statistical analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+    - data/zhou et al 2022.RData
+    - data/zhou_et_al_2022.RData
 ---
 
 ```{r setup, include=FALSE}
@@ -122,6 +125,7 @@ For this vignette we simply interpolate the missing values linearly through `zoo
 
 ```{r echo= F}
 DF2= readRDS("data/zhou et al 2022.RData")
+DF2= readRDS("data/zhou_et_al_2022.RData")
 
 ```
 
