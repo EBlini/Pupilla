@@ -17,7 +17,6 @@ options(width = 999)
 Sys.setenv(LANG = "en")
 knitr::opts_chunk$set(
   echo= T,
-  #fig.path = "images/",
   eval= T,
   fig.width = 7, 
   fig.height = 7
