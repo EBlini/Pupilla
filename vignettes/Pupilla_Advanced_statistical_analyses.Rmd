@@ -121,8 +121,8 @@ There are a few `NA` in the data. It is generally not problematic for LMEMs, whi
 For this vignette we simply interpolate the missing values linearly through `zoo::na.approx()`. Note that this function will not work when NAs are located at the beginning or the end of a vector, so that we won't get rid of all NAs.
 
 ```{r echo= F}
-DF2= readRDS("zhou et al 2022.RData")
-
+#DF2= readRDS("zhou et al 2022.RData")
+data("Zhou2022")
 ```
 
 ```{r}
@@ -183,7 +183,7 @@ nfolds= 3
 t_thresh= 1.9
 consensus_thresh = 0.99
 
-cv= decode_signal(data= DF2, 
+cv= decode_signal(data= data, 
                   formula= formula,
                   dv= dv,
                   time= time,
@@ -274,7 +274,7 @@ trial= "Trial"
 add= c("Set_size", "Color_type")
 
 rf = reduce_PCA(
-  data = DF2,
+  data = data,
   dv = dv,
   time = time,
   id = id,
@@ -384,7 +384,7 @@ rotate= "promax" #oblique rotation
 add= c("Set_size", "Color_type")
 
 rf2 = reduce_rPCA(
-  data = DF2,
+  data = data,
   dv = dv,
   time = time,
   id = id,
