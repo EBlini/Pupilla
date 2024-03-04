@@ -135,7 +135,15 @@ reduce_ICA= function(data,
   ICA= ica::icafast(rs_mat, nc=Ncomp,
                     center= F)
 
-  Loadings= ICA$M[,1:Ncomp]
+  if(Ncomp==1){
+
+    Loadings= data.frame(IC1= t(ICA$M))
+
+  } else {
+
+    Loadings= ICA$M[,1:Ncomp]
+
+  }
 
   rownames(Loadings)= order
 

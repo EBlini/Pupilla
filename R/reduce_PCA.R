@@ -130,8 +130,16 @@ reduce_PCA= function(data,
 
   }
 
+  if(Ncomp==1){
 
-  Loadings= PCA$rotation[,1:Ncomp]
+    Loadings= data.frame(PC1= PCA$rotation[,1])
+
+  } else {
+
+    Loadings= PCA$rotation[,1:Ncomp]
+
+  }
+
 
   rownames(Loadings)= order
 

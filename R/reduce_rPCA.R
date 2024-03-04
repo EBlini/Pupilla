@@ -146,14 +146,21 @@ reduce_rPCA= function(data,
   }
 
   #summaryPCA[,1:3]
-
   rPCA= psych::principal(rs_mat,
                          nfactors = Ncomp,
                          rotate = rotate)
 
   summaryRPCA= rPCA$Vaccounted
 
-  Loadings= rPCA$loadings[,1:Ncomp]
+  if(Ncomp==1){
+
+    Loadings= data.frame(RC1= rPCA$loadings[,1])
+
+  } else {
+
+    Loadings= rPCA$loadings[,1:Ncomp]
+
+  }
 
   rownames(Loadings)= order
 

@@ -36,6 +36,7 @@ plot_loadings= function(name,
 
   } else if("rPCA" %in% names(data)){
 
+    if(ncol(data$summaryRPCA)==1){name= "PC1"}
     ev= round(data$summaryRPCA["Proportion Var", name], 2)
 
   } else {
