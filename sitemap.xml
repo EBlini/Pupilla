@@ -7,6 +7,9 @@
     <loc>/articles/Pupilla.html</loc>
   </url>
   <url>
+    <loc>/articles/Pupilla_Advanced_statistical_analyses.html</loc>
+  </url>
+  <url>
     <loc>/articles/Pupilla_Eyelink_SingleSubjectPreprocessing.html</loc>
   </url>
   <url>
@@ -61,6 +64,9 @@
     <loc>/reference/pre_process.html</loc>
   </url>
   <url>
+    <loc>/reference/predict_feature.html</loc>
+  </url>
+  <url>
     <loc>/reference/read_TOBII.html</loc>
   </url>
   <url>
@@ -71,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/reduce_PCA.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reduce_rPCA.html</loc>
   </url>
   <url>
     <loc>/reference/smooth_vector.html</loc>
