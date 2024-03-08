@@ -138,7 +138,7 @@ sum(is.na(DF2$Pupil))
 
 We then plot the average pupil size by Set_Size and Color_type. The plot looks quite like the [original one](https://github.com/smathot/time_series_test), so that we sould not be too far off from the original data.  
 
-```{r mathot plot data, fig.width=8, fig.height=8}
+```{r, fig.width=8, fig.height=8}
 DF2 %>% 
   group_by(Subject, Time, Color_type, Set_size) %>% 
   summarise(Pupil= mean(Pupil, na.rm= T)) %>%
