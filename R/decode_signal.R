@@ -34,7 +34,7 @@
 #' @param time A string indicating the name of the time variable.
 #' @param id A string indicating the name of the id (participant) variable.
 #' @param trial A string indicating the name of the trial variable.
-#' @param nfolds Number of folds to split trials in. Defaults to 4.
+#' @param nfolds Number of folds to split trials in. Defaults to 3.
 #' @param t_thresh Used to seek consensus: the minimum t-value required to push the
 #' time-point forward.
 #' @param consensus_thresh The minimum proportion of time-points that must be above
@@ -47,7 +47,7 @@
 
 decode_signal= function(data, formula,
                         dv, time, id, trial,
-                        nfolds= 4,
+                        nfolds= 3,
                         t_thresh= 2,
                         consensus_thresh= 0.75){
 
