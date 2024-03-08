@@ -246,7 +246,7 @@ that we sould not be too far off from the original data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (s)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pupil size (a.u.)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Data from: Zhou, Lorist, and Mathôt (2022)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/mathot%20plot%20data-1.png" width="768"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
 <p>I am not really depicting the variability. However, what matters here
 is that: 1) there is a very large effect of Set_Size; 2) there may be
 (well, we know from the paper that there is, :) ) an interaction between
@@ -522,7 +522,7 @@ variability, and ends up describing at best the overall shape of the
 curves seen in the original plot above. We can depict it as:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p>The loadings suggest that the first PC captures an overall
 dilation/constriction occurring in the late stages of the trial, after 1
 second. (Keep in mind that the sign of the loadings is completely
@@ -531,7 +531,7 @@ data that it probably refers to dilation.) Then, the following
 components gruadually capture the remaining variability, e.g.:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC2"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 <p>Meaning that the more you go on, the more you are likely to capture
 very idiosincratic (and very small) trial-wise changes. It is not really
 the case for this second component (24% of the variance explained),
@@ -640,7 +640,7 @@ between the two set sizes.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
 <span>                           face<span class="op">=</span><span class="st">"bold"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="pc2">PC2<a class="anchor" aria-label="anchor" href="#pc2"></a>
@@ -739,10 +739,10 @@ results differ slightly).</p>
 <p>Here’s how the loadings now look:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"RC1"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"RC2"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-20-2.png" width="672"></p>
+<p><img src="Pupilla_Advanced_statistical_analyses_files/figure-html/unnamed-chunk-21-2.png" width="672"></p>
 <p>So, notwistanding the differences in the implementation of the PCA -
 based on the covariance matrix for <code><a href="https://rdrr.io/pkg/psych/man/principal.html" class="external-link">psych::principal()</a></code>, in
 this case the second component is more clearly referring to the early
@@ -799,7 +799,7 @@ understand with more research.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] sass_0.4.8          utf8_1.2.4          generics_0.1.3      lattice_0.22-5      digest_0.6.34       magrittr_2.0.3      evaluate_0.23       grid_4.3.3          estimability_1.5    mvtnorm_1.2-4       fastmap_1.1.1       jsonlite_1.8.8      purrr_1.0.2         fansi_1.0.6         scales_1.3.0        numDeriv_2016.8-1.1 textshaping_0.3.7   jquerylib_0.1.4     mnormt_2.1.1        cli_3.6.2           rlang_1.1.3         munsell_0.5.0       splines_4.3.3       withr_3.0.0         cachem_1.0.8        yaml_2.3.8          parallel_4.3.3      tools_4.3.3         nloptr_2.0.3        memoise_2.0.1       minqa_1.2.6         colorspace_2.1-0    boot_1.3-29         reticulate_1.35.0   png_0.1-8           vctrs_0.6.5         R6_2.5.1            lifecycle_1.0.4     fs_1.6.3            psych_2.4.1         MASS_7.3-60.0.1     ragg_1.2.7          pkgconfig_2.0.3     desc_1.4.3          pkgdown_2.0.7       pillar_1.9.0        bslib_0.6.1         gtable_0.3.4        Rcpp_1.0.12        </span></span>
-<span><span class="co">## [50] glue_1.7.0          systemfonts_1.0.5   highr_0.10          xfun_0.42           tibble_3.2.1        tidyselect_1.2.0    knitr_1.45          farver_2.1.1        htmltools_0.5.7     nlme_3.1-164        labeling_0.4.3      rmarkdown_2.26      compiler_4.3.3</span></span></code></pre>
+<span><span class="co">## [50] glue_1.7.0          systemfonts_1.0.6   highr_0.10          xfun_0.42           tibble_3.2.1        tidyselect_1.2.0    knitr_1.45          farver_2.1.1        htmltools_0.5.7     nlme_3.1-164        labeling_0.4.3      rmarkdown_2.26      compiler_4.3.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
