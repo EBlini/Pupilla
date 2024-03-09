@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-    - images/trial 13-1.png
+    - images/trial_13-1.png
     - images/math anxiety subj 10-1.png
 ---
 
@@ -261,7 +261,7 @@ ET %>% filter(Subject==10 & trial== 13) %>%
   check_series("Pupil", "Pupil_pp", "Time")
 ```
 
-![](images/trial 13-1.png)
+![](images/trial_13-1.png)
 
 Or you can use the function `Pupilla::check_all_series()` to have all the plots (that is, for all ids and trials) saved as images in your path.
 
