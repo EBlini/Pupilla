@@ -69,16 +69,17 @@ predict_feature= function(vector,
 
   } else if("PCA" %in% names(model)) {
 
-    res= predict(model$PCA,
+    res= stats::predict(model$PCA,
                  t(vector_s))[1:ncol(model$Loadings)]
 
   } else {
 
-    res= predict(model$rPCA,
+    res= stats::predict(model$rPCA,
                  data = vector_s,
                  old.data = model$rs_mat)
   }
 
+  names(res)= dimnames(res)[[2]]
   return(res)
 
 

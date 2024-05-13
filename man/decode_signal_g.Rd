@@ -11,7 +11,7 @@ decode_signal_g(
   time,
   id,
   trial,
-  nfolds = 4,
+  nfolds = 3,
   t_thresh = 2,
   consensus_thresh = 0.75,
   ...
@@ -30,7 +30,7 @@ decode_signal_g(
 
 \item{trial}{A string indicating the name of the trial variable.}
 
-\item{nfolds}{Number of folds to split trials in. Defaults to 4.}
+\item{nfolds}{Number of folds to split trials in. Defaults to 3.}
 
 \item{t_thresh}{Used to seek consensus: the minimum t-value required to push the
 time-point forward.}
