@@ -246,9 +246,7 @@ that we sould not be too far off from the original data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (s)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pupil size (a.u.)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Data from: Zhou, Lorist, and Mathôt (2022)"</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="images/mathot%20plot%20data-1.png" alt="plot of chunk unnamed-chunk-8"><div class="figcaption">plot of chunk unnamed-chunk-8</div>
-</div>
+<p><img src="images/mathot%20plot%20data-1.png"></p>
 <p>I am not really depicting the variability. However, what matters here
 is that: 1) there is a very large effect of Set_Size; 2) there may be
 (well, we know from the paper that there is, :) ) an interaction between
@@ -524,9 +522,7 @@ variability, and ends up describing at best the overall shape of the
 curves seen in the original plot above. We can depict it as:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="images/load_pc1-1.png" alt="plot of chunk unnamed-chunk-14"><div class="figcaption">plot of chunk unnamed-chunk-14</div>
-</div>
+<p><img src="images/load_pc1-1.png"></p>
 <p>The loadings suggest that the first PC captures an overall
 dilation/constriction occurring in the late stages of the trial, after 1
 second. (Keep in mind that the sign of the loadings is completely
@@ -535,9 +531,7 @@ data that it probably refers to dilation.) Then, the following
 components gruadually capture the remaining variability, e.g.:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC2"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="images/load_pc2-1.png" alt="plot of chunk unnamed-chunk-15"><div class="figcaption">plot of chunk unnamed-chunk-15</div>
-</div>
+<p><img src="images/load_pc2-1.png"></p>
 <p>Meaning that the more you go on, the more you are likely to capture
 very idiosincratic (and very small) trial-wise changes. It is not really
 the case for this second component (24% of the variance explained),
@@ -646,9 +640,7 @@ between the two set sizes.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
 <span>                           face<span class="op">=</span><span class="st">"bold"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<div class="float">
-<img src="images/unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-19"><div class="figcaption">plot of chunk unnamed-chunk-19</div>
-</div>
+<p><img src="images/unnamed-chunk-17-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="pc2">PC2<a class="anchor" aria-label="anchor" href="#pc2"></a>
@@ -747,14 +739,10 @@ results differ slightly).</p>
 <p>Here’s how the loadings now look:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"RC1"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="images/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-21"><div class="figcaption">plot of chunk unnamed-chunk-21</div>
-</div>
+<p><img src="images/unnamed-chunk-20-1.png"></p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"RC2"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="images/unnamed-chunk-20-2.png" alt="plot of chunk unnamed-chunk-21"><div class="figcaption">plot of chunk unnamed-chunk-21</div>
-</div>
+<p><img src="images/unnamed-chunk-20-2.png"></p>
 <p>So, notwistanding the differences in the implementation of the PCA -
 based on the covariance matrix for <code><a href="https://rdrr.io/pkg/psych/man/principal.html" class="external-link">psych::principal()</a></code>, in
 this case the second component is more clearly referring to the early
