@@ -7,6 +7,14 @@ vignette: >
   %\VignetteIndexEntry{Pupilla::Advanced statistical analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+    - images/mathot plot data-1.png
+    - images/load_pc1-1.png
+    - images/load_pc2-1.png
+    - images/unnamed-chunk-17-1.png
+    - images/unnamed-chunk-20-1.png
+    - images/unnamed-chunk-20-2.png
+
 ---
 
 
