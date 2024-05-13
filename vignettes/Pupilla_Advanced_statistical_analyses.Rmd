@@ -222,7 +222,7 @@ DF2 %>%
   ggtitle("Data from: Zhou, Lorist, and Mathôt (2022)")
 ```
 
-![plot of chunk unnamed-chunk-8](images/mathot plot data-1.png)
+![](images/mathot plot data-1.png)
 
 I am not really depicting the variability. However, what matters here is that: 1) there is a very large effect of Set_Size; 2) there may be (well, we know from the paper that there is, :) ) an interaction between Set_Size and Color_type so that the effect of the non-prototypical color is reversed between 1 and 4. Let's analyze the data!
 
@@ -461,7 +461,7 @@ Generally speaking the first component captures the main axis of variability, an
 plot_loadings("PC1", rf)
 ```
 
-![plot of chunk unnamed-chunk-14](images/load_pc1-1.png)
+![](images/load_pc1-1.png)
 
 The loadings suggest that the first PC captures an overall dilation/constriction occurring in the late stages of the trial, after 1 second. (Keep in mind that the sign of the loadings is completely arbitrary, this plot could very well be reversed, but we know from the data that it probably refers to dilation.)
 Then, the following components gruadually capture the remaining variability, e.g.:
@@ -471,7 +471,7 @@ Then, the following components gruadually capture the remaining variability, e.g
 plot_loadings("PC2", rf)
 ```
 
-![plot of chunk unnamed-chunk-15](images/load_pc2-1.png)
+![](images/load_pc2-1.png)
 
 Meaning that the more you go on, the more you are likely to capture very idiosincratic (and very small) trial-wise changes. It is not really the case for this second component (24% of the variance explained), which captures very well what is likely to be an initial response, e.g. the pupillary light reflex. 
 A note about the interpretation: because PCA is a descriptive model, it does not imply any underlying, originating process. The interpretation part is completely up to the experimenter. This would be the case, however, for any inferential technique. And for most uses, the shape of the loadings plot is more likely to highlight segregated, at least partially independent processes.
@@ -591,7 +591,7 @@ ggplot(Scores, aes(y= PC1, x= Set_size, fill= Color_type)) +
                            face="bold")) 
 ```
 
-![plot of chunk unnamed-chunk-19](images/unnamed-chunk-17-1.png)
+![](images/unnamed-chunk-17-1.png)
 
 ### PC2
 
@@ -700,13 +700,13 @@ Here's how the loadings now look:
 plot_loadings("RC1", rf2)
 ```
 
-![plot of chunk unnamed-chunk-21](images/unnamed-chunk-20-1.png)
+![](images/unnamed-chunk-20-1.png)
 
 ```r
 plot_loadings("RC2", rf2)
 ```
 
-![plot of chunk unnamed-chunk-21](images/unnamed-chunk-20-2.png)
+![](images/unnamed-chunk-20-2.png)
 
 So, notwistanding the differences in the implementation of the PCA - based on the covariance matrix for `psych::principal()`, in this case the second component is more clearly referring to the early part of the trial, presumably PLR.
 
