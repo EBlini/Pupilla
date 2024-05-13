@@ -7,13 +7,6 @@ vignette: >
   %\VignetteIndexEntry{Pupilla::Advanced statistical analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-resource_files:
-    - images/unnamed-chunk-8-1.png
-    - images/unnamed-chunk-14-1.png
-    - images/unnamed-chunk-15-1.png
-    - images/unnamed-chunk-19-1.png
-    - images/unnamed-chunk-21-1.png
-    - images/unnamed-chunk-21-2.png
 ---
 
 
