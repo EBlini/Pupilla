@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-    - images/mathot plot data-1.png
+    - images/mathot_plot_data-1.png
     - images/load_pc1-1.png
     - images/load_pc2-1.png
     - images/unnamed-chunk-17-1.png
@@ -222,7 +222,7 @@ DF2 %>%
   ggtitle("Data from: Zhou, Lorist, and Mathôt (2022)")
 ```
 
-![](images/mathot plot data-1.png)
+![](images/mathot_plot_data-1.png)
 
 I am not really depicting the variability. However, what matters here is that: 1) there is a very large effect of Set_Size; 2) there may be (well, we know from the paper that there is, :) ) an interaction between Set_Size and Color_type so that the effect of the non-prototypical color is reversed between 1 and 4. Let's analyze the data!
 

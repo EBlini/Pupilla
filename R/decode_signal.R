@@ -39,6 +39,9 @@
 #' time-point forward.
 #' @param consensus_thresh The minimum proportion of time-points that must be above
 #' 't_thresh' across folds in order to keep the time-point in the consensus.
+#' @param formula_max A 'lme4'-style formula, passed as a string. This formula is
+#' only used to test the final models. Could be useful to save computational resources.
+#' I do not necessarily recommend it because it could be overly conservative and prone to convergence issues.
 #' @return A list including: peaks retained for each (left-out) fold; test of the
 #'  retained, cross-validated peaks; test of the consensus time-points, if any; list
 #'  of time-points retained in the consensus for each effect.
@@ -49,7 +52,8 @@ decode_signal= function(data, formula,
                         dv, time, id, trial,
                         nfolds= 3,
                         t_thresh= 2,
-                        consensus_thresh= 0.75){
+                        consensus_thresh= 0.75,
+                        formula_max= NULL){
 
   #first change names for your convenience
   DF= data.frame(data)
@@ -129,8 +133,15 @@ decode_signal= function(data, formula,
 
   }
 
-  #for each fold and condition check where t is larger
 
+  #here you can change the formula if formula_max is provided
+  if(!is.null(formula_max)){
+
+    formula= as.formula(formula_max)
+
+  }
+
+  #for each fold and condition check where t is larger
   full_table= expand.grid("Fold"= 1:nfolds,
                           "Effect"= effects,
                           "Peak_t"= NA,

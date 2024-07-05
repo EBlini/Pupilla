@@ -3,11 +3,13 @@
 #' This function is under active development. It is
 #' meant to depict the three eigenvectors/loadings/weights of components obtained by reducing
 #' pupillary time-series, as to ease interpretation. Note that the
-#' components and their names are re-ordered according to their explained variance,
-#' and so are their names, so that results may differ from the original scores.
+#' components and their names are re-ordered according to their explained variance
+#' by default, and so are their names, so that results may differ from the original scores.
 #' Be mindful!
 #'
 #' @param data An object as returned by, e.g., 'reduce_PCA'.
+#' @param order A character, defaults to "var" for reordering the fingerprints
+#' by their share of explained variance. Else "none" or "peak", to order by latency of the peak value.
 #' @param flip A vector of numbers indicating the component(s) to flip in sign (e.g., c(1,1,-1))
 #'
 #' @return A plot powered by 'ggplot2'.
@@ -15,6 +17,7 @@
 #' @export
 
 plot_fingerprints= function(data,
+                            order= "var",
                             flip= c(1, 1, 1)){
 
 
@@ -41,25 +44,39 @@ plot_fingerprints= function(data,
   #only limit to 3 fingerprints
   if(length(ev)!= 3){stop("Only meant to work with 3 fingerprints!")}
 
+  #loadings
+  loadings= data$Loadings
+
 
   #automatically reorder!
-  is.ordered= sum(names(ev)== paste0(sub, 1:3))==3
+  if (order== "none"){
+
+    is.ordered= T
+
+  } else if (order== "var") {
+
+    is.ordered= sum(names(ev)== paste0(sub, 1:3))==3
+    ord= order(ev, decreasing = T)
+
+  } else if (order== "peak") {
+
+    pks= apply(abs(loadings), 2, which.max)
+    ord= order(pks, decreasing = T)
+    is.ordered= sum(names(ev)== paste0(sub, 3:1))==3
+
+    }
 
   new_names= paste0(sub, 1:3)
-  loadings= data$Loadings
 
   if(is.ordered== FALSE){
 
     warning("Warning: fingerprint names have been reordered following the explained variance!")
 
-
-    ord= order(ev, decreasing = T)
     #expl var may change
     ev= ev[ord]
     names(ev)= new_names
 
     #same for loadings
-
     loadings= loadings[,ord]
     colnames(loadings)= new_names
 
