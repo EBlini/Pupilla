@@ -124,7 +124,7 @@ to do reproducible, exploitable science.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EBlini/Pupilla" class="external-link">"Pupilla"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rvlenth/emmeans" class="external-link">"emmeans"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rvlenth.github.io/emmeans/" class="external-link">"emmeans"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/runehaubo/lmerTestR" class="external-link">"lmerTest"</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required package: lme4</span></span></code></pre>
 <pre><code><span><span class="co">## Loading required package: Matrix</span></span></code></pre>
@@ -246,7 +246,7 @@ that we sould not be too far off from the original data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (s)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pupil size (a.u.)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Data from: Zhou, Lorist, and Mathôt (2022)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images/mathot%20plot%20data-1.png"></p>
+<p><img src="images/mathot_plot_data-1.png"></p>
 <p>I am not really depicting the variability. However, what matters here
 is that: 1) there is a very large effect of Set_Size; 2) there may be
 (well, we know from the paper that there is, :) ) an interaction between
@@ -606,8 +606,8 @@ Color_type occurring for the 1 vs 4 contrast. With the package
 <code>emmeans</code> we can avoid refactoring to compute all
 contrasts:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emm_options.html" class="external-link">emm_options</a></span><span class="op">(</span>lmer.df <span class="op">=</span> <span class="st">"asymptotic"</span><span class="op">)</span></span>
-<span><span class="va">mm</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod_pc1</span>, <span class="op">~</span> <span class="va">Color_type</span><span class="op">:</span><span class="va">Set_size</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emm_options.html" class="external-link">emm_options</a></span><span class="op">(</span>lmer.df <span class="op">=</span> <span class="st">"asymptotic"</span><span class="op">)</span></span>
+<span><span class="va">mm</span><span class="op">=</span> <span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod_pc1</span>, <span class="op">~</span> <span class="va">Color_type</span><span class="op">:</span><span class="va">Set_size</span><span class="op">)</span></span>
 <span><span class="va">mm</span></span></code></pre></div>
 <pre><code><span><span class="co">##  Color_type Set_size emmean  SE  df asymp.LCL asymp.UCL</span></span>
 <span><span class="co">##  nonproto   1         -1814 252 Inf     -2309     -1319</span></span>
@@ -622,7 +622,7 @@ contrasts:</p>
 <span><span class="co">## Degrees-of-freedom method: asymptotic </span></span>
 <span><span class="co">## Confidence level used: 0.95</span></span></code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">mm</span>, method <span class="op">=</span> <span class="st">"pairwise"</span>, interaction <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">mm</span>, method <span class="op">=</span> <span class="st">"pairwise"</span>, interaction <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  Color_type_pairwise Set_size_pairwise estimate  SE  df z.ratio p.value</span></span>
 <span><span class="co">##  nonproto - proto    1 - 2                  241 183 Inf   1.315  0.1885</span></span>
 <span><span class="co">##  nonproto - proto    1 - 3                  119 183 Inf   0.651  0.5149</span></span>
