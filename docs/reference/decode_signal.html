@@ -134,7 +134,8 @@ threshold; if the same time points pop out consistently across folds (e.g.,= 'co
 <span>  <span class="va">trial</span>,</span>
 <span>  nfolds <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  t_thresh <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  consensus_thresh <span class="op">=</span> <span class="fl">0.75</span></span>
+<span>  consensus_thresh <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  formula_max <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -176,6 +177,12 @@ time-point forward.</p></dd>
 <dt>consensus_thresh</dt>
 <dd><p>The minimum proportion of time-points that must be above
 't_thresh' across folds in order to keep the time-point in the consensus.</p></dd>
+
+
+<dt>formula_max</dt>
+<dd><p>A 'lme4'-style formula, passed as a string. This formula is
+only used to test the final models. Could be useful to save computational resources.
+I do not necessarily recommend it because it could be overly conservative and prone to convergence issues.</p></dd>
 
 </dl></div>
     <div class="section level2">

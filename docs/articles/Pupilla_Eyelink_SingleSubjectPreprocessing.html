@@ -142,7 +142,7 @@ elsewhere.</p>
 once, through <code>devtools</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"EBlini/Pupilla"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"EBlini/Pupilla"</span><span class="op">)</span></span></code></pre></div>
 <p>Dependencies will be installed automatically. We will then need to
 load the following packages:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -200,7 +200,7 @@ this stage.</li>
 </ol>
 <p>So, reading the files should be straightforward. If this utility
 function does not work for you, however, just assume that it works by
-iterating <code><a href="https://alexander-pastukhov.github.io/eyelinkReader/reference/read_edf.html" class="external-link">eyelinkReader::read_edf()</a></code> across (eyetracking)
+iterating <code><a href="https://rdrr.io/pkg/eyelinkReader/man/read_edf.html" class="external-link">eyelinkReader::read_edf()</a></code> across (eyetracking)
 files. In order to use the excellent <code>eyelinkReader</code> package,
 you must have installed the SR research-EyeLink plugins, which you can
 download from their forum upon registration (these functions are also
@@ -281,8 +281,8 @@ all samples).</p>
 <p>We can now realign the timestamps to the first sample of the initial
 phase. Then, we downsample to 20 ms bins.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Time<span class="op">=</span> <span class="va">time</span><span class="op">-</span><span class="va">time</span><span class="op">[</span><span class="va">Event</span><span class="op">==</span> <span class="st">"fixation"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level2">
@@ -330,13 +330,13 @@ E.g.:</p>
 <p>Once checked the defaults, preprocessing only requires:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#entire preprocessing</span></span>
-<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Pupil_pp<span class="op">=</span> <span class="fu"><a href="../reference/pre_process.html">pre_process</a></span><span class="op">(</span><span class="va">Pupil</span>, <span class="va">Time</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>And that’s it! You can <strong>check</strong> the result of the
 pipeline visually as follows:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Subject</span><span class="op">==</span><span class="fl">10</span> <span class="op">&amp;</span> <span class="va">trial</span><span class="op">==</span> <span class="fl">13</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Subject</span><span class="op">==</span><span class="fl">10</span> <span class="op">&amp;</span> <span class="va">trial</span><span class="op">==</span> <span class="fl">13</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/check_series.html">check_series</a></span><span class="op">(</span><span class="st">"Pupil"</span>, <span class="st">"Pupil_pp"</span>, <span class="st">"Time"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/trial_13-1.png"></p>
 <p>Or you can use the function <code><a href="../reference/check_all_series.html">Pupilla::check_all_series()</a></code>
@@ -353,16 +353,16 @@ recovered are, instead, recovered.</p>
 we simply discard them!</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#drop</span></span>
-<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">Pupil_pp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">Pupil_pp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Another common step is <strong>downsampling</strong>, we choose bins
 of 20 ms:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span><span class="op">$</span><span class="va">Time</span><span class="op">=</span> <span class="fu"><a href="../reference/downsample_time.html">downsample_time</a></span><span class="op">(</span><span class="va">ET</span><span class="op">$</span><span class="va">Time</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#summarise the data for the new binned variable</span></span>
-<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">Cue</span>, <span class="va">Event</span>, </span>
-<span>           <span class="va">trial</span>, <span class="va">Time</span>, <span class="va">Accuracy</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>           <span class="va">trial</span>, <span class="va">Time</span>, <span class="va">Accuracy</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">Pupil_pp</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Next, I personally prefer to work with <strong>z-scores</strong>
 instead of arbitrary units or mms, as to have a standardized measure.
@@ -371,8 +371,8 @@ So:</p>
 <code class="sourceCode R"><span><span class="co">#z scores</span></span>
 <span><span class="va">ET</span><span class="op">$</span><span class="va">Pupil_raw</span><span class="op">=</span> <span class="va">ET</span><span class="op">$</span><span class="va">Pupil</span></span>
 <span></span>
-<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="op">(</span><span class="op">(</span><span class="va">Pupil</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">[</span><span class="va">Event</span><span class="op">!=</span> <span class="st">"response"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">[</span><span class="va">Event</span><span class="op">!=</span> <span class="st">"response"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>In this particular case I did not include the response phase because
 of the motor artifacts (verbal response and blinks allowed), but this
@@ -380,8 +380,8 @@ should not alter much the pattern of the results.</p>
 <p>If needed, we can remove here trials in which the starting pupil size
 was particularly extreme.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">deviant_baseline</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">deviant_baseline</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>Baseline_ps<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">[</span><span class="va">Event</span><span class="op">==</span> <span class="st">"fixation"</span><span class="op">]</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">deviant_baseline</span><span class="op">$</span><span class="va">Baseline_ps</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">deviant_baseline</span><span class="op">$</span><span class="va">Baseline_ps</span><span class="op">)</span></span>
@@ -391,14 +391,14 @@ was particularly extreme.</p>
 <span><span class="va">omit</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">omit</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">omit</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">trial</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">omit</span><span class="op">)</span></span>
+<span>  <span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">trial</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">omit</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>The last, crucial step is the <strong>baseline subtraction</strong>.
 In analogy to what done in the paper I simply realign the traces to the
 median of the fixation phase.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">ET</span><span class="op">=</span> <span class="va">ET</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Subject</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Pupil<span class="op">=</span> <span class="va">Pupil</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">[</span><span class="va">Event</span><span class="op">==</span> <span class="st">"fixation"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We are done!</p>
 <p>One way to save the preprocessed files would be:</p>

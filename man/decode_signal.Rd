@@ -13,7 +13,8 @@ decode_signal(
   trial,
   nfolds = 3,
   t_thresh = 2,
-  consensus_thresh = 0.75
+  consensus_thresh = 0.75,
+  formula_max = NULL
 )
 }
 \arguments{
@@ -36,6 +37,10 @@ time-point forward.}
 
 \item{consensus_thresh}{The minimum proportion of time-points that must be above
 't_thresh' across folds in order to keep the time-point in the consensus.}
+
+\item{formula_max}{A 'lme4'-style formula, passed as a string. This formula is
+only used to test the final models. Could be useful to save computational resources.
+I do not necessarily recommend it because it could be overly conservative and prone to convergence issues.}
 }
 \value{
 A list including: peaks retained for each (left-out) fold; test of the

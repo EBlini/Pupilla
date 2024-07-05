@@ -4,10 +4,13 @@
 \alias{plot_fingerprints}
 \title{Plot all (three) fingerprints of reduced time-series}
 \usage{
-plot_fingerprints(data, flip = c(1, 1, 1))
+plot_fingerprints(data, order = "var", flip = c(1, 1, 1))
 }
 \arguments{
 \item{data}{An object as returned by, e.g., 'reduce_PCA'.}
+
+\item{order}{A character, defaults to "var" for reordering the fingerprints
+by their share of explained variance. Else "none" or "peak", to order by latency of the peak value.}
 
 \item{flip}{A vector of numbers indicating the component(s) to flip in sign (e.g., c(1,1,-1))}
 }
@@ -18,7 +21,7 @@ A plot powered by 'ggplot2'.
 This function is under active development. It is
 meant to depict the three eigenvectors/loadings/weights of components obtained by reducing
 pupillary time-series, as to ease interpretation. Note that the
-components and their names are re-ordered according to their explained variance,
-and so are their names, so that results may differ from the original scores.
+components and their names are re-ordered according to their explained variance
+by default, and so are their names, so that results may differ from the original scores.
 Be mindful!
 }
