@@ -3,6 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Pupilla: Pupilla.html
+  Pupilla_Advanced_statistical_analyses: Pupilla_Advanced_statistical_analyses.html
   Pupilla_Assessing_Pupillary_Manifold: Pupilla_Assessing_Pupillary_Manifold.html
-last_built: 2024-10-24T08:49Z
+last_built: 2024-10-24T09:12Z
 
