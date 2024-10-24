@@ -3,7 +3,5 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   Pupilla_Assessing_Pupillary_Manifold: Pupilla_Assessing_Pupillary_Manifold.html
-  Pupilla_Eyelink_SingleSubjectPreprocessing: Pupilla_Eyelink_SingleSubjectPreprocessing.html
-  Pupilla_TOBII_ReduceFeatures: Pupilla_TOBII_ReduceFeatures.html
   Pupilla: Pupilla.html
-last_built: 2024-10-24T08:46Z
+last_built: 2024-10-24T08:53Z
