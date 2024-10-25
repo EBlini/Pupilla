@@ -4,7 +4,12 @@
 \alias{smooth_vector}
 \title{Smooth a time series through cubic splines}
 \usage{
-smooth_vector(vector, time, spar = pp_options("spar"))
+smooth_vector(
+  vector,
+  time,
+  spar = pp_options("spar"),
+  disable_smoothing = pp_options("disable_smoothing")
+)
 }
 \arguments{
 \item{vector}{A vector variable to be smoothed.}
@@ -12,6 +17,9 @@ smooth_vector(vector, time, spar = pp_options("spar"))
 \item{time}{A vector variable indicating the elapsed time.}
 
 \item{spar}{Smoothing factor as in 'smooth.spline()'.}
+
+\item{disable_smoothing}{Whether you want to disable smoothing. This parameter
+is FALSE by default; if you want to disable the smoothing, set it to TRUE.}
 }
 \value{
 A numeric vector smoothed as requested.

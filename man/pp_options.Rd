@@ -29,6 +29,9 @@ that is allowed to be missing from the original vector.}
 \item{consecutive_thresh}{\strong{interpolate} Consecutive gaps in the signal: e.g., the total amount of data
 that is allowed to be missing from the original vector \strong{consecutively}.}
 
+\item{disable_smoothing}{\strong{smooth} Whether you want to disable smoothing. This parameter
+is FALSE by default; if you want to disable the smoothing, set it to TRUE.}
+
 \item{spar}{\strong{smooth} Smoothing factor as in 'smooth.spline()'.}
 }
 \description{
