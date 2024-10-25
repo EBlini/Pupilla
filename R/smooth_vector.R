@@ -7,6 +7,8 @@
 #' @param vector A vector variable to be smoothed.
 #' @param time A vector variable indicating the elapsed time.
 #' @param spar Smoothing factor as in 'smooth.spline()'.
+#' @param disable_smoothing Whether you want to disable smoothing. This parameter
+#' is FALSE by default; if you want to disable the smoothing, set it to TRUE.
 
 #' @return A numeric vector smoothed as requested.
 #'
@@ -14,11 +16,19 @@
 
 smooth_vector= function(vector,
                  time,
-                 spar= pp_options("spar")){
+                 spar= pp_options("spar"),
+                 disable_smoothing= pp_options("disable_smoothing")){
 
-  ss= smooth.spline(time, vector, spar= spar)
+  if(disable_smoothing){
 
-  lp= predict(ss, time)$y
+    lp= vector
+
+  } else {
+
+    ss= smooth.spline(time, vector, spar= spar)
+    lp= predict(ss, time)$y
+
+  }
 
   return(lp)
 

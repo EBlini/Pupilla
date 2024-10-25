@@ -11,6 +11,7 @@ opt= settings::options_manager(
   overall_thresh= 0.4,
   consecutive_thresh= NULL,
 
+  disable_smoothing= FALSE,
   spar= 0.7
 
 )
@@ -34,6 +35,8 @@ opt= settings::options_manager(
 #' that is allowed to be missing from the original vector.
 #' @param consecutive_thresh **interpolate** Consecutive gaps in the signal: e.g., the total amount of data
 #' that is allowed to be missing from the original vector **consecutively**.
+#' @param disable_smoothing **smooth** Whether you want to disable smoothing. This parameter
+#' is FALSE by default; if you want to disable the smoothing, set it to TRUE.
 #' @param spar **smooth** Smoothing factor as in 'smooth.spline()'.
 
 #' @export

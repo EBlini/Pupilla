@@ -107,7 +107,7 @@ As you can see, the brighter the luminance, the stronger the pupil constriction,
 
 # Dimensionality reduction
 
-## temporal PCA
+# temporal PCA
 
 Temporal PCA attempts to summarise the data in fewer dimensions by at the same time maximizing the amount of information retained. 
 The scores that can be obtained in this way are:
@@ -312,7 +312,7 @@ For example, when we add some sort of **Working Memory Load (WML)** to the equat
 
 As we discuss in the paper, at that point we may want to use approaches that are not only mindful of the temporal aspects, but also of the underlying physiology. This, we refer to as "assessing the pupillary manifold".
 
-## Rotated PCA
+# Rotated PCA
 
 rotated PCA is implemented in the package as wrappers around `psych::principal()`. 
 Please note that the function, even in absence of rotations, produces slightly different results from `stats::prcomp()` in light of several differences in parametrization and analytical approach. Please refer to the excellent `psych` package documentation for the differences between `psych::principal()` and `psych::fa()`.
