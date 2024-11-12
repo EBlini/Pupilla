@@ -31,6 +31,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/animate_manifold.html</loc>
+  </url>
+  <url>
     <loc>/reference/check_all_series.html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>/reference/plot_loadings.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_manifold.html</loc>
   </url>
   <url>
     <loc>/reference/pp_options.html</loc>

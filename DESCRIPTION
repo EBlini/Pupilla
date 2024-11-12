@@ -1,8 +1,8 @@
 Package: Pupilla
 Title: Process and Analyze Eye-tracking and Pupillometry Data
-Version: 0.0.0.9001
-Year: 2023 
-Date: 2023
+Version: 0.1.1.01
+Year: 2024 
+Date: 2024
 Authors@R: 
     person("Elvio", "Blini", , "elvio.blini@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7181-5763"))
@@ -18,5 +18,7 @@ BugReports: https://github.com/EBlini/Pupilla/issues
 Suggests: 
     knitr,
     rmarkdown,
-    reticulate
+    reticulate,
+    plot3D,
+    gifski
 VignetteBuilder: knitr
