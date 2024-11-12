@@ -8,6 +8,7 @@
 <url><loc>/articles/index.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/reference/animate_manifold.html</loc></url>
 <url><loc>/reference/check_all_series.html</loc></url>
 <url><loc>/reference/check_series.html</loc></url>
 <url><loc>/reference/consolidate_signal.html</loc></url>
@@ -20,6 +21,7 @@
 <url><loc>/reference/interpolate.html</loc></url>
 <url><loc>/reference/plot_fingerprints.html</loc></url>
 <url><loc>/reference/plot_loadings.html</loc></url>
+<url><loc>/reference/plot_manifold.html</loc></url>
 <url><loc>/reference/pp_options.html</loc></url>
 <url><loc>/reference/pre_process.html</loc></url>
 <url><loc>/reference/predict_feature.html</loc></url>
