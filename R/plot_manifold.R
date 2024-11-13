@@ -43,7 +43,7 @@ plot_manifold= function(Scores,
   par(mar=c(0,0,0,0))
 
   #if full obj is provided
-  if(class(Scores)== "list"){Scores= Scores$Scores}
+  if(class(Scores)[1]== "list"){Scores= Scores$Scores}
   Scores= as.data.frame(Scores)
 
   #for loop: different color for each level

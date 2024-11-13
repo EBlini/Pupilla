@@ -430,7 +430,17 @@ The suggestion is made that the three components recovered in this way reflects 
 
 The relative scores define where the pupil traces lie (their coordinates) on a low-dimensional space reflecting the overall balance of the autonomic nervous system. Thus, on top of being handy to analyze, mindful of temporal aspects, completely data-driven, and so on, these values are also physiologically meaningful.    
 
+The toolbox comes with wrapper functions for 3D plots through `plot3D`, which is not installed by default with the package - so `plot3D` should be installed manually.
 
+```{r}
+plr_rpca$Scores$Luminance= as.factor(plr_rpca$Scores$Luminance)
+plot_manifold(plr_rpca$Scores,
+              colvar = "Luminance", 
+              theta = 30, phi= 15)
+
+```
+
+Finally, `gifski` (not installed automatically) provides utilities to create GIFs from several different images. The function `animate_manifold()` does precisely that: it creates a folder populated with many `plot_manifold()` images taken from different views, an saves a gif image in the current path. 
 
 # Appendix
 
