@@ -19,26 +19,33 @@
 #' @param time A vector variable indicating the elapsed time. Should be the
 #' same as the loadings' names in the model
 #' @param model Object returned by 'reduce_*', e.g. 'reduce_PCA()'.
-
-#' @return A numeric vector of scores - as many as the loadings in the model.
+#' @param use_trimmed Defaults to FALSE. However, if rPCA
+#' loadings are previously trimmed with 'trim_loadings' (and the
+#' corresponding values are appended in the model provided), then
+#' predictions are made with the trimmed loadings. Only works for rPCA.
+#'
+#' @return A dataframe of scores - as many as the loadings in the model.
 #'
 #' @export
 
 predict_feature= function(vector,
                           time,
-                          model){
+                          model,
+                          use_trimmed= FALSE){
+
 
   #checks here if time== rownames(Loadings)
   trained_time= as.numeric(rownames(model$Loadings))
 
   #initial time, last, length, average diff
-  if (! time[1]== trained_time[1] &
-  tail(time, 1)== tail(trained_time, 1) &
-  length(time)== length(trained_time) &
-  mean(diff(time))== mean(diff(trained_time))
-  ) stop("Supplied and trained timepoints do not match")
+  test1= time[1]== trained_time[1]
+  test2= tail(time, 1)== tail(trained_time, 1)
+  test3= length(time)== length(trained_time)
+  test4= mean(diff(time))== mean(diff(trained_time))
 
-
+  if (test1*test2*test3*test4== 0) {
+    stop("Supplied and trained timepoints do not match")
+  }
 
   #now scale if necessary
 
@@ -74,12 +81,26 @@ predict_feature= function(vector,
 
   } else {
 
-    res= stats::predict(model$rPCA,
+    if(use_trimmed== FALSE){
+
+      res= psych::predict.psych(model$rPCA,
                  data = vector_s,
                  old.data = model$rs_mat)
+
+    } else {
+
+      res= psych::predict.psych(model$Trimmed_rPCA,
+                                data = vector_s,
+                                old.data = model$rs_mat)
+
+    }
+
+
+
   }
 
   names(res)= dimnames(res)[[2]]
+  res= as.data.frame(res)
   return(res)
 
 

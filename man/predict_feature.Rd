@@ -4,7 +4,7 @@
 \alias{predict_feature}
 \title{Predicts features' scores from a model}
 \usage{
-predict_feature(vector, time, model)
+predict_feature(vector, time, model, use_trimmed = FALSE)
 }
 \arguments{
 \item{vector}{A vector variable to be transformed according
@@ -14,9 +14,14 @@ to the given model. Usually the pupil dimension for a trial/condition.}
 same as the loadings' names in the model}
 
 \item{model}{Object returned by 'reduce_*', e.g. 'reduce_PCA()'.}
+
+\item{use_trimmed}{Defaults to FALSE. However, if rPCA
+loadings are previously trimmed with 'trim_loadings' (and the
+corresponding values are appended in the model provided), then
+predictions are made with the trimmed loadings. Only works for rPCA.}
 }
 \value{
-A numeric vector of scores - as many as the loadings in the model.
+A dataframe of scores - as many as the loadings in the model.
 }
 \description{
 Under development. This function is meant to predict

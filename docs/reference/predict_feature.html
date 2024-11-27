@@ -96,7 +96,7 @@ they don't the function returns an error.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_feature</span><span class="op">(</span><span class="va">vector</span>, <span class="va">time</span>, <span class="va">model</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_feature</span><span class="op">(</span><span class="va">vector</span>, <span class="va">time</span>, <span class="va">model</span>, use_trimmed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -114,12 +114,19 @@ same as the loadings' names in the model</p></dd>
 <dt>model</dt>
 <dd><p>Object returned by 'reduce_*', e.g. 'reduce_PCA()'.</p></dd>
 
+
+<dt>use_trimmed</dt>
+<dd><p>Defaults to FALSE. However, if rPCA
+loadings are previously trimmed with 'trim_loadings' (and the
+corresponding values are appended in the model provided), then
+predictions are made with the trimmed loadings. Only works for rPCA.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A numeric vector of scores - as many as the loadings in the model.</p>
+<p>A dataframe of scores - as many as the loadings in the model.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

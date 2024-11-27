@@ -13,11 +13,11 @@ pupillometry data.
 
 The package is currently available through
 [GitHub](https://github.com/). The installation requires the R package
-`devtools`.
+`remotes`.
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("EBlini/Pupilla")
+# install.packages("remotes")
+remotes::install_github("EBlini/Pupilla")
 ```
 
 ## Scope
