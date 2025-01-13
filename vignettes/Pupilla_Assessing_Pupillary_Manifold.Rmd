@@ -421,8 +421,8 @@ What changes is the likely meaning of the scores.
 
 # The Pupillary Manifold
 
-As we discuss more thoroughly in the paper, we rotated solution returns a set of loadings that is extremely constant across different tasks. In this sense it is unlikely to reflect some idiosyncratic to the data. On the contrary, loadings are more likely to reflect hard constraints of the underlying physiology or the signal itself.
-The suggestion is made that the three components recovered in this way reflects physiologically relevant processes:
+As we discuss more thoroughly in the paper, the rotated solution returns a set of loadings that is extremely constant across different tasks. In this sense it is unlikely to reflect something idiosyncratic to the data. On the contrary, loadings are more likely to reflect hard constraints of the underlying physiology or the signal itself.
+The suggestion is made that the three components recovered in this way reflect physiologically relevant processes:
 
 1. **RC1**: symphatetic activation
 2. **RC2**: parasymphatetic inhibition

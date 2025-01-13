@@ -26,8 +26,13 @@ This is a collection of functions and wrappers that are useful for
 preprocessing and analysis of eyetracking data, with a special focus on
 pupillometry. Functions are generally hardware-agnostic, and have been
 designed for data collected through third-part experiment builders such
-as OpenSesame. All functions are to be considered under development: all
-requests or suggestions are more than welcome, :) .
+as OpenSesame. Functions have been tested on Windows machines.
+
+All functions are to be considered under development: all requests or
+suggestions are more than welcome, :) .
+
+Manuals, references, and vignettes are available at this link:
+<https://eblini.github.io/Pupilla/>
 
 For useful references, and an example of the results of these functions,
 see [Blini and Zorzi,
