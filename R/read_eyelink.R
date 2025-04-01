@@ -1,6 +1,7 @@
 read_el= function(ID,
                   keep_events= NULL,
                    path= getwd(),
+                  sep= "\\",
                    start_behavior= "subject-",
                    start_eyelink= "sub_",
                    separate_behavioral= TRUE,
@@ -9,7 +10,7 @@ read_el= function(ID,
   if(is.null(keep_events))(warning("You need to specify the event messages to keep"))
 
   #get likely adresses
-  el= paste0(path, "\\", start_eyelink, ID, ".edf")
+  el= paste0(path, sep, start_eyelink, ID, ".edf")
 
 
   #read
@@ -84,7 +85,7 @@ read_el= function(ID,
   #behavioral data, if required
   if(separate_behavioral) {
 
-    behav= paste0(path, "\\",  start_behavior, ID, ".csv")
+    behav= paste0(path, sep,  start_behavior, ID, ".csv")
 
     BD= data.table::fread(behav)
 
@@ -126,6 +127,8 @@ read_el= function(ID,
 #' slot returned by 'eyelinkReader::read_edf()'.
 #' @param path Defaults to `getwd()` but can be specified to be otherwise.
 #' Files will be searched for starting from this location.
+#' @param sep Defaults to "\\" windows but can be changeg for
+#' other systems.
 #' @param start_behavior A string, it defaults to `"subject-"`. Usually
 #' all files start with this string, regardless of their nature. Usually
 #' names are built by concatenating `path`, `start_filename`,
@@ -146,6 +149,7 @@ read_el= function(ID,
 read_eyelink= function(ID,
                        keep_events= NULL,
                        path= getwd(),
+                       sep= "\\",
                        start_behavior= "subject-",
                        start_eyelink= "sub_",
                        separate_behavioral= TRUE,
@@ -156,6 +160,7 @@ read_eyelink= function(ID,
   data= lapply(ID, function(x)read_el(x,
                                       keep_events = keep_events,
                                       path = path,
+                                      sep= sep,
                                       start_behavior = start_behavior,
                                       start_eyelink = start_eyelink,
                                       separate_behavioral = separate_behavioral,
