@@ -127,7 +127,7 @@ read_el= function(ID,
 #' slot returned by 'eyelinkReader::read_edf()'.
 #' @param path Defaults to `getwd()` but can be specified to be otherwise.
 #' Files will be searched for starting from this location.
-#' @param sep Defaults to "\\" windows but can be changeg for
+#' @param sep Defaults to "\\" windows but can be changed for
 #' other systems.
 #' @param start_behavior A string, it defaults to `"subject-"`. Usually
 #' all files start with this string, regardless of their nature. Usually
