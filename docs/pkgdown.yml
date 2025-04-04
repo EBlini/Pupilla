@@ -1,5 +1,5 @@
-pandoc: 3.1.11
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   Pupilla: Pupilla.html
@@ -7,5 +7,4 @@ articles:
   Pupilla_Assessing_Pupillary_Manifold: Pupilla_Assessing_Pupillary_Manifold.html
   Pupilla_Eyelink_SingleSubjectPreprocessing: Pupilla_Eyelink_SingleSubjectPreprocessing.html
   Pupilla_TOBII_ReduceFeatures: Pupilla_TOBII_ReduceFeatures.html
-last_built: 2025-01-13T11:20Z
-
+last_built: 2025-04-04T08:14Z

@@ -8,6 +8,7 @@ read_eyelink(
   ID,
   keep_events = NULL,
   path = getwd(),
+  sep = "\\\\",
   start_behavior = "subject-",
   start_eyelink = "sub_",
   separate_behavioral = TRUE,
@@ -27,6 +28,9 @@ slot returned by 'eyelinkReader::read_edf()'.}
 
 \item{path}{Defaults to \code{getwd()} but can be specified to be otherwise.
 Files will be searched for starting from this location.}
+
+\item{sep}{Defaults to "\\" windows but can be changed for
+other systems.}
 
 \item{start_behavior}{A string, it defaults to \code{"subject-"}. Usually
 all files start with this string, regardless of their nature. Usually
