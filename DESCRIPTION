@@ -1,6 +1,6 @@
 Package: Pupilla
 Title: Process and Analyze Eye-tracking and Pupillometry Data
-Version: 0.1.1.01
+Version: 0.1.2.01
 Year: 2024 
 Date: 2024
 Authors@R: 
@@ -8,7 +8,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-7181-5763"))
 Description: This R package is a collection of utility functions for the preprocessing and analysis of eye-tracking and (event-related) pupillometry data.
 Depends: R (>= 3.6)
-Imports: ggplot2, dplyr, data.table, here, tidyr, lmerTest, ica, settings, eyelinkReader, emmeans, zoo, psych
+Imports: ggplot2, dplyr, data.table, here, tidyr, lmerTest, ica, settings, eyelinkReader, emmeans, zoo, psych, BayesFactor
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -1,4 +1,4 @@
-#' Highlights and test the time-course of effects through crossvalidation
+#' Highlights and test the time-course of effects through crossvalidation (uses glmer)
 #'
 #' Same as 'decode_signal()' except it is powered by
 #' 'glmer()' and thus performs generalized LMEMs.

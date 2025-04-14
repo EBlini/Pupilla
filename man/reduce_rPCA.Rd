@@ -14,7 +14,7 @@ reduce_rPCA(
   center = FALSE,
   scale = FALSE,
   rotate = "promax",
-  add
+  add = NULL
 )
 }
 \arguments{

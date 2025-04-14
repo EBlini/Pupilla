@@ -267,6 +267,7 @@ Below we additionally map the strength of the correlation between objective lumi
 plr$Luminance=as.numeric(as.character(plr$Luminance))
 
 pca_cor= plr_pca$Scores %>%
+  mutate(Luminance= as.numeric(as.character(Luminance))) %>% 
   group_by(id, Luminance) %>%
   summarise(PC1= mean(PC1)) %>%
   group_by(id) %>%

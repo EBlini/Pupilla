@@ -1,5 +1,4 @@
 url: ~
 template:
   bootstrap: 5
-  assets: vignetted/data/zhou et al 2022.RData
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/decode_signal_g.R
 \name{decode_signal_g}
 \alias{decode_signal_g}
-\title{Highlights and test the time-course of effects through crossvalidation}
+\title{Highlights and test the time-course of effects through crossvalidation (uses glmer)}
 \usage{
 decode_signal_g(
   data,

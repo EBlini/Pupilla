@@ -52,7 +52,7 @@ reduce_rPCA= function(data,
                      center= FALSE,
                      scale= FALSE,
                      rotate= "promax",
-                     add){
+                     add= NULL){
 
   #first change names for your convenience; it's easier this way
   DF= data.frame(data)
@@ -191,7 +191,7 @@ reduce_rPCA= function(data,
 
         sel= orig[i]
 
-        Scores$add[i]= DF[DF$interaction== sel, a][1]
+        Scores$add[i]= as.character(DF[DF$interaction== sel, a])[1]
 
       }
 
