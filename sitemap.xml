@@ -22,6 +22,8 @@
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/interpolate.html</loc></url>
 <url><loc>/reference/interpret_bayes.html</loc></url>
+<url><loc>/reference/interpret_lmem.html</loc></url>
+<url><loc>/reference/lmem_test.html</loc></url>
 <url><loc>/reference/plot_fingerprints.html</loc></url>
 <url><loc>/reference/plot_loadings.html</loc></url>
 <url><loc>/reference/plot_manifold.html</loc></url>
