@@ -22,3 +22,4 @@ Suggests:
     plot3D,
     gifski
 VignetteBuilder: knitr
+LazyData: true

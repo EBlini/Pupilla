@@ -4,7 +4,7 @@
 \alias{interpret_bayes}
 \title{Interprets easily the results of 'bayesian_test'}
 \usage{
-interpret_bayes(bfs, evidence_thresh = 10)
+interpret_bayes(bfs, evidence_thresh = 10, cluster_size = 10)
 }
 \arguments{
 \item{bfs}{An object returned by 'bayesian_test'.}
@@ -12,6 +12,8 @@ interpret_bayes(bfs, evidence_thresh = 10)
 \item{evidence_thresh}{Threshold to judge evidence. Defaults
 to 10. It is meant to be symmetrical: values above 10
 indicate support for the alternative Hp, less than 1/10 for the null.}
+
+\item{cluster_size}{How many timepoints constitute a cluster?}
 }
 \value{
 A list including intervals that support H0 or H1.

@@ -23,14 +23,11 @@ bayesian_test= function(data,
                         time,
                         whichRandom,
                         whichModels= "bottom",
-                        ...= NULL){
+                        ...){
 
   #first change names for your convenience
   DF= data.frame(data)
-  # DF$dv= DF[,colnames(DF)== dv]
   DF$time= DF[,colnames(DF)== time]
-  #DF$subject= DF[,colnames(DF)== id]
-  # DF$trial= DF[,colnames(DF)== trial]
 
   #as formula
   formula= as.formula(formula)
@@ -48,21 +45,50 @@ bayesian_test= function(data,
 
   })
 
-  #now fit for every time point and fold
-  all_fit= lapply(time_list, function(x){
+  #fit function
 
-    mod= tryCatch(
-      BayesFactor::generalTestBF(
-        formula = formula,
-        data = x,
-        whichRandom = whichRandom,
-        whichModels = whichModels,
-        progress = F,
-        #...
-      ),
-      error= function(dummy)(mod= NULL))
+  my_fit= function(time_list,
+                   formula,
+                   whichRandom,
+                   whichModels,
+                   ...) {
+    lapply(time_list, function(x) {
 
-  })
+      mod= tryCatch(
+        BayesFactor::generalTestBF(
+          formula = formula,
+          data = x,
+          whichRandom = whichRandom,
+          whichModels = whichModels,
+          progress = F,
+          ...
+        ),
+        error= function(dummy)(mod= NULL))
+
+    })
+
+  }
+
+  all_fit= my_fit(time_list,
+                  formula= formula,
+                  whichRandom= whichRandom,
+                  whichModels= whichModels, ...)
+
+  # #now fit for every time point and fold
+  # all_fit= lapply(time_list, function(x, ...){
+  #
+  #   mod= tryCatch(
+  #     BayesFactor::generalTestBF(
+  #       formula = formula,
+  #       data = x,
+  #       whichRandom = whichRandom,
+  #       whichModels = whichModels,
+  #       progress = F,
+  #       ...
+  #     ),
+  #     error= function(dummy)(mod= NULL))
+  #
+  # })
 
   #now assess the time course of all effects for each fold
   effects= rownames(BayesFactor::extractBF(all_fit[[1]]))

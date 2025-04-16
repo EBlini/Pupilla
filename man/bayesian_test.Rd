@@ -4,14 +4,7 @@
 \alias{bayesian_test}
 \title{Highlights and test the time-course of effects through bayes factors}
 \usage{
-bayesian_test(
-  data,
-  formula,
-  time,
-  whichRandom,
-  whichModels = "bottom",
-  ... = NULL
-)
+bayesian_test(data, formula, time, whichRandom, whichModels = "bottom", ...)
 }
 \arguments{
 \item{data}{A data.frame containing all the necessary variables.}

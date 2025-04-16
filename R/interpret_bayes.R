@@ -8,12 +8,14 @@
 #' @param evidence_thresh Threshold to judge evidence. Defaults
 #' to 10. It is meant to be symmetrical: values above 10
 #' indicate support for the alternative Hp, less than 1/10 for the null.
+#' @param cluster_size How many timepoints constitute a cluster?
 #' @return A list including intervals that support H0 or H1.
 #'
 #' @export
 
 interpret_bayes= function(bfs,
-                          evidence_thresh= 10){
+                          evidence_thresh= 10,
+                          cluster_size= 10){
 
   #effects
   effects= names(bfs$BFs)
@@ -52,11 +54,13 @@ interpret_bayes= function(bfs,
 
     res= res[,colnames(res)!= "values"]
 
+    res$cluster= ifelse(res$lengths>= cluster_size,
+                        "Yes", "No")
+
     return(res)
   })
 
   names(tb_int)= effects
-
 
   return(tb_int)
 }
