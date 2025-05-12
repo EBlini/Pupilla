@@ -350,7 +350,7 @@ pipeline visually as follows:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ET</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Subject</span><span class="op">==</span><span class="fl">12</span> <span class="op">&amp;</span> <span class="va">Trial</span><span class="op">==</span> <span class="fl">104</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/check_series.html">check_series</a></span><span class="op">(</span><span class="st">"Pupil"</span>, <span class="st">"Pupil_pp"</span>, <span class="st">"Time"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fpreprocessed_trial-1.png"></p>
+<p><img src="images/preprocessed_trial-1.png"></p>
 <p>Or you can use the function <code><a href="../reference/check_all_series.html">Pupilla::check_all_series()</a></code>
 to have all the plots (that is, for all ids and trials) saved as images
 in your path.</p>
@@ -396,7 +396,7 @@ Time. A more extended period would be advisable.</p>
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h2>
 <p>Briefly, the data looks like this:</p>
-<p><img src="images%2Fresults_pbr-1.png"></p>
+<p><img src="images/results_pbr-1.png"></p>
 <p>We have now different paths for statistical modelling. In the
 original paper we choose a cluster-based permutation test. This approach
 is often computationally-intensive, though it works very well. Other
@@ -441,7 +441,7 @@ through a plot conveniently returned by
 <code><a href="../reference/plot_loadings.html">plot_loadings()</a></code>.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fload_pc1-1.png"></p>
+<p><img src="images/load_pc1-1.png"></p>
 <p>The loadings for the first PC, as expected, resemble very much the
 shape of the data. During the trial there was a steady pupil dilation,
 which is well captured here in that later timepoints have larger
@@ -475,7 +475,7 @@ difference between conditions:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">Scores</span><span class="op">$</span><span class="va">PC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Smokers"</span><span class="op">]</span>,</span>
 <span>       <span class="va">Scores</span><span class="op">$</span><span class="va">PC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Non smokers"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fres_pc1-1.png"></p>
+<p><img src="images/res_pc1-1.png"></p>
 <p>There is a significant interaction between group and condition that
 is captured by the first PC!</p>
 <p>The second PC is not, instead, significant:</p>
@@ -489,7 +489,7 @@ dilation. In other words, the next pcs describe some sort of contrast
 functions like this one:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC2"</span>, <span class="va">rf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fload_pc2-1.png"></p>
+<p><img src="images/load_pc2-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="ica">ICA<a class="anchor" aria-label="anchor" href="#ica"></a>
@@ -514,7 +514,7 @@ by:</p>
 that refers to the PCA model:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"IC1"</span>, <span class="va">rf2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fload_ic1-1.png"></p>
+<p><img src="images/load_ic1-1.png"></p>
 <p>So in this case the first IC and the first PC are very similar, only
 the scale changes a bit, as both reflect the overall dilation trend -
 again, the sign of the loadings does not really matter (just check the
@@ -538,7 +538,7 @@ direction for the interpretation of your data).</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">Scores2</span><span class="op">$</span><span class="va">IC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Smokers"</span><span class="op">]</span>,</span>
 <span>       <span class="va">Scores2</span><span class="op">$</span><span class="va">IC1</span><span class="op">[</span><span class="va">Scores</span><span class="op">$</span><span class="va">Group</span><span class="op">==</span> <span class="st">"Non smokers"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images%2Fres_ic1-1.png"></p>
+<p><img src="images/res_ic1-1.png"></p>
 </div>
 </div>
 <div class="section level2">
@@ -596,7 +596,7 @@ paper.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
