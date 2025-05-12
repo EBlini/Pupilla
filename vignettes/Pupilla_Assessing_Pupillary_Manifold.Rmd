@@ -225,6 +225,7 @@ Then, you probably want to assess the scores. Scores are saved in the dataframe 
 
 ```{r}
 pca_scores= plr_pca$Scores %>%
+  mutate(Luminance= as.numeric(Luminance)) %>% 
   group_by(id, Luminance) %>%
   summarise(PC1= mean(PC1)) %>%
   group_by(Luminance) %>%
@@ -382,6 +383,7 @@ And you can assess the scores as well:
 
 ```{r}
 rpca_scores= plr_rpca$Scores %>%
+  mutate(Luminance= as.numeric(Luminance)) %>% 
   group_by(id, Luminance) %>%
   summarise(RC3= mean(RC3)) %>%
   group_by(Luminance) %>%
@@ -435,6 +437,10 @@ The toolbox comes with wrapper functions for 3D plots through `plot3D`, which is
 
 ```{r}
 plr_rpca$Scores$Luminance= as.factor(plr_rpca$Scores$Luminance)
+
+plr_rpca$Scores$Luminance = factor(plr_rpca$Scores$Luminance,
+                                   levels = c("31", "36", "43", "51", "60", "71", "84", "100"))
+
 plot_manifold(plr_rpca$Scores,
               colvar = "Luminance", 
               theta = 30, phi= 15)

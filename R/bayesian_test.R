@@ -72,7 +72,8 @@ bayesian_test= function(data,
   all_fit= my_fit(time_list,
                   formula= formula,
                   whichRandom= whichRandom,
-                  whichModels= whichModels, ...)
+                  whichModels= whichModels,
+                  ...)
 
   # #now fit for every time point and fold
   # all_fit= lapply(time_list, function(x, ...){
@@ -91,7 +92,9 @@ bayesian_test= function(data,
   # })
 
   #now assess the time course of all effects for each fold
-  effects= rownames(BayesFactor::extractBF(all_fit[[1]]))
+  effects= rownames(
+    BayesFactor::extractBF(all_fit[[1]])
+    )
 
   course_eff= vector("list", 0)
 
