@@ -13,7 +13,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://github.com/EBlini/Pupilla, https://eblini.github.io/Pupilla
+URL: https://github.com/EBlini/Pupilla
 BugReports: https://github.com/EBlini/Pupilla/issues
 Suggests: 
     knitr,
