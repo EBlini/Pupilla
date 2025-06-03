@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.2
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   Pupilla_Advanced_statistical_analyses: Pupilla_Advanced_statistical_analyses.html
@@ -7,4 +7,4 @@ articles:
   Pupilla_Eyelink_SingleSubjectPreprocessing: Pupilla_Eyelink_SingleSubjectPreprocessing.html
   Pupilla_TOBII_ReduceFeatures: Pupilla_TOBII_ReduceFeatures.html
   Pupilla: Pupilla.html
-last_built: 2025-05-12T07:34Z
+last_built: 2025-06-03T08:28Z
