@@ -63,6 +63,8 @@ ext_blink= function(vector, extend_blink){
   rdna = dplyr::slice(rd, which(is.na(rl$values)))
 
   #remove blinks
+  if(nrow(rdna)>0){
+
   eb= 1:nrow(rdna)
 
   for(i in eb) {
@@ -75,7 +77,7 @@ ext_blink= function(vector, extend_blink){
 
     vector[from:to]= NA
 
-  }
+  }}
 
   return(vector)
 

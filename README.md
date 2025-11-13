@@ -4,6 +4,7 @@
 # Pupilla
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 An R package for the processing and analysis of eye-tracking and
@@ -35,7 +36,7 @@ Manuals, references, and vignettes are available at this link:
 <https://eblini.github.io/Pupilla/>
 
 For useful references, and an example of the results of these functions,
-see [Blini and Zorzi,
-2023](https://link.springer.com/article/10.3758/s13423-022-02192-z) and
+see [Castellotti et al,
+2025](https://link.springer.com/article/10.3758/s13428-025-02786-0) and
 [Blini, Arrighi, and Anobile,
 2024](https://www.nature.com/articles/s41598-024-78772-x).
