@@ -14,7 +14,7 @@
 #' @export
 
 downsample_time= function(Time,
-                          to_ms= 25,
+                          to_ms= 20,
                           to_hz= NULL){
 
 
@@ -22,7 +22,7 @@ downsample_time= function(Time,
 
   if(!is.null(to_hz))(to_ms= 1000/to_hz)
 
-  time= ceiling(Time/to_ms)*to_ms
+  time= ceiling((Time-(to_ms/2))/to_ms)*to_ms
 
   return(time)
 
