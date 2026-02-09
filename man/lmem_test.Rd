@@ -4,7 +4,17 @@
 \alias{lmem_test}
 \title{Highlights and test the time-course of effects through mixed-effects models}
 \usage{
-lmem_test(data, formula, time, family = "gaussian", correction = "fdr", ...)
+lmem_test(
+  data,
+  formula,
+  time,
+  test = c("contrasts", "omnibus"),
+  family = "gaussian",
+  correction = "fdr",
+  Anova.type = "III",
+  Anova.test = "Chisq",
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame containing all the necessary variables.}
@@ -13,9 +23,16 @@ lmem_test(data, formula, time, family = "gaussian", correction = "fdr", ...)
 
 \item{time}{A string indicating the name of the time variable.}
 
+\item{test}{Either "contrasts", in which case contrasts from lmerTest::lmer() are
+reported, or "omnibus", in which the model is given to car::Anova().}
+
 \item{family}{A string indicating a GLM family to be passed to (g)lmer.}
 
 \item{correction}{A string indicating the method for correcting p values (see p.adjust). defaults to "fdr".}
+
+\item{Anova.type}{Passed to car::Anova() as "type".}
+
+\item{Anova.test}{Passed to car::Anova() as "test.statistic".}
 
 \item{...}{Other pars passed to (g)lmer.}
 }

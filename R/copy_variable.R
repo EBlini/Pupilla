@@ -59,17 +59,18 @@ copy_variable= function(var_name,
     l= x$larger_df
     s= x$smaller_df
     
-    what= s[, var_name]
+    what= c(s[, var_name])
     times= c(table(l[,constrained_var])) 
     
     vector= rep(what, times= times)
+    
     
     return(vector)
     
   })
   
   #concatenate all vectors
-  vector= do.call(c, all_v)
+  vector= do.call(what = 'c', all_v)
   
   
   return(vector)

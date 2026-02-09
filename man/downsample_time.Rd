@@ -4,7 +4,7 @@
 \alias{downsample_time}
 \title{Recode a Time variable to a different granularity}
 \usage{
-downsample_time(Time, to_ms = 25, to_hz = NULL)
+downsample_time(Time, to_ms = 20, to_hz = NULL)
 }
 \arguments{
 \item{Time}{A vector variable indicating the elapsed time, in ms, aligned

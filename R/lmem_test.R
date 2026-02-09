@@ -8,8 +8,12 @@
 #' @param data A data.frame containing all the necessary variables.
 #' @param formula A 'lme4'-style formula, passed as a string.
 #' @param time A string indicating the name of the time variable.
+#' @param test Either "contrasts", in which case contrasts from lmerTest::lmer() are
+#' reported, or "omnibus", in which the model is given to car::Anova().
 #' @param family A string indicating a GLM family to be passed to (g)lmer.
 #' @param correction A string indicating the method for correcting p values (see p.adjust). defaults to "fdr".
+#' @param Anova.type Passed to car::Anova() as "type".
+#' @param Anova.test Passed to car::Anova() as "test.statistic".
 #' @param ... Other pars passed to (g)lmer.
 #' @return A list including: t/z values, p values, corrected p values.
 #'
@@ -18,9 +22,14 @@
 lmem_test = function(data,
                      formula,
                      time,
+                     test= c("contrasts", "omnibus"),
                      family = "gaussian",
                      correction = "fdr",
+                     Anova.type= "III",
+                     Anova.test= "Chisq",
                      ...) {
+
+  test= match.arg(test,  c("contrasts", "omnibus"))
 
   #first change names for your convenience
   DF= data.frame(data)
@@ -30,7 +39,10 @@ lmem_test = function(data,
   formula= as.formula(formula)
 
   #split data for every level of time
+  #this is quite time consuming and memory demanding
+  #a simple loop may perform better here
   if(is.factor(DF$time))(time_lev= levels(factor(DF$time))) else (time_lev= unique(DF$time))
+
   time_list= lapply(time_lev, function(x){
 
     ind= DF$time %in% x
@@ -44,6 +56,8 @@ lmem_test = function(data,
   my_fit= function(time_list,
                    formula,
                    family,
+                   test,
+                   Anova.type, Anova.test,
                    ...) {
     lapply(time_list, function(x) {
       if (family == "gaussian") {
@@ -63,7 +77,12 @@ lmem_test = function(data,
       }
       #print(mod)
       if (!is.null(mod)) {
-        summary(mod)$coefficients
+        if (test== "contrasts") {
+          summary(mod)$coefficients
+        } else if (test== "omnibus") {
+          car::Anova(mod, type= Anova.type, test.statistic= Anova.test)
+        }
+
       } else {
         NULL
       }
@@ -72,35 +91,12 @@ lmem_test = function(data,
 
   all_fit= my_fit(time_list,
                   formula= formula,
-                  family= family, ...)
-  #now fit for every time point and fold
-  # all_fit= lapply(time_list, function(x, ...){
-  #
-  #   if(family== "gaussian"){
-  #   mod= tryCatch(
-  #     lmerTest::lmer(
-  #       formula = formula,
-  #       data = x,
-  #       ...
-  #     ),
-  #     error= function(dummy)(mod= NULL))
-  #   } else {
-  #
-  #     mod= tryCatch(
-  #       lme4::glmer(
-  #         formula = formula,
-  #         data = x,
-  #         family= family,
-  #         ...
-  #       ),
-  #       error= function(dummy)(mod= NULL))
-  #   }
-  #
-  #   if(!is.null(mod))(mod= summary(mod)$coefficients)
-  #
-  # })
+                  family= family,
+                  test= test,
+                  Anova.type= Anova.type,
+                  Anova.test= Anova.test, ...)
 
-  #now assess the time course of all effects for each fold
+  #now assess the time course of all effects for each timepoint
   effects= rownames(all_fit[[1]])
 
   course_eff= vector("list", 0)
@@ -109,17 +105,31 @@ lmem_test = function(data,
   all_fit= lapply(all_fit, function(x){
 
     if(!is.null(x)){
-    x= data.frame(x)
-    w.i= which(colnames(x) %in% c("z value",
-                                  "t.value",
-                                  "t value"))
-    colnames(x)[w.i]= "statistic"
-    w.p= ncol(x)
-    colnames(x)[w.p]= "p"
+
+      if (test== "contrasts") {
+      x= data.frame(x)
+      w.i= which(colnames(x) %in% c("z value",
+                                    "t.value",
+                                    "t value"))
+      colnames(x)[w.i]= "statistic"
+      w.p= ncol(x)
+      colnames(x)[w.p]= "p"
+
+      } else if (test== "omnibus") {
+
+        x= data.frame(x)
+        w.i= which(colnames(x) %in% c("Chisq",
+                                      "F"))
+        colnames(x)[w.i]= "statistic"
+        w.p= ncol(x)
+        colnames(x)[w.p]= "p"
+
+        }
     }
     return(x)
   })
 
+  #extract
   for (e in effects){
 
     ts = sapply(all_fit, function(x) {
