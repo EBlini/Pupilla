@@ -10,14 +10,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/EBlini/Pupilla/blob/main/DESCRIPTION)
 
-Blini E (2025). *Pupilla: Process and Analyze Eye-tracking and
+Blini E (2026). *Pupilla: Process and Analyze Eye-tracking and
 Pupillometry Data*. R package version 0.1.2.01,
 <https://github.com/EBlini/Pupilla>.
 
     @Manual{,
       title = {Pupilla: Process and Analyze Eye-tracking and Pupillometry Data},
       author = {Elvio Blini},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.2.01},
       url = {https://github.com/EBlini/Pupilla},
     }

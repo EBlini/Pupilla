@@ -55,7 +55,7 @@ read_TOBII(
 
   Integer. The amount of lines to skip from the eye-tracking file, i.e.
   after how many lines the header is encountered. This is passed to
-  [`data.table::fread()`](https://rdatatable.gitlab.io/data.table/reference/fread.html).
+  [`data.table::fread()`](https://rdrr.io/pkg/data.table/man/fread.html).
 
 - separate_behavioral:
 

@@ -8,7 +8,17 @@ function returns t/z values, p values, and corrected p values.
 ## Usage
 
 ``` r
-lmem_test(data, formula, time, family = "gaussian", correction = "fdr", ...)
+lmem_test(
+  data,
+  formula,
+  time,
+  test = c("contrasts", "omnibus"),
+  family = "gaussian",
+  correction = "fdr",
+  Anova.type = "III",
+  Anova.test = "Chisq",
+  ...
+)
 ```
 
 ## Arguments
@@ -25,6 +35,11 @@ lmem_test(data, formula, time, family = "gaussian", correction = "fdr", ...)
 
   A string indicating the name of the time variable.
 
+- test:
+
+  Either "contrasts", in which case contrasts from lmerTest::lmer() are
+  reported, or "omnibus", in which the model is given to car::Anova().
+
 - family:
 
   A string indicating a GLM family to be passed to (g)lmer.
@@ -33,6 +48,14 @@ lmem_test(data, formula, time, family = "gaussian", correction = "fdr", ...)
 
   A string indicating the method for correcting p values (see p.adjust).
   defaults to "fdr".
+
+- Anova.type:
+
+  Passed to car::Anova() as "type".
+
+- Anova.test:
+
+  Passed to car::Anova() as "test.statistic".
 
 - ...:
 

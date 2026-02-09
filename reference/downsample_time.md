@@ -7,7 +7,7 @@ be null
 ## Usage
 
 ``` r
-downsample_time(Time, to_ms = 25, to_hz = NULL)
+downsample_time(Time, to_ms = 20, to_hz = NULL)
 ```
 
 ## Arguments

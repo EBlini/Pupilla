@@ -120,7 +120,7 @@ As you can see:
 So, reading the files should be straightforward. If this utility
 function does not work for you, however, just assume that it works by
 iterating
-[`data.table::fread()`](https://rdatatable.gitlab.io/data.table/reference/fread.html)
+[`data.table::fread()`](https://rdrr.io/pkg/data.table/man/fread.html)
 across (eyetracking) files. Also, please note that by default the first
 7 lines are skipped, but your eyetracker files may need different
 values!

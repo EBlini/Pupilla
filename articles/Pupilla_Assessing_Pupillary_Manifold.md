@@ -658,19 +658,19 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] ggplot2_4.0.1    dplyr_1.1.4      Pupilla_0.1.2.01
+    ## [1] ggplot2_4.0.2    dplyr_1.2.0      Pupilla_0.1.2.01
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] gtable_0.3.6       jsonlite_2.0.0     compiler_4.5.2     plot3D_1.4.2      
-    ##  [5] psych_2.5.6        tidyselect_1.2.1   parallel_4.5.2     jquerylib_0.1.4   
-    ##  [9] systemfonts_1.3.1  scales_1.4.0       textshaping_1.0.4  yaml_2.3.10       
+    ##  [5] psych_2.6.1        tidyselect_1.2.1   parallel_4.5.2     jquerylib_0.1.4   
+    ##  [9] systemfonts_1.3.1  scales_1.4.0       textshaping_1.0.4  yaml_2.3.12       
     ## [13] fastmap_1.2.0      lattice_0.22-7     R6_2.6.1           tcltk_4.5.2       
-    ## [17] labeling_0.4.3     generics_0.1.4     knitr_1.50         misc3d_0.9-1      
-    ## [21] tibble_3.3.0       desc_1.4.3         bslib_0.9.0        pillar_1.11.1     
-    ## [25] RColorBrewer_1.1-3 rlang_1.1.6        cachem_1.1.0       xfun_0.54         
+    ## [17] labeling_0.4.3     generics_0.1.4     knitr_1.51         misc3d_0.9-2      
+    ## [21] tibble_3.3.1       desc_1.4.3         bslib_0.10.0       pillar_1.11.1     
+    ## [25] RColorBrewer_1.1-3 rlang_1.1.7        cachem_1.1.0       xfun_0.56         
     ## [29] fs_1.6.6           sass_0.4.10        S7_0.2.1           cli_3.6.5         
     ## [33] pkgdown_2.2.0      withr_3.0.2        magrittr_2.0.4     digest_0.6.39     
-    ## [37] grid_4.5.2         nlme_3.1-168       lifecycle_1.0.4    vctrs_0.6.5       
-    ## [41] mnormt_2.1.1       evaluate_1.0.5     glue_1.8.0         farver_2.1.2      
+    ## [37] grid_4.5.2         nlme_3.1-168       lifecycle_1.0.5    vctrs_0.7.1       
+    ## [41] mnormt_2.1.2       evaluate_1.0.5     glue_1.8.0         farver_2.1.2      
     ## [45] ragg_1.5.0         rmarkdown_2.30     tools_4.5.2        pkgconfig_2.0.3   
-    ## [49] htmltools_0.5.8.1
+    ## [49] htmltools_0.5.9
