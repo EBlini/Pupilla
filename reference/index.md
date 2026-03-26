@@ -34,6 +34,8 @@
   effects through mixed-effects models
 - [`plot_fingerprints()`](plot_fingerprints.md) : Plot all (three)
   fingerprints of reduced time-series
+- [`plot_lmem()`](plot_lmem.md) : takes an LMEM object and plots the
+  results
 - [`plot_loadings()`](plot_loadings.md) : Plot loadings of a reduced
   time-series
 - [`plot_manifold()`](plot_manifold.md) : Plot a 3D scatterplot (based
