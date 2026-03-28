@@ -245,7 +245,7 @@ In the future this message may become more informative / reassuring.
     [`prcomp()`](https://rdrr.io/r/stats/prcomp.html). You may not need
     it directly though it is useful for prediction of unobserved data,
     for example (see, e.g., the function
-    [`Pupilla::predict_feature()`](../reference/predict_feature.md)).
+    [`Pupilla::predict_feature()`](https://eblini.github.io/Pupilla/reference/predict_feature.md)).
 
 6.  **“scaling”** is information about data scaling, if relevant. This
     is mostly useful if you change the default settings - which do not
@@ -253,7 +253,7 @@ In the future this message may become more informative / reassuring.
     baseline subtraction at very least - but then you want to predict
     new, untrained data (which then should be normalized according to
     the original values used in the model, see
-    [`Pupilla::predict_feature()`](../reference/predict_feature.md)).
+    [`Pupilla::predict_feature()`](https://eblini.github.io/Pupilla/reference/predict_feature.md)).
 
 In a typical pipeline, we can start by assessing the relative
 contribution (to the explained variance) of each component.
@@ -279,14 +279,14 @@ plot_loadings("PC1", plr_pca)
 ![](Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-7-1.png)
 
 Else, you can plot all components together with
-[`Pupilla::plot_fingerprints()`](../reference/plot_fingerprints.md). I
-originally used the term “fingerprints” assuming that certain changes in
-pupil size are the signature of distinct physiological processes, though
-now I lean toward thinking this is only applicable to rotated solutions
-(see below); for those, however, I will reserve the term “pupillary
-manifold”, whereas “fingerprints” can perhaps be more general and
-include all sorts of latent constructs, regardless of their origin. In
-fact, this function will work for temporal PCA, rotated PCA, and
+[`Pupilla::plot_fingerprints()`](https://eblini.github.io/Pupilla/reference/plot_fingerprints.md).
+I originally used the term “fingerprints” assuming that certain changes
+in pupil size are the signature of distinct physiological processes,
+though now I lean toward thinking this is only applicable to rotated
+solutions (see below); for those, however, I will reserve the term
+“pupillary manifold”, whereas “fingerprints” can perhaps be more general
+and include all sorts of latent constructs, regardless of their origin.
+In fact, this function will work for temporal PCA, rotated PCA, and
 Independent Components Analysis (ICA, not coped with here, though you do
 have functions for that). The catch: for now this function only work
 when `Ncomp== 3`; later on, it will be clearer why.
@@ -624,10 +624,11 @@ plot_manifold(plr_rpca$Scores,
 
 Finally, `gifski` (not installed automatically) provides utilities to
 create GIFs from several different images. The function
-[`animate_manifold()`](../reference/animate_manifold.md) does precisely
-that: it creates a folder populated with many
-[`plot_manifold()`](../reference/plot_manifold.md) images taken from
-different views, an saves a gif image in the current path.
+[`animate_manifold()`](https://eblini.github.io/Pupilla/reference/animate_manifold.md)
+does precisely that: it creates a folder populated with many
+[`plot_manifold()`](https://eblini.github.io/Pupilla/reference/plot_manifold.md)
+images taken from different views, an saves a gif image in the current
+path.
 
 ## Appendix
 
@@ -662,7 +663,7 @@ sessionInfo()
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] gtable_0.3.6       jsonlite_2.0.0     compiler_4.5.3     plot3D_1.4.2      
-    ##  [5] psych_2.6.1        tidyselect_1.2.1   parallel_4.5.3     jquerylib_0.1.4   
+    ##  [5] psych_2.6.3        tidyselect_1.2.1   parallel_4.5.3     jquerylib_0.1.4   
     ##  [9] systemfonts_1.3.2  scales_1.4.0       textshaping_1.0.5  yaml_2.3.12       
     ## [13] fastmap_1.2.0      lattice_0.22-9     R6_2.6.1           tcltk_4.5.3       
     ## [17] labeling_0.4.3     generics_0.1.4     knitr_1.51         misc3d_0.9-2      
@@ -672,5 +673,5 @@ sessionInfo()
     ## [33] pkgdown_2.2.0      withr_3.0.2        magrittr_2.0.4     digest_0.6.39     
     ## [37] grid_4.5.3         nlme_3.1-168       lifecycle_1.0.5    vctrs_0.7.2       
     ## [41] mnormt_2.1.2       evaluate_1.0.5     glue_1.8.0         farver_2.1.2      
-    ## [45] ragg_1.5.2         rmarkdown_2.30     tools_4.5.3        pkgconfig_2.0.3   
+    ## [45] ragg_1.5.2         rmarkdown_2.31     tools_4.5.3        pkgconfig_2.0.3   
     ## [49] htmltools_0.5.9

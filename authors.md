@@ -12,12 +12,12 @@ Source:
 
 Blini E (2026). *Pupilla: Process and Analyze Eye-tracking and
 Pupillometry Data*. R package version 0.1.2.01,
-<https://github.com/EBlini/Pupilla>.
+<https://eblini.github.io/Pupilla/>.
 
     @Manual{,
       title = {Pupilla: Process and Analyze Eye-tracking and Pupillometry Data},
       author = {Elvio Blini},
       year = {2026},
       note = {R package version 0.1.2.01},
-      url = {https://github.com/EBlini/Pupilla},
+      url = {https://eblini.github.io/Pupilla/},
     }

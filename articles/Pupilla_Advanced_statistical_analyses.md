@@ -462,13 +462,14 @@ analyses (see, e.g.,
 The same can be done with pupillometry data. In fact, because pupil
 dilation is strongly autocorrelated in time, this approach is
 potentially very effective.
-[`Pupilla::reduce_PCA()`](../reference/reduce_PCA.md) and
-[`Pupilla::reduce_ICA()`](../reference/reduce_ICA.md) attempt to do that
-by summarising each trial in very few scores; the scores reflect the
-contribution of pupil diameter at each time point, weighted by the
-loadings matrix. The loadings vary as a function of the importance of
-the contribution of each time point, thus capturing some sort of
-relevant pattern in the data.
+[`Pupilla::reduce_PCA()`](https://eblini.github.io/Pupilla/reference/reduce_PCA.md)
+and
+[`Pupilla::reduce_ICA()`](https://eblini.github.io/Pupilla/reference/reduce_ICA.md)
+attempt to do that by summarising each trial in very few scores; the
+scores reflect the contribution of pupil diameter at each time point,
+weighted by the loadings matrix. The loadings vary as a function of the
+importance of the contribution of each time point, thus capturing some
+sort of relevant pattern in the data.
 
 The notation to do this in `Pupilla` is very similar to what used above:
 
@@ -720,8 +721,10 @@ performs slightly worse in terms of explained variance, but may allow
 one a better, clearer interpretation of the loadings, and may relax some
 unrealistic assumption such as that different components do not interact
 (correlate) significantly. The implementation is outlined below. Please
-note that while [`reduce_PCA()`](../reference/reduce_PCA.md) follows
-[`prcomp()`](https://rdrr.io/r/stats/prcomp.html), this function follows
+note that while
+[`reduce_PCA()`](https://eblini.github.io/Pupilla/reference/reduce_PCA.md)
+follows [`prcomp()`](https://rdrr.io/r/stats/prcomp.html), this function
+follows
 [`psych::principal()`](https://rdrr.io/pkg/psych/man/principal.html)
 including the standardization of the loadings (that is, even `rotate` is
 `"none"` results differ slightly).

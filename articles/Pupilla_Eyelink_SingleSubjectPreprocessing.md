@@ -237,11 +237,12 @@ ET= ET %>%
 We can finally move to the real thing! The signal must be **processed**
 so that the impact of artifacts, blinks, etc. is reduced. The easiest
 way to do that in `Pupilla` would be to use the
-[`pre_process()`](../reference/pre_process.md) function. You may want,
-however, to consider whether the specific default parameters are
-applicable to your data. For a description of the parameters, see
-`?pp_options()`. You can always change the default parameters by calling
-the options globally, other than within the function itself. E.g.:
+[`pre_process()`](https://eblini.github.io/Pupilla/reference/pre_process.md)
+function. You may want, however, to consider whether the specific
+default parameters are applicable to your data. For a description of the
+parameters, see `?pp_options()`. You can always change the default
+parameters by calling the options globally, other than within the
+function itself. E.g.:
 
 ``` r
 #the default parameters:
@@ -298,17 +299,18 @@ ET %>% filter(Subject==10 & trial== 13) %>%
 ![](images/trial_13-1.png)
 
 Or you can use the function
-[`Pupilla::check_all_series()`](../reference/check_all_series.md) to
-have all the plots (that is, for all ids and trials) saved as images in
-your path.
+[`Pupilla::check_all_series()`](https://eblini.github.io/Pupilla/reference/check_all_series.md)
+to have all the plots (that is, for all ids and trials) saved as images
+in your path.
 
 In the image, the black dots represent the raw, initial data. The red
 line depicts instead the reconstructed, preprocessed signal.
-[`pre_process()`](../reference/pre_process.md) simply runs, in order,
-functions for deblinking (through a velocity-based criterion),
-interpolation, and smoothing through cubic splines. Trials in which data
-points do not reach a given quality threshold are set to NA; trials that
-can be recovered are, instead, recovered.
+[`pre_process()`](https://eblini.github.io/Pupilla/reference/pre_process.md)
+simply runs, in order, functions for deblinking (through a
+velocity-based criterion), interpolation, and smoothing through cubic
+splines. Trials in which data points do not reach a given quality
+threshold are set to NA; trials that can be recovered are, instead,
+recovered.
 
 So, for those trials in which we couldn’t restore a reliable signal, we
 simply discard them!
