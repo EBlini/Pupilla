@@ -162,28 +162,28 @@ including baseline subtraction. We can plot the results:</p>
 <span>            SEM<span class="op">=</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span>,</span>
 <span>            Pupil<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Pupil</span><span class="op">)</span>,</span>
 <span>            Color<span class="op">=</span> <span class="va">Color</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Time</span>, y<span class="op">=</span> <span class="va">Pupil</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, linewidth<span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Time</span>, y<span class="op">=</span> <span class="va">Pupil</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, linewidth<span class="op">=</span> <span class="fl">1</span>,</span>
 <span>             color<span class="op">=</span> <span class="st">"gray"</span>, linetype<span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linewidth<span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linewidth<span class="op">=</span> <span class="fl">1</span>,</span>
 <span>             color<span class="op">=</span> <span class="st">"gray"</span>, linetype<span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span> <span class="va">Luminance</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span> <span class="va">Luminance</span><span class="op">)</span>,</span>
 <span>            linewidth<span class="op">=</span> <span class="fl">1.2</span>, show.legend <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin<span class="op">=</span> <span class="va">Pupil</span><span class="op">-</span><span class="va">SEM</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_ribbon.html" class="external-link">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin<span class="op">=</span> <span class="va">Pupil</span><span class="op">-</span><span class="va">SEM</span>,</span>
 <span>                 ymax<span class="op">=</span> <span class="va">Pupil</span><span class="op">+</span><span class="va">SEM</span>, </span>
 <span>                 fill<span class="op">=</span> <span class="va">Luminance</span><span class="op">)</span>,</span>
 <span>             alpha<span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
 <span>                           face<span class="op">=</span><span class="st">"bold"</span>,</span>
 <span>                           color<span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (ms)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pupil size change (z scores)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: changes in pupil size"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, <span class="fl">4500</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/raw_data-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (ms)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pupil size change (z scores)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: changes in pupil size"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, <span class="fl">4500</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/raw_data-1.png" class="r-plt" alt="" width="700"></p>
 <p>As you can see, the brighter the luminance, the stronger the pupil
 constriction, with peak values between 1-1.5 s, followed by pupil
 escape.</p>
@@ -303,7 +303,7 @@ depict the eigenvectors. For the depiction of single components you can
 use:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loadings.html">plot_loadings</a></span><span class="op">(</span><span class="st">"PC1"</span>, <span class="va">plr_pca</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="700"></p>
 <p>Else, you can plot all components together with
 <code><a href="../reference/plot_fingerprints.html">Pupilla::plot_fingerprints()</a></code>. I originally used the term
 “fingerprints” assuming that certain changes in pupil size are the
@@ -318,7 +318,7 @@ that). The catch: for now this function only work when
 <code>Ncomp== 3</code>; later on, it will be clearer why.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_fingerprints.html">plot_fingerprints</a></span><span class="op">(</span><span class="va">plr_pca</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700"></p>
 <p>The function has options to reorder the variables or to flip their
 sign (note that the sign of the eigenvectors is perfectly arbitrary in
 PCA):</p>
@@ -329,7 +329,7 @@ PCA):</p>
 <pre><code><span><span class="co">## Warning in plot_fingerprints(plr_pca, order = "peak", flip = c(1, -1, 1)):</span></span>
 <span><span class="co">## Warning: fingerprint names have been reordered following the explained</span></span>
 <span><span class="co">## variance!</span></span></code></pre>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="700"></p>
 <p>Then, you probably want to assess the scores. Scores are saved in the
 dataframe returned by the <code>reduce_feature()</code> object. If you
 have additional experimental variables to assess, you can add this piece
@@ -347,32 +347,32 @@ the dataframe provided.</p>
 <span>            SEM<span class="op">=</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span>,</span>
 <span>            PC1<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">PC1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pca_scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Luminance</span>, y <span class="op">=</span> <span class="va">PC1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pca_scores</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Luminance</span>, y <span class="op">=</span> <span class="va">PC1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="va">PC1</span> <span class="op">-</span> <span class="va">SEM</span>,</span>
 <span>    yend <span class="op">=</span> <span class="va">PC1</span> <span class="op">+</span> <span class="va">SEM</span>,</span>
 <span>    xend <span class="op">=</span> <span class="va">Luminance</span></span>
 <span>  <span class="op">)</span>, linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Luminance</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Luminance</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    shape <span class="op">=</span> <span class="fl">21</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>    show.legend <span class="op">=</span> <span class="cn">F</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Luminance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"PC1 scores"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Luminance"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"PC1 scores"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span></span>
 <span>      size <span class="op">=</span> <span class="fl">16</span>,</span>
 <span>      face <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>      colour <span class="op">=</span> <span class="st">"black"</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: strength"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: strength"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700"></p>
 <p>Here we can see that the first component is a latent dimension along
 which the PLR happens with distinct strength, and different luminance
 conditions are well separable along this dimension. That the scores do
@@ -405,25 +405,25 @@ this component.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>M<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span>, SEM<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plr_mean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Time</span>, y<span class="op">=</span> <span class="va">M</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype<span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_rect</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xmin<span class="op">=</span> <span class="fl">10</span>, xmax<span class="op">=</span> <span class="fl">4490</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plr_mean</span>, <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Time</span>, y<span class="op">=</span> <span class="va">M</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype<span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_tile.html" class="external-link">geom_rect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>xmin<span class="op">=</span> <span class="fl">10</span>, xmax<span class="op">=</span> <span class="fl">4490</span>, </span>
 <span>                ymin<span class="op">=</span> <span class="op">-</span> <span class="va">ymin</span>, </span>
 <span>                ymax<span class="op">=</span> <span class="op">-</span> <span class="va">ymax</span><span class="op">)</span>, </span>
 <span>            fill<span class="op">=</span> <span class="st">"light blue"</span>, </span>
 <span>            alpha<span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span> <span class="va">M</span> <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span><span class="op">)</span>, color<span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span> <span class="va">M</span> <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span><span class="op">)</span>, color<span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pearson's R"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, <span class="fl">4500</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span> <span class="va">M</span> <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span><span class="op">)</span>, color<span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span> <span class="va">M</span> <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span><span class="op">)</span>, color<span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Pearson's R"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, <span class="fl">4500</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html" class="external-link">theme</a></span><span class="op">(</span>text<span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span>size<span class="op">=</span> <span class="fl">16</span>,</span>
 <span>                                             face<span class="op">=</span><span class="st">"bold"</span>,</span>
 <span>                                             colour<span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
-<span>                 axis.text<span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour<span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: timecourse"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<span>                 axis.text<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour<span class="op">=</span> <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"PLR: timecourse"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="700"></p>
 <p>To conclude, temporal PCA represents a very handy approach, capable
 to return few, very manageable values that are mindful of the temporal
 aspect. On the other hand, as we discuss in the paper, the approach
@@ -526,7 +526,7 @@ They account for a more even share of variance, i.e. 39% for rPC1 and
 <p>You can use the same set of wrapper functions as above:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_fingerprints.html">plot_fingerprints</a></span><span class="op">(</span><span class="va">plr_rpca</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="700"></p>
 <p>And you can assess the scores as well:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rpca_scores</span><span class="op">=</span> <span class="va">plr_rpca</span><span class="op">$</span><span class="va">Scores</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -538,33 +538,33 @@ They account for a more even share of variance, i.e. 39% for rPC1 and
 <span>            SEM<span class="op">=</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">SEM</span>,</span>
 <span>            RC3<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">RC3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">rpca_scores</span>, </span>
-<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Luminance</span>, y <span class="op">=</span> <span class="va">RC3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">rpca_scores</span>, </span>
+<span>       <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Luminance</span>, y <span class="op">=</span> <span class="va">RC3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="va">RC3</span> <span class="op">-</span> <span class="va">SEM</span>,</span>
 <span>    yend <span class="op">=</span> <span class="va">RC3</span> <span class="op">+</span> <span class="va">SEM</span>,</span>
 <span>    xend <span class="op">=</span> <span class="va">Luminance</span></span>
 <span>  <span class="op">)</span>, linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Luminance</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Luminance</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    shape <span class="op">=</span> <span class="fl">21</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>    show.legend <span class="op">=</span> <span class="cn">F</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Luminance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"RC3 scores"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">colfunc</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Luminance"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"RC3 scores"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span></span>
 <span>      size <span class="op">=</span> <span class="fl">16</span>,</span>
 <span>      face <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>      colour <span class="op">=</span> <span class="st">"black"</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html" class="external-link">element_text</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Parasymphatetic\nactivation strength"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Parasymphatetic\nactivation strength"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="700"></p>
 <p>What changes is the likely meaning of the scores.</p>
 </div>
 <div class="section level2">
@@ -602,7 +602,7 @@ values are also physiologically meaningful.</p>
 <span><span class="fu"><a href="../reference/plot_manifold.html">plot_manifold</a></span><span class="op">(</span><span class="va">plr_rpca</span><span class="op">$</span><span class="va">Scores</span>,</span>
 <span>              colvar <span class="op">=</span> <span class="st">"Luminance"</span>, </span>
 <span>              theta <span class="op">=</span> <span class="fl">30</span>, phi<span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<p><img src="Pupilla_Assessing_Pupillary_Manifold_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="700"></p>
 <p>Finally, <code>gifski</code> (not installed automatically) provides
 utilities to create GIFs from several different images. The function
 <code><a href="../reference/animate_manifold.html">animate_manifold()</a></code> does precisely that: it creates a folder
@@ -630,22 +630,22 @@ different views, an saves a gif image in the current path.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] ggplot2_3.5.1    dplyr_1.1.4      Pupilla_0.1.2.01</span></span>
+<span><span class="co">## [1] ggplot2_4.0.1    dplyr_1.1.4      Pupilla_0.1.2.01</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] bslib_0.6.1       compiler_4.2.3    pillar_1.10.1     jquerylib_0.1.4  </span></span>
-<span><span class="co">##  [5] tools_4.2.3       digest_0.6.34     nlme_3.1-162      lattice_0.22-6   </span></span>
-<span><span class="co">##  [9] jsonlite_2.0.0    evaluate_1.0.3    lifecycle_1.0.4   tibble_3.2.1     </span></span>
-<span><span class="co">## [13] gtable_0.3.6      pkgconfig_2.0.3   rlang_1.1.6       psych_2.4.12     </span></span>
-<span><span class="co">## [17] cli_3.6.5         rstudioapi_0.17.1 parallel_4.2.3    yaml_2.3.10      </span></span>
-<span><span class="co">## [21] pkgdown_2.1.1     xfun_0.49         fastmap_1.1.1     withr_3.0.2      </span></span>
-<span><span class="co">## [25] knitr_1.49        generics_0.1.3    desc_1.4.3        fs_1.6.5         </span></span>
-<span><span class="co">## [29] vctrs_0.6.5       htmlwidgets_1.6.4 sass_0.4.9        systemfonts_1.2.1</span></span>
-<span><span class="co">## [33] plot3D_1.4.1      grid_4.2.3        tidyselect_1.2.1  glue_1.8.0       </span></span>
-<span><span class="co">## [37] R6_2.6.1          textshaping_1.0.0 tcltk_4.2.3       rmarkdown_2.29   </span></span>
-<span><span class="co">## [41] farver_2.1.2      magrittr_2.0.3    scales_1.3.0      htmltools_0.5.8.1</span></span>
-<span><span class="co">## [45] misc3d_0.9-1      mnormt_2.1.1      colorspace_2.1-1  labeling_0.4.3   </span></span>
-<span><span class="co">## [49] ragg_1.3.3        munsell_0.5.1     cachem_1.0.8</span></span></code></pre>
+<span><span class="co">##  [1] RColorBrewer_1.1-3 bslib_0.9.0        compiler_4.2.3     pillar_1.11.1     </span></span>
+<span><span class="co">##  [5] jquerylib_0.1.4    tools_4.2.3        digest_0.6.39      nlme_3.1-168      </span></span>
+<span><span class="co">##  [9] lattice_0.22-7     jsonlite_2.0.0     evaluate_1.0.5     lifecycle_1.0.4   </span></span>
+<span><span class="co">## [13] tibble_3.3.0       gtable_0.3.6       pkgconfig_2.0.3    rlang_1.1.6       </span></span>
+<span><span class="co">## [17] psych_2.5.6        cli_3.6.5          rstudioapi_0.17.1  parallel_4.2.3    </span></span>
+<span><span class="co">## [21] yaml_2.3.12        pkgdown_2.2.0      xfun_0.55          fastmap_1.2.0     </span></span>
+<span><span class="co">## [25] withr_3.0.2        knitr_1.51         desc_1.4.3         generics_0.1.4    </span></span>
+<span><span class="co">## [29] fs_1.6.6           htmlwidgets_1.6.4  sass_0.4.10        vctrs_0.6.5       </span></span>
+<span><span class="co">## [33] systemfonts_1.3.1  plot3D_1.4.2       grid_4.2.3         tidyselect_1.2.1  </span></span>
+<span><span class="co">## [37] glue_1.8.0         R6_2.6.1           textshaping_1.0.4  tcltk_4.2.3       </span></span>
+<span><span class="co">## [41] otel_0.2.0         rmarkdown_2.30     farver_2.1.2       magrittr_2.0.4    </span></span>
+<span><span class="co">## [45] scales_1.4.0       htmltools_0.5.9    misc3d_0.9-1       mnormt_2.1.1      </span></span>
+<span><span class="co">## [49] labeling_0.4.3     S7_0.2.1           ragg_1.5.0         cachem_1.1.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -658,7 +658,7 @@ different views, an saves a gif image in the current path.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
